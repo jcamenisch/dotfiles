@@ -1,0 +1,13 @@
+if ([ -f $1 ] || [ -d $1 ]) && [ ! -f $2 ]; then
+  source=$1
+  if [ -d $2 ]; then
+    dest=`echo $2 | sed -e "s:/*$:/:"``basename $1`
+  else
+    dest=$2
+  fi
+  mv $source $dest
+  ln -s $dest $source
+else
+  echo $1 is not a file
+fi
+

@@ -1,0 +1,2 @@
+cd `ruby -e 'puts ARGV[0].gsub(/%([0-9])/){|match|(ARGV[$1.to_i] || "").gsub("/","*/")}' $@`
+pwd
