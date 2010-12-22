@@ -1,13 +1,20 @@
-if ([ -f $1 ] || [ -d $1 ]) && [ ! -f $2 ]; then
-  source=$1
-  if [ -d $2 ]; then
-    dest=`echo $2 | sed -e "s:/*$:/:"``basename $1`
-  else
-    dest=$2
-  fi
-  mv $source $dest
-  ln -s $dest $source
+# Moves a file, then adds a working symlink back at the
+# original location/name
+
+source=$1
+if [ -d $2 ]; then
+  dest=`echo $2 | sed -e "s:/*$:/:"``basename $1` # Use sed to insure only one slash (/)
 else
-  echo $1 is not a file
+  dest=$2
 fi
 
+if [ -e $dest ]; then
+  echo $dest already exists
+else
+  if [ -L $source ]; then
+    echo $source is already a symbolic link.
+  else
+    mv $source $dest
+    ln -s $dest $source
+  fi
+fi
