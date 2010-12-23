@@ -8,4 +8,4 @@ alias gs="git status"
 alias gp="git push"
 alias gcm="git commit -m"
 alias sinatra="ruby -rubygems"
-alias proj=". cd_masked ~/projects/%1*/www"
+alias proj=". cd_masked ~/projects/%1*/www" #See ~/bin/cd_masked
