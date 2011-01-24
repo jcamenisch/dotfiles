@@ -1,0 +1,2 @@
+alias cdp=". cd_masked ~/projects/%1/www/%2" #See ~/bin/cd_masked
+alias a="open -a"
