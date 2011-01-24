@@ -1,9 +1,9 @@
 # Use this in an alias to get to working directories you often use.
 # For example,
-#   alias proj=". cd_masked ~/projects/%1*/www"
+#   alias cdp=". cd_masked ~/projects/%1/www"
 # would allow you to enter 
 #   proj ac
 # on the command line to get to ~/projects/acme/www
 
-cd `ruby -e 'puts ARGV[0].gsub(/%([0-9])/){|match|(ARGV[$1.to_i] || "").gsub("/","*/")}' $@`
+cd `ruby -e 'puts ARGV[0].gsub(/%([0-9])/){|match|(ARGV[$1.to_i] ? ARGV[$1.to_i]+"*" : "").gsub("/","*/")}' $@`
 pwd
