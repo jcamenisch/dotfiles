@@ -1,5 +1,6 @@
+computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PS1="\[\e]2;local/\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
+export PS1="\[\e]2;$computername/\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
 alias mysql.server=/usr/local/mysql/share/mysql/mysql.server
 alias ls="ls -G"
 alias lsl="ls -l"
@@ -15,4 +16,4 @@ alias sinatra="ruby -rubygems"
 if [ -f ~/.bashrc_`uname` ]; then . ~/.bashrc_`uname`; fi
 
 # System-specific stuff
-if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local; fi
+if [ -f ~/.bashrc_$computername ]; then . ~/.bashrc_$computername ; fi
