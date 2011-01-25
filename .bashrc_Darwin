@@ -1,2 +1,3 @@
 alias cdp=". cd_masked ~/projects/%1/www/%2" #See ~/bin/cd_masked
-alias a="open -a"
+alias c=". cd_masked %1" #See ~/bin/cd_masked
+alias oa="open -a" # Open an OS X application; e.g. `oa Finder .` opens the current directory in Finder
