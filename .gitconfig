@@ -1,0 +1,11 @@
+[user]
+	name = Jonathan Camenisch
+	email = jonathan@camenisch.net
+[color]
+diff = auto
+status = auto
+branch = auto
+[alias]
+	co = checkout
+[apply]
+	whitespace = nowarn
