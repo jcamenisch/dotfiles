@@ -1,6 +1,6 @@
 # For lazy typists, use this in an alias to get to working directories you often use.
 # For example,
-#   alias c=". cd_masked %1" #See ~/bin/cd_masked
+#   alias c=". cd_masked %1"
 # would allow the command
 #   c ~/p/ac/www
 # to take you to
