@@ -1,0 +1,9 @@
+# For the forgetful--executing sql file via mysql client on Media Temple's (gs) grid server.
+MT_ACCT=2820 #Move this to ~/.bashrc_`uname` to share among hosts.
+
+read -p "Database? " DB
+read -p "User? " USER
+read -p "Input file? " FILE
+
+mysql -h internal-db.s$MT_ACCT.gridserver.com -u db${MT_ACCT}_$USER -p db${MT_ACCT}_$DB < $FILE
+
