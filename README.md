@@ -1,9 +1,10 @@
+
 My DotFiles and other personal *nix configs
 ===========================================
 
-Profile files from one MacBook Pro (so far).
+Profile files for a few different *nix hosts.
 
-I hope to make these sharable among Linux, FreeBSD, and OS X machines.
+Should be increasingly sharable among Linux, FreeBSD, and OS X machines.
 
 Installation
 ------------
