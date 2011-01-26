@@ -5,6 +5,7 @@ alias mysql.server=/usr/local/mysql/share/mysql/mysql.server
 alias ls="ls -G"
 alias lsl="ls -l"
 alias lsla="ls -la"
+alias c=". cd_masked %1" #See ~/bin/cd_masked
 alias ga="git add"
 alias gs="git status"
 alias gps="git push"
