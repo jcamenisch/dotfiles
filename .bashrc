@@ -5,27 +5,35 @@ cd_masked () {
   # would allow the command
   #   c ~/p/ac/www
   # to take you to
-  #   ~/projects/acme/www
+  #   ~*/p*/ac*/www (which bash translates to, say, ~/projects/acme/www)
   #
   # For a very oft-used pattern, you could set up something more specialized like
   #   alias cdp="cd_masked ~/projects/%1/www/%2"
   # which would allow the command
   #   cdp ac
   # to get to
-  #   ~/projects/acme/www
+  #   ~/projects/ac*/www (e.g., ~/projects/acme/www)
   # or even
   #   cdp ac p/s/s
   # to get to
-  #   ~/projects/acme/www/public/stylesheets/sass
+  #   ~/projects/ac*/www/p*/s*/s* (as in, ~/projects/acme/www/public/stylesheets/sass)
 
-  cd `ruby -e "puts ARGV[0].gsub(/%([0-9])/){|match|(ARGV[\\$1.to_i] ? ARGV[\\$1.to_i]+'*' : '').gsub(/(.)\//,'\\\\1*/')}" $@`
-  pwd
+  if [ `type -P ruby` ]; then
+    cd `ruby -e "
+      puts ARGV[0].gsub( /%([0-9])/ ) {|match|
+        (ARGV[\\$1.to_i] ? ARGV[\\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
+      }
+    " $@`
+    pwd
+  else
+    echo "Sorry, this machine doesn't have ruby installed"
+  fi
 }
 
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PS1="\[\e]2;$computername/\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
-alias mysql.server=/usr/local/mysql/share/mysql/mysql.server
+
 alias ls="ls -G"
 alias lsl="ls -l"
 alias lsla="ls -la"
