@@ -1,3 +1,4 @@
-alias cdp=". cd_masked ~/projects/%1/www/%2" #See ~/bin/cd_masked
-alias oa="open -a" # Open an OS X application; For example...
-alias finder="oa Finder ." # Open current directory in Finder
+alias cdp="cd_masked ~/projects/%1/www/%2" # depends on cd_masked function defined in ~/.bashrc
+pman () {
+  man -t "${1}" | open -f -a /Applications/Preview.app
+}
