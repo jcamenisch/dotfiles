@@ -16,5 +16,10 @@ alias sinatra="ruby -rubygems"
 # OS-specific Stuff
 if [ -f ~/.bashrc_`uname` ]; then . ~/.bashrc_`uname`; fi
 
-# System-specific stuff
+# System-specific stuff; use .bashrc_$computername file for benign syncing with
+#   other machines. Use .bashrc_local for private settings that should not
+#   be synced or published.
 if [ -f ~/.bashrc_$computername ]; then . ~/.bashrc_$computername ; fi
+
+MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if gets =~ %r"/home/([0-9]+)/users/.home"'`
+if [ $MT_ACCT ]; then . ~/.bashrc_mediatemple ; fi
