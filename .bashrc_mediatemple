@@ -1,6 +1,6 @@
 mysql_file () {
   # For the forgetful--executing sql file via mysql client on Media Temple's (gs) grid server.
-  # $MT_ACCT must be already set, normally in ~/.bashrc_`uname` or ~/.bashrc_local
+  # $MT_ACCT must be already set, normally via .bashrc
 
   read -p "Database? " DB
   read -p "User? " USER

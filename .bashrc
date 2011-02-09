@@ -55,8 +55,8 @@ fi
 # OS-specific Stuff
 if [ -f ~/.bashrc_`uname` ]; then . ~/.bashrc_`uname`; fi
 
-# System-specific stuff; use .bashrc_$computername file for benign syncing with
-#   other machines. Use .bashrc_local for sensitive settings that should not
+# System-specific stuff; use dotfiles/.bashrc_$computername file for benign syncing
+#   with other machines. Use ~/.bashrc_local for sensitive settings that should not
 #   be synced or published.
 if [ -f ~/.bashrc_$computername ]; then . ~/.bashrc_$computername ; fi
 if [ -f ~/.bashrc_local ]; then . ~/.bashrc_local ; fi
