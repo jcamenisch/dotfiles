@@ -1,4 +1,8 @@
 alias cdp="cd_masked ~/projects/%1/www/%2" # depends on cd_masked function defined in ~/.bashrc
+cw () {
+  if [ $# -gt 0 ]; then cd_masked ~/projects/%1/www/public/stylesheets/sass $@ ; fi
+  compass watch
+}
 pman () {
   man -t "${1}" | open -f -a /Applications/Preview.app
 }

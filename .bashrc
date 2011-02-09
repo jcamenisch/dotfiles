@@ -29,6 +29,7 @@ cd_masked () {
     echo "Sorry, this machine doesn't have ruby installed"
   fi
 }
+sshmt () { ssh serveradmin@$1@$1 ; }
 
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH"

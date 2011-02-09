@@ -1,1 +1,2 @@
 alias mysql.server=/usr/local/mysql/share/mysql/mysql.server
+alias t="ssh -i ~/.ssh/id_rsa3 vpn2.characterfirst.net $*"
