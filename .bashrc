@@ -33,7 +33,7 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PS1="\[\e]2;$computername/\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
+export PS1="\[\e]2;$computername:\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
 
 alias ls="ls -G"
 alias lsl="ls -l"
