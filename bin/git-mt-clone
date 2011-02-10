@@ -1,0 +1,6 @@
+serverdomain=$1
+for repo in `ssh serveradmin@$serverdomain@$serverdomain 'ls repositories'`; do
+  repodomain=`echo "$repo" | sed -e 's/\.git//'`
+  mkdir $repodomain
+  git clone serveradmin@$serverdomain@$serverdomain:repositories/$repo $repodomain/html
+done
