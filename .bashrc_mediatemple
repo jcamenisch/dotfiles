@@ -19,6 +19,7 @@ gitify () {
       git commit -m "Initial import to repository"
     fi
     if [ ! -d $barerepo ]; then
+      # For explanation of bare repositories, see the Pro Git book: http://progit.org/book/ch4-2.html
       git clone --bare $site $barerepo
     fi
     git remote add origin $barerepo
