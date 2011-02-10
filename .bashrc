@@ -24,13 +24,13 @@ cd_masked () {
         (ARGV[\\$1.to_i] ? ARGV[\\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
       }
     " $@`
-    pwd
   else
     echo "Sorry, this machine doesn't have ruby installed"
   fi
 }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
+shopt -s extglob
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="~/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PS1="\[\e]2;$computername:\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
