@@ -8,3 +8,21 @@ mysql_file () {
 
   mysql -h internal-db.s$MT_ACCT.gridserver.com -u db${MT_ACCT}_$USER -p db${MT_ACCT}_$DB < $FILE
 }
+gitify () {
+  for domain in $@; do
+    site=~/domains/$domain/html
+    barerepo=~/repositories/$domain.git
+    cd $site
+    if [ ! -d .git ]; then
+      git init
+      git add .
+      git commit -m "Initial import to repository"
+    fi
+    if [ ! -d $barerepo ]; then
+      git clone --bare $site $barerepo
+    fi
+    git remote add origin $barerepo
+    git config branch.master.remote origin
+    git config branch.master.merge refs/heads/master
+  done
+}
