@@ -10,7 +10,7 @@ mysql_file () {
 }
 gitify () {
   for domain in $@; do
-    site=~/domains/$domain/html
+    site=~/domains/$domain
     barerepo=~/repositories/$domain.git
     cd $site
     if [ ! -d .git ]; then
