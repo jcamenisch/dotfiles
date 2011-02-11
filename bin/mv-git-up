@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+#
+# This script will move a .git repository up to it's parent directory,
+# rearranging all the working directory contents with clean "rename"
+# operations instead of disjoined "delete" and "add" operations.
+#
+# It has worked perfectly on several repositories, but your mileage may vary.
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+fullpath=`pwd`
+dirname=`basename $fullpath`
+
+if [ ! -d ./.git ]; then
+  echo 'Working directory contains no .git repository. There is nothing to move.'
+elif [ -d ../.git ]; then
+  echo 'Parent directory already contains a .git repository. Aborting.'
+elif [ -d $dirname ]; then
+  echo "There's already a $dirname directory. Aborting to be safe."
+
+else  # Enough checking; let's get some work done...
+
+  mkdir $dirname
+  shopt -s extglob
+  for file in `ls -a | egrep -v [.]git\|^[.]+\$\|^$dirname\$`; do
+    git mv $file $dirname/
+  done
+  mv .git* ..
+  mv $dirname/* .
+  mv html/.[a-z]* .
+  git commit -m "Moved Git repository up one directory"
+  rmdir $dirname
+
+fi
