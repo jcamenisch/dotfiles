@@ -1,6 +1,13 @@
 serverdomain=$1
 for repo in `ssh serveradmin@$serverdomain@$serverdomain 'ls repositories'`; do
   repodomain=`echo "$repo" | sed -e 's/\.git//'`
-  mkdir $repodomain
-  git clone serveradmin@$serverdomain@$serverdomain:repositories/$repo $repodomain/html
+  echo "Backing up $repodomain"
+  if [ ! -d $repodomain ]; then
+    echo "$repodomain directory did not exist; creating fresh clone of repository"
+    git clone serveradmin@$serverdomain@$serverdomain:repositories/$repo $repodomain
+  else
+    cd $repodomain
+    git pull
+    cd - > /dev/null
+  fi
 done
