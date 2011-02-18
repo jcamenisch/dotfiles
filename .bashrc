@@ -28,6 +28,7 @@ cd_masked () {
     echo "Sorry, this machine doesn't have ruby installed"
   fi
 }
+mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
 shopt -s extglob
