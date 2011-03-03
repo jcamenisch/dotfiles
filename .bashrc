@@ -66,3 +66,5 @@ if [ `type -P ruby` ]; then
   MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if gets =~ %r"/home/([0-9]+)/users/.home"'`
   if [ $MT_ACCT ]; then . ~/.bashrc_mediatemple ; fi
 fi
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
