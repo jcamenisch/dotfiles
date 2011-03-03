@@ -50,6 +50,7 @@ if [ `type -P git` ]; then
   alias sinatra="ruby -rubygems"
 fi
 if [ `type -P bundle` ]; then
+  alias be="bundle exec"
   alias bess="bundle exec script/server"
 fi
 
