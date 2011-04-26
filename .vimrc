@@ -27,3 +27,7 @@ inoremap <F5> <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
 inoremap <C-S> <ESC>:w<CR>a
 inoremap <F4> <ESC>:x<CR>
 nnoremap <F4> :x<CR>
+
+if has("gui_macvim")
+    let macvim_hig_shift_movement = 1
+endif
