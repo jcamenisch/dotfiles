@@ -38,6 +38,7 @@ export PS1="\[\e]2;$computername:\w |\a\]\[\e[30;42m\]:\[\e[0m\] "
 
 alias ls="ls -G"
 alias lsl="ls -l"
+alias lsa="ls -a"
 alias lsla="ls -la"
 alias c="cd_masked %1"
 if [ `type -P git` ]; then
@@ -47,6 +48,7 @@ if [ `type -P git` ]; then
   alias gpshm="git push heroku master"
   alias gpl="git pull"
   alias gcm="git commit -m"
+  alias gca="git commit --amend"
   alias sinatra="ruby -rubygems"
 fi
 if [ `type -P bundle` ]; then
