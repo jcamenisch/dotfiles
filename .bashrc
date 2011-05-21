@@ -43,6 +43,7 @@ alias lsla="ls -la"
 alias c="cd_masked %1"
 if [ `type -P git` ]; then
   alias ga="git add"
+  alias gl="git log"
   alias gs="git status"
   alias gps="git push"
   alias gpshm="git push heroku master"
