@@ -1,8 +1,12 @@
 [ -f `brew --prefix`/etc/bash_completion ] && . `brew --prefix`/etc/bash_completion
 
-alias cdp="cd_masked ~/projects/%1/@(www|html)/%2" # depends on cd_masked function defined in ~/.bashrc
 alias lk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend ; exit"
 alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences&"
+cdp() { # depends on cd_masked function defined in ~/.bashrc
+  cd_masked ~/projects/%1 $1
+  cd_masked @(www|html)/%1 $2 2>/dev/null
+  pwd
+}
 cw () {
   [ $# -gt 0 ] && cd_masked ~/projects/%1/www/public/stylesheets/sass $@
   compass watch
