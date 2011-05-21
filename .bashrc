@@ -52,8 +52,11 @@ if [ `type -P git` ]; then
   alias sinatra="ruby -rubygems"
 fi
 if [ `type -P bundle` ]; then
+  alias b="bundle"
   alias be="bundle exec"
+  alias bi="bundle install"
   alias bess="bundle exec script/server"
+  alias beru="bundle exec rackup"
 fi
 
 # OS-specific Stuff
