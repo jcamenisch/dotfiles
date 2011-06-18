@@ -1,7 +1,10 @@
-[[ -f `brew --prefix`/etc/bash_completion ]] && . `brew --prefix`/etc/bash_completion
+[[ "$0" == "bash" ]] && [[ -f `brew --prefix`/etc/bash_completion ]] && \
+  . `brew --prefix`/etc/bash_completion
 
 alias lk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend ; exit"
 alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences&"
+alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
+alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 cdp() { # depends on cd_masked function defined in ~/.bashrc
   cd_masked ~/projects/%1 $1
   cd_masked @(www|html)/%1 $2 2>/dev/null
