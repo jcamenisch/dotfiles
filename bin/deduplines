@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+lines = {}
+pattern = Regexp.new(ARGV[0]) || /.+/
+STDIN.each do |line|
+  line.chomp!
+  puts line if line == "" || line !~ pattern || !lines.key?(line)
+  lines[line] ||= true
+end

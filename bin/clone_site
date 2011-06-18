@@ -1,0 +1,32 @@
+#!/usr/bin/ruby
+ 
+# cp_radiant.rb
+ 
+require 'fileutils'
+ 
+def process_dir(dir_path)
+  Dir.chdir(dir_path) do
+    (all=Dir["*"]).each do |file_name|
+      if File.directory?(file_name)
+        if all.include?(source_index="#{file_name}.html")
+          FileUtils.cp("#{source_index}", (dest_index=File.join(file_name, "index.html")))
+          puts "...RESTRUCTURED #{source_index} to #{dest_index}"
+        end
+        process_dir(File.expand_path(file_name))
+      end
+    end
+  end
+end
+ 
+if(url = ARGV.first)
+  puts "FETCHING SITE... #{url}"
+  `wget -E --no-verbose --no-cache --mirror #{url}`
+ 
+  puts
+  puts
+  result_dir = File.join(Dir.pwd, url.gsub(/http:\/\//,''))
+  puts "POST PROCESSING #{result_dir}"
+  process_dir(result_dir)
+else
+  puts "MISSING URL ARGUMENT"
+end

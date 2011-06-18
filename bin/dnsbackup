@@ -1,0 +1,27 @@
+#!/usr/bin/ruby
+
+if ARGV.length < 1 then
+  puts 'Usage: dnsbackup domain.com [domain2.com [... domainsn.com]]'
+  exit
+end
+
+answer = ''
+ARGV.each do |host|
+  answer =  `dig +nocmd +noall +answer #{host}`
+  answer += `dig +nocmd +noall +answer #{host} mx`
+  answer += `dig +nocmd +noall +answer #{host} txt`
+
+  %w(
+    www
+    mail
+    ftp
+    start
+    calendar
+    *
+  ).each do |subdomain|
+    answer += `dig +nocmd +noall +answer #{subdomain}.#{host} | grep ^#{subdomain}.#{host}`
+  end
+
+end
+
+puts answer
