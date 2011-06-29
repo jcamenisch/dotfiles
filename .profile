@@ -13,6 +13,7 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 # Program-specific stuff
 if [ `which git` ]; then
   alias ga="git add"
+  alias gb="git bisect"
   alias gl="git log"
   alias gs="git status"
   alias gps="git push"
@@ -66,16 +67,16 @@ if [ `which ruby` ]; then
   }
 
   MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if $_ =~ %r"/home/([0-9]+)/users/.home"'`
-  [[ "$MT_ACCT" -ne "" ]] && . ~/.bashrc_mediatemple
+  [[ "$MT_ACCT" -ne "" ]] && . ~/.profile_mediatemple
 fi
 
 # OS-specific Stuff
-[[ -f ~/.bashrc_`uname` ]] && . ~/.bashrc_`uname`
+[[ -f ~/.profile_`uname` ]] && . ~/.profile_`uname`
 
-# Machine-specific stuff; use dotfiles/.bashrc_$computername file for safe syncing
-#   with other machines. Use ~/.bashrc_local for sensitive settings that should not
+# Machine-specific stuff; use dotfiles/.profile_$computername file for safe syncing
+#   with other machines. Use ~/.profile_local for sensitive settings that should not
 #   be synced or published.
-[[ -f ~/.bashrc_$computername ]] && . ~/.bashrc_$computername
-[[ -f ~/.bashrc_local ]] && . ~/.bashrc_local
+[[ -f ~/.profile_$computername ]] && . ~/.profile_$computername
+[[ -f ~/.profile_local ]] && . ~/.profile_local
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
