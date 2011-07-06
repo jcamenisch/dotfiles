@@ -18,7 +18,7 @@ if [ `which git` ]; then
   alias gs="git status"
   alias gps="git push"
   alias gpshm="git push heroku master"
-  alias gpl="git pull"
+  alias gpl="git pull && bundle install"
   alias gc="git commit"
   alias gcm="git commit -m"
   alias gca="git commit --amend"
