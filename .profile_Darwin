@@ -7,7 +7,7 @@ alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 cdp() { # depends on cd_masked function defined in ~/.profile
   cd_masked ~/projects/%1 $1
-  cd_masked @(www|html)/%1 $2 2>/dev/null
+  cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
   pwd
 }
 cw () {
