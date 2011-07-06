@@ -1,3 +1,6 @@
+# Note: this script, along with every script it calls,
+#   should be written to run from bash or zsh
+#   That's not too big a deal--most of the time. ;)
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/bin"
 
