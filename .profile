@@ -14,20 +14,26 @@ mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
 # Program-specific stuff
-if [ `which git` ]; then
+if which git>/dev/null; then
   alias ga="git add"
   alias gb="git bisect"
   alias gl="git log"
   alias gs="git status"
   alias gps="git push"
   alias gpshm="git push heroku master"
-  alias gpl="git pull && bundle install"
   alias gc="git commit"
   alias gcm="git commit -m"
   alias gca="git commit --amend"
   alias sinatra="ruby -rubygems"
+  gpl() {
+    if [[ $(git pull) == 'Already up-to-date.' ]]; then
+      echo 'Already up-to-date.'
+    else
+      bundle install && [[ -f ./tmp/restart.txt ]] && touch ./tmp/restart.txt
+    fi
+  }
 fi
-if [ `which bundle` ]; then
+if which bundle>/dev/null; then
   alias b="bundle"
   alias be="bundle exec"
   alias bec="bundle exec cucumber"
@@ -39,7 +45,7 @@ if [ `which bundle` ]; then
   alias beru="bundle exec rackup"
   alias bi="bundle install"
 fi
-if [ `which ruby` ]; then
+if which ruby>/dev/null; then
   LANG=en_US.UTF-8
   
   cd_masked () {
@@ -70,7 +76,7 @@ if [ `which ruby` ]; then
   }
 
   MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if $_ =~ %r"/home/([0-9]+)/users/.home"'`
-  [[ "$MT_ACCT" -ne "" ]] && . ~/.profile_mediatemple
+  [[ "$MT_ACCT" != "" ]] && . ~/.profile_mediatemple
 fi
 
 # OS-specific Stuff
