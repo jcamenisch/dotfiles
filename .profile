@@ -9,7 +9,6 @@ alias ls="ls -G"
 alias lsl="ls -l"
 alias lsa="ls -a"
 alias lsla="ls -la"
-alias c="cd_masked %1"
 mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
@@ -68,15 +67,17 @@ if which ruby>/dev/null; then
     # to get to
     #   ~/projects/ac*/www/p*/s*/s* (as in, ~/projects/acme/www/public/stylesheets/sass)
 
-    cd `ruby -e "
+    cd $(ruby -e "
       puts ARGV[0].gsub( /%([0-9])/ ) {|match|
-        (ARGV[\\$1.to_i] ? ARGV[\\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
+        (ARGV[\$1.to_i] ? ARGV[\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
       }
-    " $@`
+    " $@)
   }
 
+  alias c="cd_masked %1"
+
   MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if $_ =~ %r"/home/([0-9]+)/users/.home"'`
-  [[ "$MT_ACCT" != "" ]] && . ~/.profile_mediatemple
+  [ "$MT_ACCT" != "" ] && . ~/.profile_mediatemple
 fi
 
 # OS-specific Stuff
