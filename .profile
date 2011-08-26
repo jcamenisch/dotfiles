@@ -14,13 +14,13 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 
 # Program-specific stuff
 if which git>/dev/null; then
-  alias ga="git add"
+  ga () { git add $* && git status ; }
   alias gb="git bisect"
   alias gl="git log"
   alias gs="git status"
   alias gps="git push"
   alias gpshm="git push heroku master"
-  alias gc="git commit"
+  alias gc="git checkout"
   alias gcm="git commit -m"
   alias gca="git commit --amend"
   alias sinatra="ruby -rubygems"
@@ -35,14 +35,16 @@ fi
 if which bundle>/dev/null; then
   alias b="bundle"
   alias be="bundle exec"
-  alias bec="bundle exec cucumber"
-  alias ber="bundle exec rake"
-  alias besr="bundle exec script/rails"
-  alias besrc="bundle exec script/rails console"
-  alias besrs="bundle exec script/rails server"
-  alias bess="bundle exec script/server"
-  alias beru="bundle exec rackup"
   alias bi="bundle install"
+  alias bu="bundle update"
+  alias cuc="bundle exec cucumber"
+  alias rk="bundle exec rake"
+  alias rkdm="bundle exec rake db:migrate"
+  alias r="bundle exec script/rails"
+  alias rc="bundle exec script/rails console"
+  alias rs="bundle exec script/rails server"
+  alias bess="bundle exec script/server"
+  alias ru="bundle exec rackup"
 fi
 if which ruby>/dev/null; then
   LANG=en_US.UTF-8
@@ -76,7 +78,7 @@ if which ruby>/dev/null; then
 
   alias c="cd_masked %1"
 
-  MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if $_ =~ %r"/home/([0-9]+)/users/.home"'`
+  MT_ACCT=`echo $HOME | ruby -e 'puts $~[1] if $_ =~ %r"/home/([0-9]+)/users/.home"' 2>/dev/null`
   [ "$MT_ACCT" != "" ] && . ~/.profile_mediatemple
 fi
 
