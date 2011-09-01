@@ -38,6 +38,8 @@ if which bundle>/dev/null; then
   alias bi="bundle install"
   alias bu="bundle update"
   alias cuc="bundle exec cucumber"
+  alias k="bundle exec kumade"
+  alias kh="bundle exec kumade heroku"
   alias rk="bundle exec rake"
   alias rkdm="bundle exec rake db:migrate"
   alias r="bundle exec script/rails"
