@@ -23,6 +23,8 @@ if which git>/dev/null; then
   alias gc="git checkout"
   alias gcm="git commit -m"
   alias gca="git commit --amend"
+  alias gd="git diff"
+  alias gg="git grep"
   alias sinatra="ruby -rubygems"
   gpl() {
     if [[ $(git pull) == 'Already up-to-date.' ]]; then
@@ -47,6 +49,9 @@ if which bundle>/dev/null; then
   alias rs="bundle exec script/rails server"
   alias bess="bundle exec script/server"
   alias ru="bundle exec rackup"
+fi
+if which heroku>/dev/null; then
+  alias h="heroku"
 fi
 if which ruby>/dev/null; then
   LANG=en_US.UTF-8
