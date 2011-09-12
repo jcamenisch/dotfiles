@@ -46,6 +46,7 @@ if which bundle>/dev/null; then
   alias rkdm="bundle exec rake db:migrate"
   alias r="bundle exec script/rails"
   alias rc="bundle exec script/rails console"
+  alias rr="bundle exec script/rails runner"
   alias rs="bundle exec script/rails server"
   alias bess="bundle exec script/server"
   alias ru="bundle exec rackup"
