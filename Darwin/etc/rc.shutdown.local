@@ -1,5 +1,7 @@
 #!/bin/sh
 
 /usr/bin/osascript -e "set volume with output muted"
-find ~/Downloads -ctime +30 -exec rm -rf {} +
-find ~/.Trash -ctime +30 -exec rm {} +
+find ~/Downloads -type f -ctime +30 -exec rm -rf {} +
+find ~/Downloads -depth -type d -empty -exec rmdir {} +
+find ~/.Trash -type f -ctime +30 -exec rm {} +
+find ~/.Trash -depth -type d -empty -exec rmdir {} +
