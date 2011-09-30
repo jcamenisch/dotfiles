@@ -2,13 +2,14 @@
 #   should be written to run from bash or zsh
 #   That's not too big a deal--most of the time. ;)
 computername=`uname -n | sed -e 's/\..*$//'`
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:~/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$(echo ~/bin)"
 
 # Aliases and shortcuts
 alias ls="ls -G"
 alias lsl="ls -l"
 alias lsa="ls -a"
 alias lsla="ls -la"
+alias profile=". ~/.profile"
 mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
@@ -16,22 +17,29 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 if which git>/dev/null; then
   ga () { git add $* && git status ; }
   alias gb="git bisect"
+  alias gc="git checkout"
+  alias gca="git commit --amend"
+  alias gcm="git commit -m"
+  alias gd="git diff"
+  alias gdc="git diff --cached"
+  alias gg="git grep"
   alias gl="git log"
-  alias gs="git status"
   alias gps="git push"
   alias gpshm="git push heroku master"
-  alias gc="git checkout"
-  alias gcm="git commit -m"
-  alias gca="git commit --amend"
-  alias gd="git diff"
-  alias gg="git grep"
-  alias sinatra="ruby -rubygems"
+  alias gs="git status"
+  alias gsl="git shortlog"
   gpl() {
     if [[ $(git pull) == 'Already up-to-date.' ]]; then
       echo 'Already up-to-date.'
     else
       bundle install && [[ -f ./tmp/restart.txt ]] && touch ./tmp/restart.txt
     fi
+  }
+  gg_replace() {
+    git grep -l $1 **/*.sass | xargs sed -i '' "s/$1/$2/g"
+  }
+  gg_dasherize() {
+    replace_in_project $1 `echo $1 | sed -e 's/_/-/g'`
   }
 fi
 if which bundle>/dev/null; then

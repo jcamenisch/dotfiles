@@ -6,6 +6,10 @@ alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/Syste
 alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 alias go="pg && mate . && gpl"
+
+alias edit="subl"
+export EDITOR='subl -w'
+
 cdp() { # depends on cd_masked function defined in ~/.profile
   cd_masked ~/projects/%1 $1
   cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
