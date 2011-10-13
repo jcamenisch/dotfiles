@@ -19,3 +19,6 @@ cw () {
   [ $# -gt 0 ] && cd_masked ~/projects/%1/www/public/stylesheets/sass $@
   compass watch
 }
+reopen () {
+  killall $1 && open -a $1
+}
