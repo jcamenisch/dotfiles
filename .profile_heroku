@@ -1,0 +1,10 @@
+alias h="heroku"
+alias hc="heroku console"
+h_pg_restore() {
+  file=$1
+  app_param='--app=chotels-hb'
+  db=caribbeanhotels
+  echo "heroku pgbackups:url $file $app_param"
+  url=`heroku pgbackups:url $file $app_param`
+  wget -O/tmp/$file.dump $url && pg_restore --verbose --clean --no-acl --no-owner -h localhost  -d $db /tmp/$file.dump
+}

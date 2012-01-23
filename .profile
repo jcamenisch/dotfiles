@@ -26,6 +26,8 @@ if which git>/dev/null; then
   alias gl="git log"
   alias gps="git push"
   alias gpshm="git push heroku master"
+  alias gr="git rebase"
+  alias grc="git rebase --continue"
   alias gs="git status"
   alias gsl="git shortlog"
   gpl() {
@@ -36,10 +38,10 @@ if which git>/dev/null; then
     fi
   }
   gg_replace() {
-    git grep -l $1 **/*.sass | xargs sed -i '' "s/$1/$2/g"
+    git grep -l $2 **/*$1 | xargs sed -i '' "s/$2/$3/g"
   }
   gg_dasherize() {
-    replace_in_project $1 `echo $1 | sed -e 's/_/-/g'`
+    gg_replace $1 `echo $2 | sed -e 's/_/-/g'`
   }
 fi
 if which bundle>/dev/null; then
@@ -59,9 +61,8 @@ if which bundle>/dev/null; then
   alias bess="bundle exec script/server"
   alias ru="bundle exec rackup"
 fi
-if which heroku>/dev/null; then
-  alias h="heroku"
-fi
+which heroku>/dev/null && . ~/.profile_heroku
+
 if which ruby>/dev/null; then
   LANG=en_US.UTF-8
   
@@ -107,4 +108,4 @@ fi
 [[ -f ~/.profile_$computername ]] && . ~/.profile_$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
