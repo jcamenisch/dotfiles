@@ -38,7 +38,7 @@ if which git>/dev/null; then
     fi
   }
   gg_replace() {
-    git grep -l $2 **/*$1 | xargs sed -i '' "s/$2/$3/g"
+    for file in `git grep -l $2 **/*$1`; sed -i '' "s/$2/$3/g" $file
   }
   gg_dasherize() {
     gg_replace $1 `echo $2 | sed -e 's/_/-/g'`
