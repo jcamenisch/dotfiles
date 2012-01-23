@@ -38,10 +38,12 @@ if which git>/dev/null; then
     fi
   }
   gg_replace() {
-    for file in `git grep -l $2 **/*$1`; sed -i '' "s/$2/$3/g" $file
+    mask=$3
+    [[ "$mask" == "" ]] && mask='*.*'
+    for file in `git grep -l $1 **/$mask`; sed -i '' "s/$1/$2/g" $file
   }
   gg_dasherize() {
-    gg_replace $1 `echo $2 | sed -e 's/_/-/g'`
+    gg_replace $1 `echo $1 | sed -e 's/_/-/g'` $3
   }
 fi
 if which bundle>/dev/null; then
