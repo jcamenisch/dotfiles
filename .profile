@@ -92,6 +92,7 @@ if which ruby>/dev/null; then
     # to get to
     #   ~/projects/ac*/www/p*/s*/s* (as in, ~/projects/acme/www/public/stylesheets/sass)
 
+    expr "$SHELL" : ".*/zsh$" >/dev/null && setopt globsubst
     cd $(ruby -e "
       puts ARGV[0].gsub( /%([0-9])/ ) {|match|
         (ARGV[\$1.to_i] ? ARGV[\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
