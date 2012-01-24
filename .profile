@@ -38,15 +38,24 @@ if which git>/dev/null; then
     fi
   }
   gg_replace() {
-    find=$1; shift
-    replace=$1; shift
+    if [[ "$#" == "0" ]]; then
+      echo 'Usage:'
+      echo '  gg_replace term replacement file_mask'
+      echo
+      echo 'Example:'
+      echo '  gg_replace cappuchino cappuccino *.html'
+      echo
+    else
+      find=$1; shift
+      replace=$1; shift
 
-    while [[ "$#" -gt "0" ]]; do
-      for file in `git grep -l $find **/$1`; do
-        sed -i '' "s/$find/$replace/g" $file
+      while [[ "$#" -gt "0" ]]; do
+        for file in `git grep -l $find **/$1`; do
+          sed -i '' "s/$find/$replace/g" $file
+        done
+        shift
       done
-      shift
-    done
+    fi
   }
   gg_dasherize() {
     gg_replace $1 `echo $1 | sed -e 's/_/-/g'` $2
