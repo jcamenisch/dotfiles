@@ -114,5 +114,3 @@ fi
 #   be synced or published.
 [[ -f ~/.profile_$computername ]] && . ~/.profile_$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
