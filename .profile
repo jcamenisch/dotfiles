@@ -42,7 +42,9 @@ if which git>/dev/null; then
     replace=$1; shift
 
     while [[ "$#" -gt "0" ]]; do
-      for file in `git grep -l $find **/$1`; sed -i '' "s/$find/$replace/g" $file
+      for file in `git grep -l $find **/$1`; do
+        sed -i '' "s/$find/$replace/g" $file
+      done
       shift
     done
   }
@@ -92,12 +94,18 @@ if which ruby>/dev/null; then
     # to get to
     #   ~/projects/ac*/www/p*/s*/s* (as in, ~/projects/acme/www/public/stylesheets/sass)
 
-    expr "$SHELL" : ".*/zsh$" >/dev/null && setopt globsubst
+    # Set globsubst option to work with zsh's globbing
+    add_option=`which unsetopt >/dev/null && unsetopt | grep globsubst` 
+    [[ -n "$add_option" ]] && setopt $add_option
+
     cd $(ruby -e "
       puts ARGV[0].gsub( /%([0-9])/ ) {|match|
         (ARGV[\$1.to_i] ? ARGV[\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
       }
     " $@)
+
+    # Put zsh options back where we found them
+    [[ -n "$add_option" ]] && unsetopt $add_option
   }
 
   alias c="cd_masked %1"
