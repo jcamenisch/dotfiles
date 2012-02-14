@@ -30,6 +30,11 @@ if which git>/dev/null; then
   alias grc="git rebase --continue"
   alias gs="git status"
   alias gsl="git shortlog"
+  if which git-ftp>/dev/null; then
+    passwd_arg=p
+    [[ `uname` == "Darwin" ]] && passwd_arg=k
+    alias gfp="git ftp push -$passwd_arg"
+  fi
   gpl() {
     if [[ $(git pull) == 'Already up-to-date.' ]]; then
       echo 'Already up-to-date.'
@@ -71,6 +76,7 @@ if which bundle>/dev/null; then
   alias kh="bundle exec kumade heroku"
   alias rk="bundle exec rake"
   alias rkdm="bundle exec rake db:migrate"
+  alias rkap="bundle exec rake assets:precompile"
   alias r="bundle exec script/rails"
   alias rc="bundle exec script/rails console"
   alias rr="bundle exec script/rails runner"
