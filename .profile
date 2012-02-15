@@ -10,6 +10,7 @@ alias lsl="ls -l"
 alias lsa="ls -a"
 alias lsla="ls -la"
 alias profile=". ~/.profile"
+alias vip="vi ~/.profile"
 mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
