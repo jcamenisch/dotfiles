@@ -26,6 +26,7 @@ if which git>/dev/null; then
   alias gg="git grep"
   alias gl="git log"
   alias gps="git push"
+  alias gpso="git push origin"
   alias gpshm="git push heroku master"
   alias gr="git rebase"
   alias grc="git rebase --continue"
