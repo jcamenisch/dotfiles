@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+def log(string)
+  puts string
+end
+
+def current_commit_hash
+  `git log -1 --pretty=format:%H`
+end
+
+def shell(command)
+  log `#{command} 2>&1`
+  $?.success?
+end
+
+def pull
+  shell 'git pull'
+end
+
+def migrate_db
+  shell 'bundle exec rake db:migrate'
+end
+
+def changed?(mask)
+  `git diff #{@last_commit} --exit-code #{mask}`
+  !$?.success?
+end
+
+def new_migrations?
+  changed?('db/migrate')
+end
+
+def update_bundle
+  shell 'bundle'
+end
+
+def bundle_changed?
+  changed?('Gemfile.lock')
+end
+
+def go
+  @last_commit=current_commit_hash
+
+  pull || return
+
+  @new_commit=current_commit_hash
+  return if @new_commit == @last_commit
+
+  migrate_db if new_migrations?
+
+  update_bundle if bundle_changed?
+end
+
+go
