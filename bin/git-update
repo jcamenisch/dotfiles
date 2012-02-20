@@ -13,42 +13,22 @@ def shell(command)
   $?.success?
 end
 
-def pull
-  shell 'git pull'
-end
-
-def migrate_db
-  shell 'bundle exec rake db:migrate'
-end
-
 def changed?(mask)
-  `git diff #{@last_commit} --exit-code #{mask}`
+  `git diff #{@prev_commit} --exit-code #{mask}`
   !$?.success?
 end
 
-def new_migrations?
-  changed?('db/migrate')
-end
-
-def update_bundle
-  shell 'bundle'
-end
-
-def bundle_changed?
-  changed?('Gemfile.lock')
-end
-
 def go
-  @last_commit=current_commit_hash
+  @prev_commit=current_commit_hash
 
-  pull || return
+  shell 'git pull' || return
 
   @new_commit=current_commit_hash
-  return if @new_commit == @last_commit
+  return if @new_commit == @prev_commit
 
-  migrate_db if new_migrations?
+  shell 'bundle exec rake db:migrate' if changed?('db/migrate')
 
-  update_bundle if bundle_changed?
+  shell 'bundle' if changed?('Gemfile.lock')
 end
 
 go
