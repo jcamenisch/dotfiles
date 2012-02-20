@@ -1,7 +1,12 @@
 #!/usr/bin/env ruby
 
-def log(string)
-  puts string
+def verbosity
+  @verbosity ||= 0
+end
+
+def log(string, options={})
+  puts string unless (options[:if_verbosity] || 0) > verbosity
+  string
 end
 
 def current_commit_hash
