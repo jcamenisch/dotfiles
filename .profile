@@ -25,6 +25,7 @@ if which git>/dev/null; then
   alias gdc="git diff --cached"
   alias gg="git grep"
   alias gl="git log"
+  alias gpl="git pull"
   alias gps="git push"
   alias gpso="git push origin"
   alias gpshm="git push heroku master"
@@ -32,18 +33,12 @@ if which git>/dev/null; then
   alias grc="git rebase --continue"
   alias gs="git status"
   alias gsl="git shortlog"
+  alias gu="git update"
   if which git-ftp>/dev/null; then
     passwd_arg=p
     [[ `uname` == "Darwin" ]] && passwd_arg=k
     alias gfp="git ftp push -$passwd_arg"
   fi
-  gpl() {
-    if [[ $(git pull) == 'Already up-to-date.' ]]; then
-      echo 'Already up-to-date.'
-    else
-      bundle install && [[ -f ./tmp/restart.txt ]] && touch ./tmp/restart.txt
-    fi
-  }
   gg_replace() {
     if [[ "$#" == "0" ]]; then
       echo 'Usage:'
