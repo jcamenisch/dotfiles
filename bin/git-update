@@ -1,20 +1,11 @@
 #!/usr/bin/env ruby
 
-def verbosity
-  @verbosity ||= 0
-end
-
-def log(string, options={})
-  puts string unless (options[:if_verbosity] || 0) > verbosity
-  string
-end
-
 def current_commit_hash
   `git log -1 --pretty=format:%H`
 end
 
 def shell(command)
-  log `#{command} 2>&1`
+  system("#{command} 2>&1")
   $?.success?
 end
 
