@@ -19,6 +19,8 @@ def shell(command)
 end
 
 def changed?(mask)
+  found=('found' == `[[ -n \`git ls-files man\` ]] && echo found`)
+  return false unless found
   `git diff #{@prev_commit} --exit-code #{mask}`
   !$?.success?
 end
