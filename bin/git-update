@@ -1,28 +1,26 @@
 #!/usr/bin/env ruby
 
-def current_commit_hash
+def current_commit_id
   `git log -1 --pretty=format:%H`
 end
 
 def shell(command)
-  system("#{command} 2>&1")
+  system("#{command}")
   $?.success?
 end
 
 def changed?(mask)
   found=('found' == `[[ -n \`git ls-files man\` ]] && echo found`)
   return false unless found
-  `git diff #{@prev_commit} --exit-code #{mask}`
+  `git diff #{@prev_commit_id} --exit-code #{mask}`
   !$?.success?
 end
 
 def go
-  @prev_commit=current_commit_hash
+  @prev_commit_id = current_commit_id
 
   shell 'git pull' || return
-
-  @new_commit=current_commit_hash
-  return if @new_commit == @prev_commit
+  return if current_commit_id == @prev_commit_id
 
   shell 'bundle exec rake db:migrate' if changed?('db/migrate')
 
