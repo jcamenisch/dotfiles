@@ -1,0 +1,22 @@
+cd ~/timesheets
+IFS=$'\t'
+i=0
+args=("$@")
+while [ $i -lt $# ] ; do
+  DIR=`echo ${args[$i]} | perl -pe 's/(--dir=(.*))?.*/\2/'`
+  if [ -n "$DIR" ] ; then
+    if [ -d $DIR ] ; then
+      echo Process directory $DIR
+      cd $DIR
+    else
+      echo $DIR is not a directory
+    fi
+    DIR=''
+  else
+    arg_string="$arg_string$IFS${args[$i]}"
+  fi
+  i=$(( $i + 1 ))
+done
+
+ruby ./parse.rb$arg_string
+cd - > /dev/null
