@@ -18,6 +18,7 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 if which git>/dev/null; then
   ga () { git add $* && git status ; }
   alias gb="git bisect"
+  alias gbr="git branch"
   alias gc="git checkout"
   alias gca="git commit --amend"
   alias gcm="git commit -m"
@@ -25,6 +26,7 @@ if which git>/dev/null; then
   alias gdc="git diff --cached"
   alias gg="git grep"
   alias gl="git log"
+  alias gm="git merge"
   alias gpl="git pull"
   alias gps="git push"
   alias gpso="git push origin"
@@ -52,7 +54,7 @@ if which git>/dev/null; then
       replace=$1; shift
 
       while [[ "$#" -gt "0" ]]; do
-        for file in `git grep -l $find **/$1`; do
+        for file in `git grep -l $find -- $1`; do
           sed -i '' "s/$find/$replace/g" $file
         done
         shift
@@ -72,8 +74,9 @@ if which bundle>/dev/null; then
   alias k="bundle exec kumade"
   alias kh="bundle exec kumade heroku"
   alias rk="bundle exec rake"
-  alias rkdm="bundle exec rake db:migrate"
   alias rkap="bundle exec rake assets:precompile"
+  alias rkdm="bundle exec rake db:migrate"
+  alias rkjw="bundle exec rake jobs:work"
   alias r="bundle exec script/rails"
   alias rc="bundle exec script/rails console"
   alias rr="bundle exec script/rails runner"
@@ -115,9 +118,10 @@ if which ruby>/dev/null; then
         (ARGV[\$1.to_i] ? ARGV[\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
       }
     " $@)
-
+    return_val=$?
     # Put zsh options back where we found them
     [[ -n "$add_option" ]] && unsetopt $add_option
+    return $return_val
   }
 
   alias c="cd_masked %1"

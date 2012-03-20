@@ -11,9 +11,10 @@ alias edit="subl"
 export EDITOR='subl -w'
 
 cdp() { # depends on cd_masked function defined in ~/.profile
-  cd_masked ~/projects/%1 $1
-  cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
-  pwd
+  if cd_masked ~/projects/%1 $1; then
+    cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
+    pwd
+  fi
 }
 cw () {
   [ $# -gt 0 ] && cd_masked ~/projects/%1/www/public/stylesheets/sass $@
