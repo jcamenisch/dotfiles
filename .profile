@@ -3,6 +3,7 @@
 #   That's not too big a deal--most of the time. ;)
 computername=`uname -n | sed -e 's/\..*$//'`
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$(echo ~/bin)"
+email=`echo 'onjthan@aamcniechsne.t' | sed -e "s/\(.\)\(.\)\(.\)/\3\1\2/g"`
 
 # Aliases and shortcuts
 alias ls="ls -G"
@@ -16,6 +17,10 @@ sshmt () { ssh serveradmin@$1@$1 ; }
 
 # Program-specific stuff
 if which git>/dev/null; then
+  export GIT_COMMITTER_NAME=Jonathan\ Camenisch
+  export GIT_COMMITTER_EMAIL=$email
+  export GIT_AUTHOR_NAME=Jonathan\ Camenisch
+  export GIT_AUTHOR_EMAIL=$email
   ga () { git add $* && git status ; }
   alias gb="git bisect"
   alias gbr="git branch"
