@@ -24,6 +24,7 @@ ab hg: Herring Gas Co.:
 ab hpc: Heritage Pres.:
 ab jfl: Jobs for Life:
 ab lg: Lily Grass:
+ab o2: Ocean Two:
 ab oh: Overhead:
 ab pb: Phonebooth.com:
 ab rsr: Rebecca's Silver Rose:
