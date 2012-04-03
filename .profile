@@ -58,12 +58,21 @@ if which git>/dev/null; then
       find=$1; shift
       replace=$1; shift
 
+      ORIG_GLOBIGNORE=$GLOBIGNORE
+      GLOBIGNORE=*.*
+      
+      if [[ "$#" = "0" ]]; then
+        set -- ' ' $@
+      fi
+
       while [[ "$#" -gt "0" ]]; do
         for file in `git grep -l $find -- $1`; do
           sed -i '' "s/$find/$replace/g" $file
         done
         shift
       done
+
+      GLOBIGNORE=$ORIG_GLOBIGNORE
     fi
   }
   gg_dasherize() {
@@ -90,6 +99,10 @@ if which bundle>/dev/null; then
   alias ru="bundle exec rackup"
 fi
 which heroku>/dev/null && . ~/.profile_heroku
+
+if which mongod>/dev/null; then
+  [[ -f ~/mongo/config ]] && alias mongo_start="mongod -f ~/mongo/config"
+fi
 
 if which ruby>/dev/null; then
   LANG=en_US.UTF-8
