@@ -1,0 +1,82 @@
+#!/usr/bin/ruby
+ 
+# cp_radiant.rb
+ 
+require 'optparse'
+require 'fileutils'
+
+opts = OptionParser.new do |opts|
+  opts.banner =  'Usage: s3sitecopy [options] URL [PATH]'
+  opts.separator 'Scrape a static copy of a web site from a url into an Amazon S3 bucket. Keep all client-side functionality intact.'
+  opts.separator ''
+  opts.separator 'URL: A valid url, including http://, etc.'
+  opts.separator 'PATH: not yet supported'
+  opts.separator ''
+  opts.separator 'Required:'
+  opts.on("-k", "--key ACCESS_KEY"    , "Your S3 access key. You can also set the environment variable AWS_ACCESS_KEY_ID instead") { |o| @access_key = o }
+  opts.on("-s", "--secret SECRET_KEY" , "Your S3 secret key. You can also set the environment variable AWS_SECRET_ACCESS_KEY instead") { |o| @secret_key = o }
+  opts.on("-b", "--bucket BUCKET_NAME", "The S3 bucket you want the files to go into.") { |o| @bucket = o }
+
+  #opts.separator ""
+  #opts.separator "Optional:"
+
+  #opts.on("-v", "--verbose", "") { |o| @verbose += 1 }
+  #opts.on("-p", "--public-read", "Set the copied files permission to be public readable.") { |o| @public = true }
+  #opts.on("-c", "--compress EXT", "Compress files with given EXT before uploading (ususally css and js),", "setting the HTTP headers for delivery accordingly. Repeat for multiple extensions") { |o| @compress << ".#{o}" }
+  #opts.on("-d", "--digest", "Save the sha1 digest of the file, to the S3 metadata. Require sha1sum to be installed") { |o| @save_hash  = true }
+  #opts.on("-t", "--time", "Save modified time of the file, to the S3 metadata") { |o| @save_time  = true }
+  #opts.on("-y", "--dry-run", "Simulate only - do not upload any file to S3") { |o| @dry_run  = true }
+  #opts.on("-h", "--help", "Show this instructions") { |o| @help_exit  = true }
+  opts.separator ""
+  opts.banner =  "Copyright(c) Jonathan Camenisch, 2012 (https://github.com/jcamenisch). Released under the MIT license."
+end
+
+@url, @path, *@more_args = opts.parse!(ARGV) #intended feature set
+@url = @url.sub /\/?$/, ''
+@path = File.join(Dir.pwd, @url.sub(%r(http://),'')) #until @path is actually implemented
+
+if @help_exit || !@url
+  puts opts
+  exit 1
+end
+
+def strip_absolute_hrefs(file)
+  text = File.read(file)
+  if text.gsub! %r( (href|src)(=["'])#{@url}/), ' \\1\\2/'
+    File.open(file, 'w') {|f| f.write text }
+  end
+end
+
+def process_dir(dir_path)
+  Dir.chdir(dir_path) do
+    html_files=Dir["*.html"]
+    html_files.each do |source_index|
+      strip_absolute_hrefs(source_index)
+
+      next if source_index == 'index.html'
+      dest_dir=source_index[0..-6] #chop off .html
+      if File.directory?(dest_dir)
+        process_dir(File.expand_path(dest_dir))
+      elsif !File.exists?(dest_dir)
+        Dir.mkdir(dest_dir)
+      else
+        next
+      end
+
+      dest_index = File.join(dest_dir, "index.html")
+      
+      FileUtils.cp source_index, dest_index
+      puts "...Copied #{source_index} to #{dest_index}"
+    end
+  end
+end
+ 
+puts "Fetching site... #{@url}"
+system "wget -E --no-verbose --no-cache --mirror #{@url}"
+
+puts "\n\n"
+
+puts "Processing #{@path}"
+process_dir(@path)
+Dir.chdir(@path)
+system "[[ -f ../cp2s3.rb ]] && ../cp2s3.rb #{'-b ' if @bucket}#{@bucket} #{'-k ' if @access_key}#{@access_key} #{'-s ' if @secret_key}#{@secret_key} -r -t *.*"
