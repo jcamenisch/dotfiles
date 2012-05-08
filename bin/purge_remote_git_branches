@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+read -sn 1 -p "This will delete all remote branches that are fully merged. Are you sure you want to continue? [y/N]" yesno
+echo
+[[ "$yesno" = "y" ]] && echo && \
+  git branch -r --merged | \
+    grep -v master | \
+    ruby -ne 'remote, branch = *$_.strip.split("/"); system "git push #{remote} :refs/heads/#{branch}"'
