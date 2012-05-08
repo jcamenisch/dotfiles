@@ -2,7 +2,7 @@
 #   should be written to run from bash or zsh
 #   That's not too big a deal--most of the time. ;)
 computername=`uname -n | sed -e 's/\..*$//'`
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$(echo ~/bin)"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin"
 email=`echo 'onjthan@aamcniechsne.t' | sed -e "s/\(.\)\(.\)\(.\)/\3\1\2/g"`
 
 # Aliases and shortcuts
