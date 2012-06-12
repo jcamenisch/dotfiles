@@ -66,7 +66,10 @@ if which git>/dev/null; then
 
       while [[ "$#" -gt "0" ]]; do
         for file in `git grep -l $find -- $1`; do
-          sed -i '' "s/$find/$replace/g" $file
+          # for Darwin/BSD:
+          sed -e "s/$find/$replace/g" -i '' $file
+          # for Linux/GNU:
+          # sed -e "s/$find/$replace/g" -i $file
         done
         shift
       done
