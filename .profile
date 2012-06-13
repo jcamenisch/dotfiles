@@ -15,12 +15,12 @@ mdcd () { mkdir $1 ; cd $1 ; }
 sshmt () { ssh serveradmin@$1@$1 ; }
 
 # Program-specific stuff
-for program in $(ls program_specific_configs); do
-  which $program>/dev/null && . program_specific_configs/$program
+for program in $(ls ~/.profile_program-specific); do
+  which $program>/dev/null && . ~/.profile_program-specific/$program
 done
 
 # OS-specific Stuff
-[[ -f ~/.profile_`uname` ]] && . ~/.profile_`uname`
+[[ -f ~/.profile_os-specific/`uname` ]] && . ~/.profile_os-specific/`uname`
 
 # Machine-specific stuff; use dotfiles/.profile_$computername file for safe syncing
 #   with other machines. Use ~/.profile_local for sensitive settings that should not
