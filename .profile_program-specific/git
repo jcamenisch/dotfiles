@@ -1,3 +1,5 @@
+email=`echo 'onjthan@aamcniechsne.t' | sed -e "s/\(.\)\(.\)\(.\)/\3\1\2/g"`
+
 export GIT_COMMITTER_NAME=Jonathan\ Camenisch
 export GIT_COMMITTER_EMAIL=$email
 export GIT_AUTHOR_NAME=Jonathan\ Camenisch
