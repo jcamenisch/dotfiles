@@ -22,10 +22,10 @@ done
 # OS-specific Stuff
 [[ -f ~/.profile_os-specific/`uname` ]] && . ~/.profile_os-specific/`uname`
 
-# Machine-specific stuff; use dotfiles/.profile_$computername file for safe syncing
+# Machine-specific stuff; use dotfiles/.profile_machine-specific/$computername file for safe syncing
 #   with other machines. Use ~/.profile_local for sensitive settings that should not
 #   be synced or published.
-[[ -f ~/.profile_$computername ]] && . ~/.profile_$computername
+[[ -f ~/.profile_machine-specific/$computername ]] && . ~/.profile_machine-specific/$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
 
 export PATH="$PATH:$HOME/bin"
