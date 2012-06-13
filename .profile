@@ -2,15 +2,8 @@
 #   should be written to run from bash or zsh
 #   That's not too big a deal--most of the time. ;)
 
-# Aliases and shortcuts
-alias ls="ls -G"
-alias lsl="ls -l"
-alias lsa="ls -a"
-alias lsla="ls -la"
-alias profile=". ~/.profile"
-alias vip="vi ~/.profile"
-mdcd () { mkdir $1 ; cd $1 ; }
-sshmt () { ssh serveradmin@$1@$1 ; }
+# Shortcuts (aliases and functions)
+for script in $(ls ~/.profile_shortcuts); . ~/.profile_shortcuts/$script
 
 # Program-specific stuff
 for program in $(ls ~/.profile_program-specific); do
