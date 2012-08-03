@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# from Jimmy Thrasher: https://github.com/jjthrash/jimmyconf/blob/master/bin/git-dangling-commits
+
+function dangling_commits {
+    git fsck --lost-found | awk '/commit/ { print $3 }'
+}
+
+for commit in `dangling_commits`; do
+    echo $commit
+    git cat-file -p $commit
+    echo
+done
