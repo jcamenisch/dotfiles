@@ -50,7 +50,13 @@ gg_replace() {
 
     while [[ "$#" -gt "0" ]]; do
       for file in `git grep -l $find -- $1`; do
-        sed -e "s/$find/$replace/g" -i'' $file
+        if [[ $(uname) = 'Darwin' ]]; then
+          #for BSD flavors of sed (sorry to not check for non-Mac systems :( )
+          sed -e "s/$find/$replace/g" -i '' $file
+        else
+          #for Linux's flavor of sed
+          sed -e "s/$find/$replace/g" -i $file
+        fi
       done
       shift
     done
