@@ -7,6 +7,7 @@ alias k="bundle exec kumade"
 alias kh="bundle exec kumade heroku"
 alias rk="bundle exec rake"
 alias rkap="bundle exec rake assets:precompile"
+alias rkap-c='bundle exec rake assets:precompile && git add . && git commit -m "Compile assets"'
 alias rkdm="bundle exec rake db:migrate"
 alias rkjw="bundle exec rake jobs:work"
 alias r="bundle exec script/rails"
