@@ -11,16 +11,6 @@ set visualbell t_vb=
 set incsearch
 set wildmenu
 
-ab oh: Overhead:
-ab cf: Character First:
-ab er: Eyereach Productions:
-ab sa: Shepherd Automotive:
-ab tr: Tobacco Road: 
-ab ur: Uprooting Anger:
-ab pb: Phonebooth.com:
-ab rsr: Rebecca's Silver Rose:
-ab hpc: Heritage Pres.:
-
 nnoremap <F5> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
 nnoremap <C-D> :.s/^/#\~ /<CR>:.s/^#\~ #\~ //<CR>
 nnoremap <C-L> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
