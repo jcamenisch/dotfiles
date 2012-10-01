@@ -1,5 +1,7 @@
 alias h="heroku"
-alias hc="heroku console"
+alias hr="heroku run"
+alias hrb="heroku run bash"
+alias hrc="heroku run console"
 h_pg_restore() {
   file=$1
   app_param='--app=chotels-hb'
