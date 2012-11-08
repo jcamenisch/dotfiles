@@ -3,7 +3,9 @@
 #   That's not too big a deal--most of the time. ;)
 
 # Shortcuts (aliases and functions)
-for script in $(ls ~/.profile_shortcuts); . ~/.profile_shortcuts/$script
+for script in $(ls ~/.profile_shortcuts); do
+  . ~/.profile_shortcuts/$script
+done
 
 # Program-specific stuff
 for program in $(ls ~/.profile_program-specific); do
