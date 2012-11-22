@@ -1,8 +1,7 @@
-alias mysql.server=/usr/local/mysql/share/mysql/mysql.server
 #alias t="ssh -i ~/.ssh/id_rsa3 vpn2.characterfirst.net $*"
 alias ti='vi -c "$" ~/timesheets/`date +"%Y-%m-%d"`.ts'
 NODE_PATH=/usr/local/lib/node_modules
 
-export PATH="$PATH:$HOME/pear/bin"
+export PATH=/Applications/MAMP/bin/php/php5.2.17/bin:$PATH
 export PATH="$PATH:$HOME/Applications/android-sdk-macosx/tools"
 export PATH="$PATH:$HOME/Applications/android-sdk-macosx/platform-tools"
