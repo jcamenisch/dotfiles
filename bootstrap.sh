@@ -22,4 +22,6 @@ fi
 
 unset doIt
 
+cd -
+
 source ~/.profile
