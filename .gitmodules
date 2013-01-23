@@ -19,3 +19,6 @@
 [submodule "janus/vimchat"]
 	path = janus/vimchat
 	url = git://github.com/ironcamel/vimchat.git
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = git://github.com/jcamenisch/oh-my-zsh.git
