@@ -1,5 +1,7 @@
 LANG=en_US.UTF-8
 
+alias z="zeus"
+
 cd_masked () {
   # For lazy typists, use this in an alias to get to working directories you often use.
   # For example,
