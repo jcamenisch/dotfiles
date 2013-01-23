@@ -1,3 +1,21 @@
 [submodule ".vim"]
 	path = .vim
 	url = git@github.com:jcamenisch/janus.git
+[submodule "janus/tabular"]
+	path = janus/tabular
+	url = https://github.com/ihacklog/tabular.git
+[submodule "janus/YankRing"]
+	path = janus/YankRing
+	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "janus/yankstack"]
+	path = janus/yankstack
+	url = https://github.com/maxbrunsfeld/vim-yankstack.git
+[submodule "janus/Align"]
+	path = janus/Align
+	url = git://github.com/vim-scripts/Align.git
+[submodule "janus/vim-slime"]
+	path = janus/vim-slime
+	url = https://github.com/jpalardy/vim-slime.git
+[submodule "janus/vimchat"]
+	path = janus/vimchat
+	url = git://github.com/ironcamel/vimchat.git
