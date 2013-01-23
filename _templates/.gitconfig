@@ -1,6 +1,6 @@
 [user]
 	name = Jonathan Camenisch
-	email = jonathan@camenisch.net
+	email = $email
 [color]
 diff = auto
 status = auto
@@ -9,3 +9,5 @@ branch = auto
 	co = checkout
 [apply]
 	whitespace = nowarn
+[core]
+	excludesfile = $HOME/.gitignore_global

@@ -1,0 +1,9 @@
+dir=$(dirname $0)
+
+for f in $(ls -a $dir | grep -v '^\.\+$' | grep -v '^INSTALL$'); do
+  # Eval the file to substitute any env variables and expressions
+  # Kids, don't try this at home. At least not with untrusted files, yo!
+  eval "cat <<< \"$(<$dir/$f)\"" 2> /dev/null > ~/$f
+done
+
+unset dir
