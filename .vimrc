@@ -11,10 +11,10 @@ set visualbell t_vb=
 set incsearch
 set wildmenu
 
-nnoremap <C-D> :.s/^/#\~ /<CR>:.s/^#\~ #\~ //<CR>
-nnoremap <C-L> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
-inoremap <C-L> <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
-inoremap <C-S> <ESC>:w<CR>a
+nnoremap ;d :.s/^/#\~ /<CR>:.s/^#\~ #\~ //<CR>
+nnoremap ;l "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
+inoremap ;l <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
+inoremap ;s <ESC>:w<CR>a
 imap jj <Esc>
 
 if has("gui_macvim")
