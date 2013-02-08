@@ -5,9 +5,13 @@
 cd "$(dirname $0)"
 
 git pull
+git submodule init
+git submodule update
 
 function doIt() {
   rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "README.md" -av . ~
+  sh ~/.vim/bootstrap.sh
+  [ `uname` = "Darwin" ] && [ -f macos_tweaks.sh ] && sh macos_tweaks.sh
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
