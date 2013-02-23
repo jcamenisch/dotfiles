@@ -7,7 +7,8 @@ alias profile=". ~/.profile"
 
 alias vip="vi ~/.profile"
 
-alias sshp="ssh pc.camenischcreative.com"
+alias ssh2="ssh 2.portcat.net"
+alias ssh2r="ssh -R 2222:localhost:22 2.portcat.net"
 sshmt () { ssh serveradmin@$1@$1 ; }
 
 mdcd () { mkdir $1 ; cd $1 ; }
