@@ -1,0 +1,1 @@
+PATH=$PATH:$(gem env | grep 'EXECUTABLE DIRECTORY' | cut -d':' -f2 | sed -e 's/^[[:space:]]*//g')
