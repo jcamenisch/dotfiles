@@ -1,0 +1,12 @@
+if [[ -d /Applications/MAMP ]]; then
+  php_version() {
+    curl -s http://localhost:8888/MAMP/phpinfo.php | grep '<h1 class="p">' | rev | cut -d' ' -f1 | rev | cut -d'<' -f1
+  }
+
+  add_mamp_path() {
+    php_version=$(php_version)
+    if [[ -n "$php_version" ]]; then
+      PATH=$PATH:$(find /Applications/MAMP | grep "$(php_version)/bin$")
+    fi
+  }
+fi
