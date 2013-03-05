@@ -1,4 +1,3 @@
-#alias t="ssh -i ~/.ssh/id_rsa3 vpn2.characterfirst.net $*"
 alias ti='vi -c "$" ~/timesheets/`date +"%Y-%m-%d"`.ts'
 NODE_PATH=/usr/local/lib/node_modules
 
