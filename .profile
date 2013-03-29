@@ -23,3 +23,6 @@ computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f ~/.profile_local ]] && . ~/.profile_local
 
 export PATH="$PATH:$HOME/bin"
+
+# Run direnv hook at the very end--'cause it's picky and stuff
+which direnv>/dev/null && eval `direnv hook $SHELL`
