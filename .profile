@@ -2,6 +2,8 @@
 #   should be written to run from bash or zsh
 #   That's not too big a deal--most of the time. ;)
 
+export PATH="$PATH:$HOME/bin"
+
 # Shortcuts (aliases and functions)
 for script in $(ls ~/.profile_shortcuts); do
   . ~/.profile_shortcuts/$script
@@ -22,8 +24,6 @@ done
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f ~/.profile_machine-specific/$computername ]] && . ~/.profile_machine-specific/$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
-
-export PATH="$PATH:$HOME/bin"
 
 # Run direnv hook at the very end--'cause it's picky and stuff
 which direnv>/dev/null && eval `direnv hook $SHELL`
