@@ -8,8 +8,9 @@ for script in $(ls ~/.profile_shortcuts); do
 done
 
 # Program-specific stuff
-for program in $(ls ~/.profile_program-specific); do
-  which $program>/dev/null && . ~/.profile_program-specific/$program
+for file in $(ls ~/.profile_program-specific); do
+  program=$(echo $file | rev | cut -d'.' -f1 | rev)
+  which $program>/dev/null && . ~/.profile_program-specific/$file
 done
 
 # OS-specific Stuff
