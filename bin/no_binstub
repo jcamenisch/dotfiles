@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+program, *args = ARGV
+
+binstub_directory = `bundle config bin`.split("\n").grep(/:/)
+binstub_directory &&= binstub_directory.first[/: "(.+)"/, 1]
+
+def shell(command)
+  `#{command}`.chomp
+end
+
+if binstub_directory
+  orig_path = shell("echo $PATH")
+  path_without_binstub = orig_path.sub(%r{(?<=^|:)#{binstub_directory}:},'')
+  dest_program = shell("PATH=#{path_without_binstub}; which #{program}")
+
+  system "#{dest_program} #{args.join(' ')}"
+else
+  system "unalias #{program} && #{program} #{args.join(' ')}"
+end
