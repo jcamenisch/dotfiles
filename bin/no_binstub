@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 
+# To run a binary (like, say, zeus) from it's system-installed location
+# instead of from the Bundler-supplied binstub, call
+#
+#   > no_binstub my_binary
+#
+# Combine with an alias for transparent usage throughout your session. E.g.
+#
+#   > alias zeus='no_binstub zeus'
+#   > zeus
+
 program, *args = ARGV
 
 binstub_directory = `bundle config bin`.split("\n").grep(/:/)
