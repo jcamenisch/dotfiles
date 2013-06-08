@@ -13,4 +13,4 @@ alias rc="rails c"
 alias rr="rails runner"
 alias rs="rails s"
 alias ru="bundle exec rackup"
-alias zeus='no_binstub zeus'
+alias zeus=$(which -a zeus | grep -m1 -v bundle)
