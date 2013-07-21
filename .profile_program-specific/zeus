@@ -1,0 +1,5 @@
+alias zeus=$(which -a zeus | grep -m1 -v bundle)
+alias z=zeus
+alias zr='zeus rake'
+alias zrm='zeus rake minitest:all'
+alias zrmq='zeus rake minitest:all:quick'
