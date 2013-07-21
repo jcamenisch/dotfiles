@@ -9,10 +9,12 @@ for script in $(ls ~/.profile_shortcuts); do
   . ~/.profile_shortcuts/$script
 done
 
+is_executable() type $1>/dev/null
+
 # Program-specific stuff
 for file in $(ls ~/.profile_program-specific); do
   program=$(echo $file | rev | cut -d'.' -f1 | rev)
-  which $program>/dev/null && . ~/.profile_program-specific/$file
+  is_executable $program && . ~/.profile_program-specific/$file
 done
 
 # OS-specific Stuff
@@ -26,4 +28,4 @@ computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f ~/.profile_local ]] && . ~/.profile_local
 
 # Run direnv hook at the very end--'cause it's picky and stuff
-which direnv>/dev/null && eval `direnv hook $SHELL`
+is_executable direnv && eval `direnv hook $SHELL`
