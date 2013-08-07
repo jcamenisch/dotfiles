@@ -6,7 +6,6 @@ alias lk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources
 alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences&"
 alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
-alias go="pg && mate . && gpl"
 
 alias edit="subl"
 export EDITOR='subl -w'
