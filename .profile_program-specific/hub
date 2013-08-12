@@ -1,4 +1,4 @@
 alias git=hub
-alias gpr='hub pull=request'
+alias gpr='hub pull-request'
 is_executable compdef && compdef hub=git
 
