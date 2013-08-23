@@ -1,0 +1,18 @@
+#!/usr/bin/ruby
+
+scope = ARGV[0] || 'all:quick'
+
+file  = ARGV[1] && ARGV[1].dup
+
+if file
+  file.sub! /(_test)?(\.rb)?$/, '_test.rb'
+  file.sub! %r{^(test/)?(#{scope}/)?}, "test/#{scope}/"
+end
+
+command = "rake minitest:#{scope}" << (file ? " TEST=#{file} " : ' ') << Array(ARGV[2..-1]).join(' ')
+
+if $PROGRAM_NAME == __FILE__
+  system command
+else
+  command
+end
