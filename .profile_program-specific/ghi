@@ -2,11 +2,11 @@
 
 alias isetms='[[ -z $GHI_CURRENT_MILESTONE ]] && export GHI_CURRENT_MILESTONE=$( ghi milestone -S due_date -v | grep -E "Past due|^Due" -B5| grep -E "^\#" | tail -1 | cut -f1 -d:|tr -d "# \t\n") || true'
 
-function iissues() { setcms; ghi list -M $GHI_CURRENT_MILESTONE $@ }
+function iissues() { setcms; ghi list -M $GHI_CURRENT_MILESTONE $@; }
 
-function imyissues() { setcms; ghi list -M $GHI_CURRENT_MILESTONE --mine $@ }
+function imyissues() { setcms; ghi list -M $GHI_CURRENT_MILESTONE --mine $@; }
 
-function inotmyissues() { issues $@ COL | grep -vE "^\s*($(myissues COL |awk '{print $1}' | tr -d ' \t'|paste -s -d'|' -))" }
+function inotmyissues() { issues $@ COL | grep -vE "^\s*($(myissues COL |awk '{print $1}' | tr -d ' \t'|paste -s -d'|' -))"; }
 
 alias teampoints='for i in $(echo ${GHI_TEAM:=$USER}); do echo -n "$i: "; issues -u $i COL POINTS; done | grep -Ev " 0$"|sort -nrk2'
 
@@ -37,14 +37,14 @@ alias im='ghi milestone'
 alias imw='ghi milestone -w'
 
 alias inext="ghi list --mine --label 'In Progress' && ghi list --mine --label 'High Priority' --not-label 'In Progress'"
-function istart() { ghi label $1 | grep "In Progress" && echo "Aborted. \nAlready in progress!" || (ghi assign $1 && ghi label $1 "In Progress") }
+function istart() { ghi label $1 | grep "In Progress" && echo "Aborted. \nAlready in progress!" || (ghi assign $1 && ghi label $1 "In Progress"); }
 alias istop='grep "In Progress" >/dev/null && ghi label -d "In%20Progress"'
 
-function ifinish() { [[ ! -z $GHI_PM ]] && (ghi assign $1 $GHI_PM && ghi label $1 "Awaiting Approval") || (echo 'GHI_PM not set to a GitHub user! Issue not checked in!' && false ) }
+function ifinish() { [[ ! -z $GHI_PM ]] && (ghi assign $1 $GHI_PM && ghi label $1 "Awaiting Approval") || (echo 'GHI_PM not set to a GitHub user! Issue not checked in!' && false ); }
 
 # Labels
-function ilab() { ghi label $1 -a $2 }
-function ilabel() { ghi label $1 -a $2 }
+function ilab() { ghi label $1 -a $2; }
+function ilabel() { ghi label $1 -a $2; }
 
 alias iblocked='ghi label -a blocked'
 alias iblocking='ghi label -a blocking'
@@ -52,7 +52,7 @@ alias iblocking='ghi label -a blocking'
 alias ienh='ghi label -a enhancement'
 alias ibug='ghi label -a bug'
 
-function ims() { setcms; ghi edit ${1:=9999999} -M ${2:=$GHI_CURRENT_MILESTONE} } # Usage: ims <issueno> [milestoneno] (defaults to earliest milestone)
+function ims() { setcms; ghi edit ${1:=9999999} -M ${2:=$GHI_CURRENT_MILESTONE}; } # Usage: ims <issueno> [milestoneno] (defaults to earliest milestone)
 
 function ilow() { [[ -n $1 ]] &&
   ghi label -d "Medium%20Priority" $1 > /dev/null &&

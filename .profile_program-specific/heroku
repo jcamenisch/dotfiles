@@ -8,7 +8,7 @@ alias hr="heroku run"
 alias hrb="heroku run bash"
 alias hrc="heroku run console"
 alias hrr="heroku run rake"
-hp() { heroku $* -r production }
+hp() { heroku $* -r production; }
 
 h_pg_restore() {
   file=$1
