@@ -31,3 +31,4 @@ source $ZSH/oh-my-zsh.sh
 setopt glob_subst
 # Uncomment to re-enable RVM
 [[ -s "/Users/jcamenisch/.rvm/scripts/rvm" ]] && source "/Users/jcamenisch/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+[[ -f ~/bin/tmuxinator.zsh ]] && source ~/bin/tmuxinator.zsh
