@@ -29,6 +29,9 @@ source $ZSH/oh-my-zsh.sh
 # export PATH=/Users/jcamenisch/.rvm/gems/ruby-1.9.2-p180/bin:/Users/jcamenisch/.rvm/gems/ruby-1.9.2-p180@global/bin:/Users/jcamenisch/.rvm/rubies/ruby-1.9.2-p180/bin:/Users/jcamenisch/.rvm/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:~/bin
 . ~/.profile
 setopt glob_subst
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+
 # Uncomment to re-enable RVM
 [[ -s "/Users/jcamenisch/.rvm/scripts/rvm" ]] && source "/Users/jcamenisch/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -f ~/bin/tmuxinator.zsh ]] && source ~/bin/tmuxinator.zsh
