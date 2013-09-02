@@ -8,7 +8,6 @@ alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 
 alias edit="subl"
-export EDITOR='subl -w'
 
 cdp() { # depends on cd_masked function defined in ~/.profile
   if cd_masked ~/projects/%1 $1; then
