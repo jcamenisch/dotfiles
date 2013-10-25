@@ -4,5 +4,7 @@ alias zr='zeus rake'
 alias zrm='zeus rake minitest:all'
 alias zrmq='zeus rake minitest:all:quick'
 alias zrt='zeus rake test'
+alias zt='zeus test'
+alias ztt='zeus test test'
 
 alias kpt="ps aux | grep 'postgres.\\+_t[e]st' | ruby -ne 'puts \$_.split(/ +/)[1]' | xargs kill"
