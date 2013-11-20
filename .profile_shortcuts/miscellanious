@@ -12,3 +12,9 @@ alias ssh2r="ssh -R 2222:localhost:22 2.portcat.net"
 sshmt () { ssh serveradmin@$1@$1 ; }
 
 mdcd () { mkdir $1 ; cd $1 ; }
+wait_for_process () {
+  while [[ -z $(ps | grep "$1") ]]; do
+    sleep 0.5
+  done
+}
+
