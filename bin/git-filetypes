@@ -1,0 +1,4 @@
+git ls-files |                  # List all files in the git repository \
+  grep '\w\.\w\+$' |            # Only keep the ones that have a file extension (a dot within the last word) \
+  rev | cut -d '.' -f 1 | rev | # Chop off the file extension \
+  sort | uniq                   # Show distinct values
