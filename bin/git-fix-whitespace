@@ -1,23 +1,25 @@
 #!/usr/bin/env ruby
 
-extensions = %w[
-  rb ru erb
-  html slim haml emblem
-  sass scss css
-  js coffee json
-  markdown md
-  sql txt yml example
-  gitignore
-]
+`git status`; if $?.exitstatus == 0
+  extensions = %w[
+    rb ru erb
+    html slim haml emblem
+    sass scss css
+    js coffee json
+    markdown md
+    sql txt yml example
+    gitignore
+  ]
 
-files=`git diff --name-status master`
-  .split("\n")
-  .select { |line| line[0] != 'D' && extensions.include?(line[/[^.]+$/]) }
-  .map { |line| line.split("\t").last }
-  .join(' ')
+  files=`git diff --name-status master`
+    .split("\n")
+    .select { |line| line[0] != 'D' && extensions.include?(line[/[^.]+$/]) }
+    .map { |line| line.split("\t").last }
+    .join(' ')
 
-system %(
-  for file in #{files}; do
-    [[ "" == "$(tail -qc 1 $file)" ]] || echo >> $file
-  done
-)
+  system %(
+    for file in #{files}; do
+      [[ "" == "$(tail -qc 1 $file)" ]] || echo >> $file
+    done
+  )
+end
