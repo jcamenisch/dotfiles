@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ "$1" = "false" ]; then
+  show=true
+else
+  show=false
+fi
+
+defaults write com.apple.finder CreateDesktop -bool $show
+killall Finder
