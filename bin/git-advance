@@ -1,0 +1,12 @@
+#!/bin/sh
+
+toward_branch=$1
+[[ -z "$toward_branch" ]] && toward_branch=master
+
+next_commit=$(git log HEAD..$toward_branch --reverse | head -1 | cut -d' ' -f 2)
+if [[ -z "$next_commit" ]]; then
+  echo "There is no next commit toward branch $toward_branch"
+  exit 1
+else
+  git checkout $next_commit
+fi
