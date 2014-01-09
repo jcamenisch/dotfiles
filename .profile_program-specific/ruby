@@ -44,7 +44,7 @@ MT_ACCT=$(echo $HOME | ruby -e 'puts $~[1] if gets =~ %r(/home/([0-9]+)/users/.h
 
 export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
 
-export RUBY_HEAP_MIN_SLOTS=1000000
+export RUBY_GC_HEAP_INIT_SLOTS=1000000
 export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
