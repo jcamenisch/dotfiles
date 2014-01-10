@@ -1,0 +1,34 @@
+# ~/.tmuxinator/rails.yml
+
+name: rails
+socket_path: /tmp/rails-pair-session
+root: .
+
+# Optional tmux socket
+socket_name: rails
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: EDITOR=vim
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+windows:
+  - r:
+      name: s
+      layout: c420,204x47,0,0{81x47,0,0[81x23,0,0,0,81x23,0,24,5],122x47,82,0,2}
+      panes:
+        - zeus start
+        - wait_for_process 'zeu[s] slave'; zeus rake jobs:work
+        - wait_for_process 'zeu[s] slave'; zeus s
+  - vi:
+      name: vi
+      layout: main-vertical
+      panes:
+        - vim
+  - sh:
+  - rc: wait_for_process 'zeu[s] slave'; zeus c
+  - starting: tmux rename-session $(pwd | rev | cut -d/ -f1 | rev); nocorrect chmod 777 /tmp/rails-pair-session; tmux set-window-option -t $SESSION:0 monitor-activity off; monitor-activity off; sleep 2; kr; kz; exit; exit; exit
