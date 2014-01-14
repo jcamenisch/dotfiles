@@ -1,3 +1,4 @@
+alias mdf='mux dotfiles'
 alias mr='mux rails'
 alias mkk='cdp kikuchat2; mux rails'
 alias mse='cdp swagexpert; mux rails'
