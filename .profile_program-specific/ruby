@@ -26,11 +26,11 @@ cd_masked () {
   add_option=`which unsetopt >/dev/null && unsetopt | grep globsubst`
   [[ -n "$add_option" ]] && setopt $add_option
 
-  cd $(ruby -e "
+  cd "$(ls -d $(ruby -e "
     puts ARGV[0].gsub( /%([0-9])/ ) {|match|
       (ARGV[\$1.to_i] ? ARGV[\$1.to_i]+'*' : '' ).gsub(/(.)\//,'\\\\1*/')
     }
-  " $@)
+  " $@) | head -1)"
   return_val=$?
   # Put zsh options back where we found them
   [[ -n "$add_option" ]] && unsetopt $add_option
