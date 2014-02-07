@@ -49,3 +49,16 @@ export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
+
+if [[ -d "$HOME/.rbenv/bin" ]]; then
+  # Install rbenv & ruby-build plugin with
+  #   git clone https://github.com/sstephenson/rbenv.git ~/.rbenv
+  #   git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+  # 
+  # Then install versions of ruby with
+  #   rbenv install --list
+  #   rbenv install <version>
+
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
