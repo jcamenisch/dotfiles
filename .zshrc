@@ -33,6 +33,4 @@ bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^R' history-incremental-pattern-search-backward
 
-# Uncomment to re-enable RVM
-[[ -s "/Users/jcamenisch/.rvm/scripts/rvm" ]] && source "/Users/jcamenisch/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 [[ -f ~/bin/tmuxinator.zsh ]] && source ~/bin/tmuxinator.zsh

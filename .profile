@@ -27,6 +27,11 @@ computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f ~/.profile_machine-specific/$computername ]] && . ~/.profile_machine-specific/$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
 
+export EDITOR=vim
+
+[[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+[[ -s "/Users/jcamenisch/.rvm/scripts/rvm" ]] && source "/Users/jcamenisch/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
 # Run direnv hook at the very end--'cause it's picky and stuff
 export shell=$(ps -p $$ | tail -1 | rev | cut -d' ' -f1 | rev)
 is_executable direnv && eval `direnv hook $shell`
