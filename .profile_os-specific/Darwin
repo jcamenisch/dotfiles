@@ -9,16 +9,29 @@ alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres
 
 alias edit="subl"
 
-cdp() { # depends on cd_masked function defined in ~/.profile
-  if cd_masked ~/projects/%1 $1; then
-    cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
-    pwd
-  fi
-}
+if [[ -d ~/projects ]]; then
+  cdp() { # depends on cd_masked function defined in ~/.profile
+    if cd_masked ~/projects/%1 $1; then
+      cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
+      pwd
+    fi
+  }
+fi
+
+if [[ -d ~/uservoice ]]; then
+  cdu() { # depends on cd_masked function defined in ~/.profile
+    if cd_masked ~/uservoice/%1 $1; then
+      cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
+      pwd
+    fi
+  }
+fi
+
 cw () {
   [ $# -gt 0 ] && cd_masked ~/projects/%1/www/public/stylesheets/sass $@
   compass watch
 }
+
 reopen () {
   killall $1 && open -a $1
 }
