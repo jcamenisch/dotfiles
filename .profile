@@ -32,7 +32,7 @@ export EDITOR=vim
 [[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "/Users/jcamenisch/.rvm/scripts/rvm" ]] && source "/Users/jcamenisch/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-[[ "$PATH" == "*.git/safe/../../bin:*" ]] || export PATH=".git/safe/../../bin:$PATH"
+[[ "$PATH" == "*.git/safe/../../.bundle/bin:*" ]] || export PATH=".git/safe/../../.bundle/bin:$PATH"
 
 # Run direnv hook at the very end--'cause it's picky and stuff
 export shell=$(ps -p $$ | tail -1 | rev | cut -d' ' -f1 | rev)
