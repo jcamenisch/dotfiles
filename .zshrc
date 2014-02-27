@@ -34,3 +34,5 @@ bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^R' history-incremental-pattern-search-backward
 
 [[ -f ~/bin/tmuxinator.zsh ]] && source ~/bin/tmuxinator.zsh
+
+is_executable rspec && alias rspec='nocorrect rspec'
