@@ -10,6 +10,7 @@ alias gbl="git blame"
 alias gbmd='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 alias gb="git branch"
 alias gbd="git branch -d"
+alias gbD="git branch -D"
 alias gc="git checkout"
 alias gc1="git checkout HEAD~1"
 alias gca="git commit --amend"
