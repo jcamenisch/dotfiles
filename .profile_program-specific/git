@@ -21,6 +21,25 @@ alias gd="git diff"
 alias gd1="git diff HEAD~1"
 alias gdc="git diff --cached"
 alias gdm="git diff master"
+
+gdmb() { # Diff a branch against its merge-base with another branch
+  if [[ $# -gt 1 ]]; then
+    ref1=$1
+    ref2=$2
+  else
+    ref1=master
+    if [[ $# -eq 1 ]]; then
+      ref2=$1
+    else
+      ref2=HEAD
+    fi
+  fi
+
+  base=`git merge-base $ref1 $ref2`
+
+  git diff $base $ref2
+}
+
 alias gdw="git diff --ignore-all-space"
 alias gg="git grep"
 alias gh="git help"
