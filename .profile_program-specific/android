@@ -1,0 +1,6 @@
+# For Android Emulator setup tips, see
+# "10 Tips for Setting Up + Using Android Emulator (Smart Layers Style)"
+# by Jonathan 'J5' Cook at
+# https://www.addthis.com/blog/2013/07/22/10-tips-for-android-emulator/#.UzGuSa1dWa4
+
+export ANDROID_HOME=/usr/local/opt/android-sdk
