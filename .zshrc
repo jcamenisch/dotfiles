@@ -32,6 +32,8 @@ setopt glob_subst
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^R' history-incremental-pattern-search-backward
+# Remap Ctrl-S to Ctrl-- for stopping termianl output
+stty start  stop 
 
 [[ -f ~/bin/tmuxinator.zsh ]] && source ~/bin/tmuxinator.zsh
 
