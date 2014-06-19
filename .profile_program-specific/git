@@ -26,8 +26,8 @@ gdmb() { # Diff a branch against its merge-base with another branch
   ref1=master
   ref2=HEAD
 
-  git rev-parse "$1" 2>1 >/dev/null || (ref1=$1 && shift)
-  git rev-parse "$1" 2>1 >/dev/null || (ref2=$1 && shift)
+  [[ -n "$1" ]] && (git rev-parse "$1" 2>&1 >/dev/null || (ref1=$1 && shift))
+  [[ -n "$1" ]] && (git rev-parse "$1" 2>&1 >/dev/null || (ref2=$1 && shift))
 
   base=`git merge-base $ref1 $ref2`
 
