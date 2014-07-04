@@ -6,6 +6,18 @@ git pull
 git submodule init
 git submodule update
 
+# Clean out any outdated symlinks from ~
+for file in $(ls -A ~); do
+  # if it 
+  #   1) is a symlink,
+  #   2) points to a file that doesn't exist, and
+  #   3) points somewhere in this directory
+  if [[ -h ~/$file ]] && [[ ! -e ~/$file ]] && [[ $(ls -l ~/$file) == *$(pwd)* ]]; then
+    rm ~/$file
+  fi
+done
+
+# Add all the latest symlinks into ~
 for file in $(ls -A | grep -v "^\.skipfiles$" | grep -vf .skipfiles); do
   if [[ -e ~/$file ]] && [[ ! -h ~/$file ]]; then
     echo "skipping ~/$file, as it already exists"
