@@ -1,0 +1,21 @@
+#!/bin/bash
+
+skip_files='^\.git$\|^[^.]'
+
+cd "$(dirname $0)"
+
+git pull
+git submodule init
+git submodule update
+
+for file in $(ls -a | grep -v "$skip_files\|^\.\+$" ); do
+  if [[ -e ~/$file ]] && [[ ! -h ~/$file ]]; then
+    echo "skipping ~/$file, as it already exists"
+  else
+    ln -fs $(pwd)/$file ~/$file
+  fi
+done
+
+cd - >/dev/null
+
+source ~/.profile
