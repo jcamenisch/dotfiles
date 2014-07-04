@@ -1,0 +1,4 @@
+if [[ -d ~/uservoice ]]; then
+  export UV_METROID_DIR=~/uservoice/metroid
+  export UV_RAILS_DIR=~/uservoice/uservoice
+fi
