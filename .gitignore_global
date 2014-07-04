@@ -1,0 +1,10 @@
+.DS_Store
+_scratch
+.powenv
+.ruby-version
+.tags
+
+env_jcamenisch.rb
+.jcamenisch.rb
+~jcamenisch.rb
+.jcamenisch/
