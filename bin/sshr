@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+unless (host = ARGV.find { |arg| arg !~ /^\d+/ } || ENV['DEFAULT_SSH_BASTION_HOST'])
+  puts "You must supply an ssh server hostname"
+  exit 1
+end
+port = ARGV.find { |arg| arg =~ /^\d+/ }.to_i
+port += 2222 unless port >= 1024
+
+puts 'Establishing reverse ssh tunnel. Pair user can connect with:', '',
+     "    ssh -p #{port} pair@#{host}", '',
+     'Press Ctrl+C to close tunnel', ''
+
+system "ssh -NR #{port}:localhost:22 #{host}"
+
