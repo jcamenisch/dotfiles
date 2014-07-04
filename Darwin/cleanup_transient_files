@@ -1,0 +1,6 @@
+#!/bin/sh
+
+find /Users/jcamenisch/Downloads -not -type d -ctime +30 -exec rm -f {} +
+find /Users/jcamenisch/Downloads -depth -type d -empty -exec rmdir {} +
+find /Users/jcamenisch/.Trash -not -type d -ctime +30 -exec rm -f {} +
+find /Users/jcamenisch/.Trash -depth -type d -empty -exec rmdir {} +
