@@ -21,7 +21,7 @@ for file in $(ls -A | grep -v "^\.skipfiles$" | grep -vf .skipfiles); do
   if [[ -e ~/$file ]] && [[ ! -h ~/$file ]]; then
     echo "skipping ~/$file, as it already exists"
   else
-    ln -fs $(pwd)/$file ~/$file
+    ln -fs $(pwd)/$file ~/
   fi
 done
 
