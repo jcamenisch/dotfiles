@@ -8,12 +8,12 @@ git submodule update
 
 # Clean out any outdated symlinks from ~
 for file in $(ls -A ~); do
-  if [[ -h ~/$file ]]  && \             # It's a symlink,
-    [[ ! -e ~/$file ]] && \             # that points to a nonexistent file,
-    [[ $(ls -l ~/$file) == *$(pwd)* ]]  # somewhere inside this directory.
-  then
-    rm ~/$file
-  fi
+  # If $file
+  # - is a symlink
+  # - that points to a nonexistent file
+  # - somewhere inside this directory
+  # Then rm it
+  [[ -h ~/$file ]] && [[ ! -e ~/$file ]] && [[ $(ls -l ~/$file) == *$(pwd)* ]] && rm ~/$file
 done
 
 # Add all the latest symlinks into ~
