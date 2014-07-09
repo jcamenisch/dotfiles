@@ -4,6 +4,8 @@ export GIT_COMMITTER_NAME=Jonathan\ Camenisch
 export GIT_COMMITTER_EMAIL=$email
 export GIT_AUTHOR_NAME=Jonathan\ Camenisch
 export GIT_AUTHOR_EMAIL=$email
+
+alias g=git
 ga () { git add $* && git status ; }
 alias gbi="git bisect"
 alias gbl="git blame"
