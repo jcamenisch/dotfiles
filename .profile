@@ -11,12 +11,6 @@ done
 
 is_executable() { type $1>/dev/null 2>&1; }
 
-# Program-specific stuff
-for file in $(ls ~/.profile_program-specific); do
-  program=$(echo $file | rev | cut -d'.' -f1 | rev)
-  is_executable $program && . ~/.profile_program-specific/$file
-done
-
 # OS-specific Stuff
 [[ -f ~/.profile_os-specific/$(uname) ]] && . ~/.profile_os-specific/$(uname)
 
@@ -26,6 +20,12 @@ done
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f ~/.profile_machine-specific/$computername ]] && . ~/.profile_machine-specific/$computername
 [[ -f ~/.profile_local ]] && . ~/.profile_local
+
+# Program-specific stuff
+for file in $(ls ~/.profile_program-specific); do
+  program=$(echo $file | rev | cut -d'.' -f1 | rev)
+  is_executable $program && . ~/.profile_program-specific/$file
+done
 
 export EDITOR=vim
 
