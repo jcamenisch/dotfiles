@@ -8,5 +8,10 @@ if [[ -z "$next_commit" ]]; then
   echo "There is no next commit toward branch $toward_branch"
   exit 1
 else
+  if [[ -z "$(git diff --numstat $next_commit..$toward_branch)" ]]; then
+    next_commit=$toward_branch
+  fi
+
   git checkout $next_commit
+  git log -1 | cat
 fi
