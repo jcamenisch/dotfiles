@@ -27,4 +27,26 @@ done
 
 cd - >/dev/null
 
+# Install prezto
+if type zsh>/dev/null 2>&1; then
+  if [[ -d "${ZDOTDIR:-$HOME}/.zprezto" ]]; then
+    cd "${ZDOTDIR:-$HOME}/.zprezto"
+    git pull && git submodule update --init --recursive
+    cd - >/dev/null
+  else
+    git clone --recursive https://github.com/jcamenisch/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+  fi
+  for script in $(ls ${ZDOTDIR:-$HOME}/.zprezto/runcoms/); do
+    if [[ ! "$script" =~ '.' ]]; then
+      src=${ZDOTDIR:-$HOME}/.zprezto/runcoms/$script
+      dest=$HOME/.$script
+      if [[ -e $dest ]]; then
+        [[ "$src" == "$(readlink $dest)" ]] || echo "not linking $dest to $src, since it has been customized at $(readlink $dest)"
+      else
+        ln -s $src $dest
+      fi
+    fi
+  done
+fi
+
 source ~/.profile
