@@ -22,7 +22,7 @@ windows:
       layout: c420,204x47,0,0{81x47,0,0[81x23,0,0,0,81x23,0,24,5],122x47,82,0,2}
       panes:
         - zeus start
-        - wait_for_process 'zeu[s] slave'; zeus rake jobs:work
+        - if [ -f faye.ru ]; && bundle exec rackup faye.ru -s thin -E production
         - wait_for_process 'zeu[s] slave'; zeus s
   - vi:
       name: vi
