@@ -3,5 +3,13 @@ if [[ -d ~/uservoice ]]; then
   export UV_RAILS_DIR=~/uservoice/uservoice
 fi
 
-alias vu='vagrant up'
-alias vs='vagrant ssh'
+if ! is_executable v && [[ -n "$VAGRANT_HOME" ]]; then
+  v() {
+    cd $VAGRANT_HOME
+    vagrant $@
+    cd - >/dev/null
+  }
+  alias vu='v up'
+  alias vss='v ssh'
+  alias vs='v status'
+fi
