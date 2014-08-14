@@ -10,25 +10,21 @@ alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres
 alias edit="subl"
 
 if [[ -d ~/projects ]]; then
-  cdp() { # depends on cd_masked function defined in ~/.profile
-    if cd_masked ~/projects/%1 $1; then
-      cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
-      pwd
-    fi
+  cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
+    cd $(ls_match -mask="$HOME/projects/%1*" -first $1)
+    pwd
   }
 fi
 
 if [[ -d ~/uservoice ]]; then
-  cdu() { # depends on cd_masked function defined in ~/.profile
-    if cd_masked ~/uservoice/%1 $1; then
-      cd_masked ./www/%1 $2 2>/dev/null || cd_masked ./html/%1 $2 2>/dev/null
-      pwd
-    fi
+  cdu() { # depends on ls_match from https://github.com/jcamenisch/ls_match
+    cd $(ls_match -mask="$HOME/uservoice/%1*" -first $1)
+    pwd
   }
 fi
 
-cw () {
-  [ $# -gt 0 ] && cd_masked ~/projects/%1/www/public/stylesheets/sass $@
+cw () { # depends on ls_match from https://github.com/jcamenisch/ls_match
+  [ $# -gt 0 ] && cd $(ls_match -mask="$HOME/projects/%1/www/public/stylesheets/sass" -first) $@
   compass watch
 }
 
