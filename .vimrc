@@ -144,3 +144,21 @@ endif
 if has("gui_macvim")
     let macvim_hig_shift_movement = 1
 endif
+
+" Splits
+set splitbelow         " Split below
+set splitright         " Vsplit right
+set winminheight=0
+
+" Make pasting work without indentation in terminal
+if &term =~ "xterm.*"
+    let &t_ti = &t_ti . "\e[?2004h"
+    let &t_te = "\e[?2004l" . &t_te
+    function XTermPasteBegin(ret)
+        set pastetoggle=<Esc>[201~
+        set paste
+        return a:ret
+    endfunction
+    map <expr> <Esc>[200~ XTermPasteBegin("i")
+    imap <expr> <Esc>[200~ XTermPasteBegin("")
+endif
