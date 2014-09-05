@@ -11,14 +11,14 @@ alias edit="subl"
 
 if [[ -d ~/projects ]]; then
   cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
-    cd $(ls_match -mask="$HOME/projects/%1*" -first $1)
+    cd $(ls_match -mask="$HOME/projects/%1:$HOME/projects/%1*" -first $1)
     pwd
   }
 fi
 
 if [[ -d ~/uservoice ]]; then
   cdu() { # depends on ls_match from https://github.com/jcamenisch/ls_match
-    cd $(ls_match -mask="$HOME/uservoice/%1*" -first $1)
+    cd $(ls_match -mask="$HOME/uservoice/%1:$HOME/uservoice/%1*" -first $1)
     pwd
   }
 fi
