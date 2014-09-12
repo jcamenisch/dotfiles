@@ -1,0 +1,2 @@
+alias vim="vim -u $XDG_CONFIG_HOME/vimrc"
+alias vi=vim

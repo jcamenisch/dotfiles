@@ -1,6 +1,0 @@
-export RAILS_ENV=development
-export DATABASE_URL=mysql2://root:@localhost/uservoice_dev?socket=/var/run/mysqld/mysqld.sock
-export CACHE_CLASSES=1
-
-export BUNDLE_PATH=.bundle-vagrant
-export BUNDLE_BIN=.bin-vagrant

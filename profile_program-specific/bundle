@@ -14,3 +14,6 @@ alias rr="bundle exec rails runner"
 alias rs="bundle exec rails s"
 alias ru="bundle exec rackup"
 
+[[ -z "$BUNDLE_PATH" ]] && export BUNDLE_PATH=.bundle
+[[ -z "$BUNDLE_BIN" ]] && export BUNDLE_BIN=$BUNDLE_PATH/bin
+[[ "$PATH" == "*.git/safe/../../$BUNDLE_BIN:*" ]] || export PATH=".git/safe/../../$BUNDLE_BIN:$PATH"
