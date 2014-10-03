@@ -3,7 +3,7 @@
 #   That's not too big a deal--most of the time. ;)
 
 # It turns out getting the directory of this file is tricky if you want it to work
-# on Darwin as well as most Unix variants. The following seems pretty to do the trick.
+# on Darwin as well as most Unix variants. The following seems to do the trick.
 export XDG_CONFIG_HOME="$(cd $(dirname ${BASH_SOURCE:-$_}); pwd)"
 
 # Don't prepend these if they're already there--sometimes this file may get
