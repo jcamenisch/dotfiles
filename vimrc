@@ -22,10 +22,12 @@ Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-vinegar'
+Bundle 'fatih/vim-go'
+Bundle 'bling/vim-airline'
 
 
 if run_bundle_install == 1
-  :BundleInstall
+  :PluginInstall
 
   silent !echo ""
   silent !echo "Vim is now ready."
@@ -63,7 +65,7 @@ autocmd FileType awk,b,c,cfg,chaskell,conf,config,cpp,crontab,cucumber,d,django,
 " Searching
 set hlsearch                                " Highlight searches
 set incsearch                               " Highlight search results instantly
-set ignorecase                              " Ignore case
+" set ignorecase                              " Ignore case
 set smartcase                               " Override 'ignorecase' option if the search contains upper case characters.
 
 filetype plugin indent on                   " Enable automatic filetype detection, filetype-specific plugins/indentation
@@ -153,14 +155,14 @@ set splitright         " Vsplit right
 set winminheight=0
 
 " Make pasting work without indentation in terminal
-if &term =~ "xterm.*"
-    let &t_ti = &t_ti . "\e[?2004h"
-    let &t_te = "\e[?2004l" . &t_te
-    function XTermPasteBegin(ret)
-        set pastetoggle=<Esc>[201~
-        set paste
-        return a:ret
-    endfunction
-    map <expr> <Esc>[200~ XTermPasteBegin("i")
-    imap <expr> <Esc>[200~ XTermPasteBegin("")
-endif
+"if &term =~ "xterm.*"
+    "let &t_ti = &t_ti . "\e[?2004h"
+    "let &t_te = "\e[?2004l" . &t_te
+    "function XTermPasteBegin(ret)
+        "set pastetoggle=<Esc>[201~
+        "set paste
+        "return a:ret
+    "endfunction
+    "map <expr> <Esc>[200~ XTermPasteBegin("i")
+    "imap <expr> <Esc>[200~ XTermPasteBegin("")
+"endif
