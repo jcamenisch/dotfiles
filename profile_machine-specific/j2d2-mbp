@@ -1,4 +1,4 @@
-export VAGRANT_HOME=~/uservoice/deployment
+export DEFAULT_VAGRANT_HOME=~/uservoice/deployment
 
 setgopath() {
   if [[ -n "$UV_METROID_DIR" ]]; then

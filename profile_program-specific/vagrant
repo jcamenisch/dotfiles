@@ -3,11 +3,21 @@ if [[ -d ~/uservoice ]]; then
   export UV_RAILS_DIR=~/uservoice/uservoice
 fi
 
-if ! is_executable v && [[ -n "$VAGRANT_HOME" ]]; then
+if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
   v() {
-    cd $VAGRANT_HOME
+    ORIG_PATH=`pwd`
+    [[ -n "$VAGRANT_HOME" ]] && ORIG_VAGRANT_HOME=$VAGRANT_HOME
+
+    [[ -f ./Vagrantfile ]] || cd "${VAGRANT_HOME:-$DEFAULT_VAGRANT_HOME}"
+    [[ -f ./Vagrantfile ]] || exit 1
+
+    VAGRANT_HOME=`pwd`
     vagrant $@
-    cd - >/dev/null
+
+    cd $ORIG_PATH >/dev/null
+    unset ORIG_PATH
+    unset VAGRANT_HOME
+    [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
   }
   alias vu='v up'
   alias vss='v ssh'
