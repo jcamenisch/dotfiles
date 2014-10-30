@@ -34,7 +34,5 @@ for file in $(ls $XDG_CONFIG_HOME/profile_program-specific); do
   is_executable $program && . $XDG_CONFIG_HOME/profile_program-specific/$file
 done
 
-export EDITOR=vim
-
 [[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
