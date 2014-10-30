@@ -7,8 +7,6 @@ alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/Syste
 alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 
-alias edit="subl"
-
 if [[ -d ~/projects ]]; then
   cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
     cd $(ls_match -mask="$HOME/projects/%1:$HOME/projects/%1*" -first $1)
