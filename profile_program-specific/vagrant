@@ -8,16 +8,18 @@ if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
     ORIG_PATH=`pwd`
     [[ -n "$VAGRANT_HOME" ]] && ORIG_VAGRANT_HOME=$VAGRANT_HOME
 
+    [[ -f ./Vagrantfile ]] || (git rev-parse --show-toplevel >/dev/null 2>&1 && cd $(git rev-parse --show-toplevel) >/dev/null)
     [[ -f ./Vagrantfile ]] || cd "${VAGRANT_HOME:-$DEFAULT_VAGRANT_HOME}"
-    [[ -f ./Vagrantfile ]] || exit 1
 
-    VAGRANT_HOME=`pwd`
-    vagrant $@
+    if [[ -f ./Vagrantfile ]]; then
+      VAGRANT_HOME=`pwd`
+      vagrant $@
 
-    cd $ORIG_PATH >/dev/null
-    unset ORIG_PATH
-    unset VAGRANT_HOME
-    [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
+      cd $ORIG_PATH >/dev/null
+      unset ORIG_PATH
+      unset VAGRANT_HOME
+      [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
+    fi
   }
   alias vu='v up'
   alias vss='v ssh'
