@@ -4,4 +4,5 @@ export CACHE_CLASSES=1
 
 export BUNDLE_PATH=.bundle-vagrant
 export RAILS_ENV=development
-export GOPATH=/home/dev/metroid
+export GOPATH=/home/dev/go
+export GOBIN=$GOPATH/bin

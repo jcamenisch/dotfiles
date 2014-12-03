@@ -1,17 +1,1 @@
 export DEFAULT_VAGRANT_HOME=~/uservoice/deployment
-
-setgopath() {
-  if [[ -n "$UV_METROID_DIR" ]]; then
-    if [[ "$(pwd)" =~ "$UV_METROID_DIR*" ]]; then
-      [[ -z "$SYSTEM_GOPATH" ]] && [[ -n "$GOPATH" ]] && export SYSTEM_GOPATH=$GOPATH
-      export GOPATH=$UV_METROID_DIR
-    else
-      if [[ -n "$SYSTEM_GOPATH" ]]; then
-        export GOPATH=$SYSTEM_GOPATH
-        unset SYSTEM_GOPATH
-      fi
-    fi
-  fi
-}
-
-chpwd_functions=(${chpwd_functions[@]} "setgopath")

@@ -1,6 +1,8 @@
 if [[ -d ~/uservoice ]]; then
-  export UV_METROID_DIR=~/uservoice/metroid
-  export UV_RAILS_DIR=~/uservoice/uservoice
+  UV_DIR=~/uservoice
+  export UV_METROID_DIR="$UV_DIR/metroid"
+  export UV_RAILS_DIR="$UV_DIR/uservoice"
+  export UV_SAMUS_DIR="$UV_DIR/samus"
 fi
 
 if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
