@@ -1,37 +1,29 @@
-let &rtp=$XDG_CONFIG_HOME."/vim,".&rtp
-set rtp+=~/.vim/bundle/Vundle.vim/
-let run_bundle_install = 0
+let vim_home=$XDG_CONFIG_HOME."/vim"
+let bundle_home=vim_home."/bundle"
+let &rtp=vim_home.",".&rtp.",".bundle_home."/Vundle.vim"
 
-if !isdirectory(expand("~/.vim/bundle/Vundle.vim/"))
+if !isdirectory(expand(bundle_home."/Vundle.vim/"))
   silent !echo "Installing Vundle..."
-  silent !mkdir -p ~/.vim/bundle
-  silent !git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim
-  let run_bundle_install = 1
+  silent execute "!mkdir -p ".bundle_home
+  silent execute "!git clone https://github.com/gmarik/Vundle.vim ".bundle_home."/Vundle.vim"
 endif
 
 set nocompatible
 filetype off
 
-call vundle#rc()
+if isdirectory(expand(bundle_home."/Vundle.vim/"))
+  call vundle#rc(bundle_home)
 
-Bundle "gmarik/vundle"
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-vinegar'
-Bundle 'fatih/vim-go'
-Bundle 'bling/vim-airline'
-
-
-if run_bundle_install == 1
-  :PluginInstall
-
-  silent !echo ""
-  silent !echo "Vim is now ready."
-  :cq
+  Bundle "gmarik/vundle"
+  Bundle 'kien/ctrlp.vim'
+  Bundle 'bling/vim-airline'
+  Bundle 'tpope/vim-cucumber'
+  Bundle 'tpope/vim-git'
+  Bundle 'fatih/vim-go'
+  Bundle 'tpope/vim-haml'
+  Bundle 'tpope/vim-markdown'
+  Bundle 'tpope/vim-rails'
+  Bundle 'tpope/vim-vinegar'
 endif
 
 " Misc
