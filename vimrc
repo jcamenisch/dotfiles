@@ -2,14 +2,17 @@ let vim_home=$XDG_CONFIG_HOME."/vim"
 let bundle_home=vim_home."/bundle"
 let &rtp=vim_home.",".&rtp.",".bundle_home."/Vundle.vim"
 
+set nocompatible
+filetype off
+
 if !isdirectory(expand(bundle_home."/Vundle.vim/"))
   silent !echo "Installing Vundle..."
   silent execute "!mkdir -p ".bundle_home
   silent execute "!git clone https://github.com/gmarik/Vundle.vim ".bundle_home."/Vundle.vim"
+  let run_bundle_install = 1
+else
+  let run_bundle_install = 0
 endif
-
-set nocompatible
-filetype off
 
 if isdirectory(expand(bundle_home."/Vundle.vim/"))
   call vundle#rc(bundle_home)
@@ -24,6 +27,13 @@ if isdirectory(expand(bundle_home."/Vundle.vim/"))
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-vinegar'
+endif
+
+if run_bundle_install
+  :PluginInstall
+  silent !echo ""
+  silent !echo "Vim is now ready."
+  :cq
 endif
 
 " Misc
