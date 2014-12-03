@@ -1,8 +1,7 @@
 export RAILS_ENV=development
 export DATABASE_URL='mysql2://root:@localhost/uservoice_dev?socket=/var/run/mysqld/mysqld.sock'
-export CACHE_CLASSES=1
-
 export BUNDLE_PATH=.bundle-vagrant
 export RAILS_ENV=development
 export GOPATH=/home/dev/go
 export GOBIN=$GOPATH/bin
+export METROID_TEST_DB_SPEC='root:@unix(/var/run/mysqld/mysqld.sock)/uservoice_test?charset=utf8&parseTime=true'
