@@ -1,0 +1,5 @@
+if type zsh>/dev/null 2>&1; then
+  ENV="$(cd $(dirname ${BASH_SOURCE:-${0:-$_}}); pwd)/zshrc" zsh
+else
+  bash --rcfile "$(cd $(dirname ${BASH_SOURCE:-${0:-$_}}); pwd)/bash_profile"
+fi
