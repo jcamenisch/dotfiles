@@ -43,7 +43,7 @@ To exit immediately after session is closed (avoid need to exit twice), call
 One-off use, with no files left behind
 --------------------------------------
 
-To avoid touching someone else's precious profile, but still use these dotfiles while your there, just run
+To avoid touching someone else's precious profile, but still use these dotfiles while you're there, just run
 
 ```
 git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shell && rm -rf ~/.jcamenisch && exit
