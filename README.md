@@ -12,4 +12,37 @@ enough.
 Installation
 ------------
 
-Are you kidding? Use at your own risk!
+1. Copy the repo:
+
+   ```sh
+   git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch
+   ```
+
+2. (Optional) To permanently install, call rc files from local one(s):
+   
+   ```sh
+   echo '. $HOME/jcamenisch/bash_profile' >> ~/.bash_profile
+   echo '. $HOME/.jcamenisch/bashrc' >> ~/.bashrc
+   ```
+
+Manual invocation
+-----------------
+
+After the repo is in place, use dotfiles in zsh (or bash as fallback) with
+
+```sh
+~/.jcamenisch/shell
+```
+
+To exit immediately after session is closed (avoid need to exit twice):
+
+```sh
+~/.jcamenisch/shexit
+```
+
+One-off use, with no files left behind:
+---------------------------------------
+
+```
+git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shell && rm -rf ~/.jcamenisch && exit
+```
