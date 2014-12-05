@@ -23,6 +23,7 @@ Installation
    ```sh
    echo '. $HOME/jcamenisch/bash_profile' >> ~/.bash_profile
    echo '. $HOME/.jcamenisch/bashrc' >> ~/.bashrc
+   echo '. $HOME/.jcamenisch/zshrc' >> ~/.zshrc
    ```
 
 Manual invocation
