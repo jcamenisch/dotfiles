@@ -34,14 +34,16 @@ After the repo is in place, use dotfiles in zsh (or bash as fallback) with
 ~/.jcamenisch/shell
 ```
 
-To exit immediately after session is closed (avoid need to exit twice):
+To exit immediately after session is closed (avoid need to exit twice), call
 
 ```sh
 ~/.jcamenisch/shexit
 ```
 
-One-off use, with no files left behind:
----------------------------------------
+One-off use, with no files left behind
+--------------------------------------
+
+To avoid touching someone else's precious profile, but still use these dotfiles while your there, just run
 
 ```
 git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shell && rm -rf ~/.jcamenisch && exit
