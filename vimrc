@@ -5,7 +5,7 @@ let &rtp=vim_home.",".&rtp.",".bundle_home."/Vundle.vim"
 set nocompatible
 filetype off
 
-if !isdirectory(expand(bundle_home."/Vundle.vim/"))
+if !isdirectory(expand(bundle_home."/Vundle.vim/")) && $PROFILEMODE_CLEAN != "1"
   silent !echo "Installing Vundle..."
   silent execute "!mkdir -p ".bundle_home
   silent execute "!git clone https://github.com/gmarik/Vundle.vim ".bundle_home."/Vundle.vim"

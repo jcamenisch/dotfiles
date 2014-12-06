@@ -1,2 +1,14 @@
-$(cd $(dirname ${BASH_SOURCE:-${0:-$_}}); pwd)/shell $*
+PROFILE_DIR="$(cd $(dirname ${BASH_SOURCE:-${0:-$_}}); pwd)"
+
+for arg in $@; do
+  case $arg in
+    -c | --clean )
+      export PROFILEMODE_CLEAN=1
+      ;;
+  esac
+done
+
+$PROFILE_DIR/shell
+[[ "$PROFILEMODE_CLEAN" = "1" ]] && rm -rf $PROFILE_DIR
+
 exit

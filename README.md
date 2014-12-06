@@ -16,7 +16,7 @@ Installation
    ```
 
 2. (Optional) To permanently install, call rc files from local one(s):
-   
+
    ```sh
    echo '. $HOME/.jcamenisch/bash_profile' >> ~/.bash_profile
    echo '. $HOME/.jcamenisch/bashrc' >> ~/.bashrc
@@ -44,5 +44,9 @@ One-off use, with no files left behind
 To avoid touching someone else's precious profile, but still use these dotfiles while you're there, just run
 
 ```
-git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shell && rm -rf ~/.jcamenisch && exit
+git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shexit --clean
 ```
+
+This will create the ~/.jcamenisch directory, but remove it completely when you exit the session. It will
+also set `PROFILEMODE_CLEAN=1` in the shell session, to inform any apps that may want to skip setup steps
+in this mode. Vim responds to this flag by not taking time to install any plugins.
