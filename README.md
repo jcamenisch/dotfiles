@@ -12,7 +12,7 @@ Installation
 1. Copy the repo:
 
    ```sh
-   git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch
+   git clone https://github.com/jcamenisch/dotfiles.git ~/.jcamenisch
    ```
 
 2. (Optional) To permanently install, call rc files from local one(s):
@@ -44,7 +44,7 @@ One-off use, with no files left behind
 To avoid touching someone else's precious profile, but still use these dotfiles while you're there, just run
 
 ```
-git clone git@github.com:jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shexit --clean
+git clone https://github.com/jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shexit --clean
 ```
 
 This will create the ~/.jcamenisch directory, but remove it completely when you exit the session. It will
