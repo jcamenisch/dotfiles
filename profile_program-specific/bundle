@@ -8,10 +8,6 @@ alias rkap="bundle exec rake assets:precompile"
 alias rkap-c='bundle exec rake assets:precompile && git add . && git commit -m "Compile assets"'
 alias rkdm="bundle exec rake db:migrate"
 alias rkjw="bundle exec rake jobs:work"
-alias r="bundle exec rails"
-alias rc="bundle exec rails c"
-alias rr="bundle exec rails runner"
-alias rs="bundle exec rails s"
 alias ru="bundle exec rackup"
 
 [[ -z "$BUNDLE_PATH" ]] && export BUNDLE_PATH=.bundle

@@ -1,0 +1,16 @@
+rails3_aliases () {
+  alias rc="bundle exec rails c"
+  alias rd="bundle exec rails dbconsole"
+  alias rr="bundle exec rails runner"
+  alias rs="bundle exec rails s"
+}
+
+rails2_aliases () {
+  alias rc="bundle exec script/console"
+  alias rd="bundle exec script/dbconsole"
+  alias rr="bundle exec script/runner"
+  alias rs="bundle exec script/server"
+}
+
+alias r="bundle exec rails"
+rails3_aliases
