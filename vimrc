@@ -62,7 +62,7 @@ autocmd FileType gitcommit set spell        " Turn on spell check in Git commits
 autocmd Filetype css,scss,sass setlocal iskeyword+=-
 
 " Remove trailing whitespace from source files
-autocmd FileType awk,b,c,cfg,chaskell,conf,config,cpp,crontab,cucumber,d,django,dtd,dtml,eiffel,erlang,eruby,gitconfig,haml,haskell,html,java,javacc,javascript,liquid,lisp,lua,make,markdown,objc,ocaml,pascal,perl,perl6,php,phtml,plsql,python,r,ruby,sass,scheme,scss,sh,smarty,sql,tcl,tcsh,vim,xhtml,xml,xsd,xslt,yaml,zsh autocmd BufWritePre <buffer> :%s/\s\+$//e
+"autocmd FileType awk,b,c,cfg,chaskell,conf,config,cpp,crontab,cucumber,d,django,dtd,dtml,eiffel,erlang,eruby,gitconfig,haml,haskell,html,java,javacc,javascript,liquid,lisp,lua,make,markdown,objc,ocaml,pascal,perl,perl6,php,phtml,plsql,python,r,ruby,sass,scheme,scss,sh,smarty,sql,tcl,tcsh,vim,xhtml,xml,xsd,xslt,yaml,zsh autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Searching
 set hlsearch                                " Highlight searches
