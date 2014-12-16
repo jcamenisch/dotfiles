@@ -29,3 +29,7 @@ cw () { # depends on ls_match from https://github.com/jcamenisch/ls_match
 reopen () {
   killall $1 && open -a $1
 }
+
+# Help gcc out a bit with a target platform
+# See https://developer.apple.com/legacy/library/technotes/tn2064/_index.html
+export MACOSX_DEPLOYMENT_TARGET="10.$(echo 9 $(sw_vers | awk -F. '/ProductVersion/ { print $2 }') | xargs -n1 | sort -n | head -1)"
