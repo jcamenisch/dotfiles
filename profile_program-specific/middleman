@@ -1,1 +1,1 @@
-alias mm=middleman
+safe_alias mm middleman

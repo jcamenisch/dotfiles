@@ -6,7 +6,7 @@ if [[ -d ~/uservoice ]]; then
 fi
 
 if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
-  v() {
+  v () {
     ORIG_PATH=`pwd`
     [[ -n "$VAGRANT_HOME" ]] && ORIG_VAGRANT_HOME=$VAGRANT_HOME
 
@@ -23,7 +23,7 @@ if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
       [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
     fi
   }
-  alias vu='v up'
-  alias vss='v ssh'
-  alias vs='v status'
+  safe_alias vu 'v up'
+  safe_alias vss 'v ssh'
+  safe_alias vs 'v status'
 fi

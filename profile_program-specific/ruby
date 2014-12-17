@@ -1,7 +1,5 @@
 LANG=en_US.UTF-8
 
-alias z="zeus"
-
 MT_ACCT=$(echo $HOME | ruby -e 'puts $~[1] if gets =~ %r(/home/([0-9]+)/users/.home)' 2>/dev/null)
 [ "$MT_ACCT" != "" ] && . ~/.profile_mediatemple
 
