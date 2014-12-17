@@ -1,16 +1,18 @@
-rails3_aliases () {
-  alias rc="bundle exec rails c"
-  alias rd="bundle exec rails dbconsole"
-  alias rr="bundle exec rails runner"
-  alias rs="bundle exec rails s"
+r () {
+  _GIT_ROOT=$(git rev-parse --show-toplevel)
+
+  if [[ -x $GIT_ROOT/script/rails ]]; then
+    # We're in a rails 3+ app
+    bundle exec $GIT_ROOT/script/rails $*
+  elif [[ -x $GIT_ROOT/script/$1 ]]; then
+    # This must be a rails 2 app; oh my
+    bundle exec $GIT_ROOT/script/$*
+  fi
+
+  unset _GIT_ROOT
 }
 
-rails2_aliases () {
-  alias rc="bundle exec script/console"
-  alias rd="bundle exec script/dbconsole"
-  alias rr="bundle exec script/runner"
-  alias rs="bundle exec script/server"
-}
-
-alias r="bundle exec rails"
-rails3_aliases
+alias rc="r console"
+alias rd="r dbconsole"
+alias rr="r runner"
+alias rs="r server"
