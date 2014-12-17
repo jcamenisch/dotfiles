@@ -1,9 +1,4 @@
-is_executable o || o () {
-  command=$1; shift
-  case $command in
-    r) orc rails $*; ;;
-    s) orc ssh $*; ;;
-    u) orc update $*; ;;
-    *) orc $1 $*; ;;
-  esac
-}
+safe_alias o orc
+safe_alias or "orc rails"
+safe_alias os "orc ssh"
+safe_alias ou "orc update"
