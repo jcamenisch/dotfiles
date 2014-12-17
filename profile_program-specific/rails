@@ -1,18 +1,20 @@
-r () {
+is_executable rl || rl () {
   _GIT_ROOT=$(git rev-parse --show-toplevel)
 
-  if [[ -x $GIT_ROOT/script/rails ]]; then
+  if [[ -x $_GIT_ROOT/script/rails ]]; then
     # We're in a rails 3+ app
-    bundle exec $GIT_ROOT/script/rails $*
-  elif [[ -x $GIT_ROOT/script/$1 ]]; then
+    bundle exec $_GIT_ROOT/script/rails $*
+  elif [[ -x $_GIT_ROOT/script/$1 ]]; then
     # This must be a rails 2 app; oh my
-    bundle exec $GIT_ROOT/script/$*
+    bundle exec $_GIT_ROOT/script/$*
+  else
+    echo "This doesn't seem to be a rails directory; doing nothing"
   fi
 
   unset _GIT_ROOT
 }
 
-alias rc="r console"
-alias rd="r dbconsole"
-alias rr="r runner"
-alias rs="r server"
+safe_alias rc "rl console"
+safe_alias rd "rl dbconsole"
+safe_alias rr "rl runner"
+safe_alias rs "rl server"

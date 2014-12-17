@@ -1,2 +1,9 @@
-alias o=orc
-alias os='orc ssh'
+is_executable o || o () {
+  command=$1; shift
+  case $command in
+    r) orc rails $*; ;;
+    s) orc ssh $*; ;;
+    u) orc update $*; ;;
+    *) orc $1 $*; ;;
+  esac
+}

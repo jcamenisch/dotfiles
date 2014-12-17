@@ -19,6 +19,7 @@ for script in $(ls $XDG_CONFIG_HOME/profile_shortcuts); do
 done
 
 is_executable() { type $1>/dev/null 2>&1; }
+safe_alias ()   { is_executable $1 || alias $1=$2 }
 
 # OS-specific Stuff
 [[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
