@@ -14,7 +14,7 @@ is_executable rl || rl () {
   unset _GIT_ROOT
 }
 
-safe_alias rc "rl console"
-safe_alias rd "rl dbconsole"
-safe_alias rr "rl runner"
-safe_alias rs "rl server"
+safe_alias rlc "rl console"
+safe_alias rld "rl dbconsole"
+safe_alias rlr "rl runner"
+safe_alias rls "rl server"

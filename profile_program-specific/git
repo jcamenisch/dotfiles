@@ -13,7 +13,7 @@ safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 safe_alias gb   "git branch"
 safe_alias gbd  "git branch -d"
 safe_alias gbD  "git branch -D"
-safe_alias gc   "git checkout"
+safe_alias gco   "git checkout"
 safe_alias gc1  "git checkout HEAD~1"
 safe_alias gca  "git commit --amend"
 safe_alias gcac "git commit --amend -CHEAD"
