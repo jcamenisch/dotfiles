@@ -18,6 +18,7 @@ Installation
 2. (Optional) To permanently install, call rc files from local one(s):
 
    ```sh
+   echo '. $HOME/.jcamenisch/profile' >> ~/.profile
    echo '. $HOME/.jcamenisch/bash_profile' >> ~/.bash_profile
    echo '. $HOME/.jcamenisch/bashrc' >> ~/.bashrc
    echo '. $HOME/.jcamenisch/zshrc' >> ~/.zshrc
