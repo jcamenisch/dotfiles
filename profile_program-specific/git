@@ -6,7 +6,7 @@ export GIT_AUTHOR_NAME=Jonathan\ Camenisch
 export GIT_AUTHOR_EMAIL=$email
 
 safe_alias g git
-is_executable ga || ga () { git add $* && git status }
+is_executable ga || ga () { git add $* && git status; }
 safe_alias gbi  "git bisect"
 safe_alias gbl  "git blame"
 safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
