@@ -1,0 +1,4 @@
+alias ls="ls -G"
+alias lsl="ls -l"
+alias lsa="ls -a"
+alias lsla="ls -la"

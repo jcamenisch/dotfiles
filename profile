@@ -13,26 +13,26 @@ export XDG_CONFIG_HOME="$(cd $(dirname ${BASH_SOURCE:-$_}); pwd)"
 
 export INPUTRC=$XDG_CONFIG_HOME/inputrc
 
-# Shortcuts (aliases and functions)
-for script in $(ls $XDG_CONFIG_HOME/profile_shortcuts); do
-  . $XDG_CONFIG_HOME/profile_shortcuts/$script
-done
-
 is_executable() { type $1>/dev/null 2>&1; }
-safe_alias ()   { is_executable $1 || alias $1="$2"; }
-
-# OS-specific Stuff
-[[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
+safe_alias()    { is_executable $1 || alias $1="$2"; }
 
 # Machine-specific stuff; use dotfiles/.profile_machine-specific/$computername file for safe syncing
 #   with other machines. Use ~/.profile for sensitive settings that should not be synced or published.
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_machine-specific/$computername ]] && . $XDG_CONFIG_HOME/profile_machine-specific/$computername
 
+# OS-specific Stuff
+[[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
+
 # Program-specific stuff
 for file in $(ls $XDG_CONFIG_HOME/profile_program-specific); do
   program=$(echo $file | rev | cut -d'.' -f1 | rev)
   is_executable $program && . $XDG_CONFIG_HOME/profile_program-specific/$file
+done
+
+# Miscellaneous stuff
+for script in $(ls $XDG_CONFIG_HOME/profile_misc); do
+  . $XDG_CONFIG_HOME/profile_misc/$script
 done
 
 [[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

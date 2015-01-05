@@ -1,0 +1,7 @@
+alias profile=". ~/.profile"
+
+wait_for_process () {
+  while [[ -z $(ps | grep "$1") ]]; do
+    sleep 0.5
+  done
+}
