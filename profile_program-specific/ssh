@@ -1,1 +1,2 @@
+safe_alias sshbluehost 'ssh randkcam@69.195.124.113'
 sshmt () { ssh serveradmin@$1@$1 ; }
