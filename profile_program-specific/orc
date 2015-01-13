@@ -1,4 +1,6 @@
 safe_alias o orc
+safe_alias om "orc migrate"
 safe_alias or "orc rails"
 safe_alias os "orc ssh"
 safe_alias ou "orc update"
+safe_alias odep "orc deploy staging uservoice $(git symbolic-ref --short HEAD)"
