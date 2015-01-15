@@ -1,6 +1,16 @@
+orc_random_web_server() {
+  echo "web$(($RANDOM % 12 + 27))"
+}
+
 safe_alias o orc
+safe_alias odsu "orc deploy staging uservoice \$(git symbolic-ref --short HEAD)"
 safe_alias om "orc migrate"
+safe_alias oms "orc migrate staging"
 safe_alias or "orc rails"
+safe_alias ors "orc rails staging"
+safe_alias orw "orc rails \$(orc_random_web_server)"
 safe_alias os "orc ssh"
+safe_alias oss "orc ssh staging"
+safe_alias osw "orc ssh \$(orc_random_web_server)"
+safe_alias ots "orc top staging"
 safe_alias ou "orc update"
-safe_alias odep "orc deploy staging uservoice $(git symbolic-ref --short HEAD)"
