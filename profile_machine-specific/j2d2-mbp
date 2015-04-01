@@ -1,1 +1,1 @@
-export DEFAULT_VAGRANT_HOME=~/uservoice/deployment
+export DEFAULT_VAGRANT_HOME=$(cd $HOME/../uservoice && pwd)/deployment

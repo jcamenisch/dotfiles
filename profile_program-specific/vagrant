@@ -1,8 +1,9 @@
-if [[ -d ~/uservoice ]]; then
-  UV_DIR=~/uservoice
-  export UV_METROID_DIR="$UV_DIR/metroid"
+UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
+if [[ -d $UV_DIR ]]; then
   export UV_RAILS_DIR="$UV_DIR/uservoice"
+  export UV_METROID_DIR="$UV_DIR/metroid"
   export UV_SAMUS_DIR="$UV_DIR/samus"
+  export UV_SILLYPUTTY_DIR="$UV_DIR/sillyputty"
 fi
 
 if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
