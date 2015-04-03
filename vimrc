@@ -27,6 +27,7 @@ if isdirectory(expand(bundle_home."/Vundle.vim/"))
   Bundle 'tpope/vim-markdown'
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-vinegar'
+  Bundle 'jcamenisch/vim-rename3'
 endif
 
 if run_bundle_install
