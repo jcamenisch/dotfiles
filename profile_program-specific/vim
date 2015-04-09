@@ -1,8 +1,6 @@
-if is_executable nvim; then
-  export EDITOR="nvim -u $XDG_CONFIG_HOME/vimrc"
-else
-  export EDITOR="vim -u $XDG_CONFIG_HOME/vimrc"
-fi
+export EDITOR="vim -u $XDG_CONFIG_HOME/vimrc"
 
 alias vim="$EDITOR"
 alias vi="$EDITOR"
+
+is_executable nvim && alias nvim="n$EDITOR"
