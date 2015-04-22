@@ -12,6 +12,19 @@ safe_alias gbi  "git bisect"
 safe_alias gbl  "git blame"
 safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 safe_alias gb   "git branch"
+
+gbcleanup() {
+  branches=$@
+  [[ -z "$branches" ]] && branches=$(git branch | awk '!/\*|master/ { print $1 }')
+
+  for b in $(echo $branches); do
+    if [[ -z $(git log master..$b 2>/dev/null) ]]; then
+      git push origin :$b
+      git branch -d $b
+    fi
+  done
+}
+
 safe_alias gbd  "git branch -d"
 safe_alias gbD  "git branch -D"
 safe_alias gco   "git checkout"
