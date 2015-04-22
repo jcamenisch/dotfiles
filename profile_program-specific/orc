@@ -1,5 +1,6 @@
 orc_random_web_server() {
-  echo "web$(($RANDOM % 11 + 40))" # Gimme somethin between web40 & web51
+  WEB_SERVERS=($(cat $UV_RAILS_DIR/config/deploy/production.rb | awk '/role :app/ { print $NF }'))
+  echo ${WEB_SERVERS[$RANDOM % ${#WEB_SERVERS[@]}]}
 }
 
 safe_alias o orc
