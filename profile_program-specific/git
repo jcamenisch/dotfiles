@@ -33,8 +33,21 @@ safe_alias gca  "git commit --amend"
 safe_alias gcac "git commit --amend -CHEAD"
 safe_alias gcb  "git checkout -b"
 safe_alias gcm  "git commit -m"
-safe_alias gd   "git diff"
-safe_alias gd1  "git diff HEAD~1"
+
+gd() {
+  args=()
+  for arg in $@; do
+    new=$(grp $arg 2>/dev/null)
+    if [[ -n "$new" ]]; then
+      args+=($new)
+    else
+      args+= $arg
+    fi
+  done
+
+  git diff $args
+}
+
 safe_alias gdc  "git diff --cached"
 safe_alias gdm  "git diff master"
 
@@ -75,7 +88,22 @@ safe_alias gpssm "git push stage master"
 safe_alias gr    "git rebase"
 safe_alias grc   "git rebase --continue"
 safe_alias grm   "git rebase master"
-safe_alias grp   "git rev-parse"
+
+grp() { # git rev-parse (plus)
+  case $1 in
+  '')
+    sha=HEAD
+    ;;
+  [1-9]*([0-9]))
+    sha=HEAD~$1
+    ;;
+  *)
+    sha=$1
+  esac
+
+  git rev-parse $sha
+}
+
 safe_alias grph  "git rev-parse HEAD"
 safe_alias gruo  "git remote update origin"
 safe_alias gst   "git status"
