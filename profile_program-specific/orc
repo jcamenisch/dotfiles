@@ -5,6 +5,13 @@ orc_random_web_server() {
 
 safe_alias o orc
 safe_alias ods "orc deploy staging \$(git remote -v | awk -F'[/.]' '/origin.*fetch/ { print \$3 }') \$(git symbolic-ref --short HEAD)"
+
+ods_m() {
+  for app in $@; do
+    orc deploy staging $app master
+  done
+}
+
 safe_alias om "orc migrate"
 safe_alias oms "orc migrate staging"
 safe_alias omy "orc mysql \$(orc_random_web_server)"
