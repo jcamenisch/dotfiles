@@ -48,8 +48,9 @@ gd() {
   git diff $args
 }
 
-safe_alias gdc  "git diff --cached"
-safe_alias gdm  "git diff master"
+safe_alias gdc  "gd --cached"
+safe_alias gdm  "gd master"
+safe_alias gdno "gd --name-only"
 
 is_executable gdmb || gdmb() { # Diff a branch against its merge-base with another branch
   ref1=master
@@ -65,6 +66,7 @@ is_executable gdmb || gdmb() { # Diff a branch against its merge-base with anoth
 
 safe_alias gdw   "git diff --ignore-all-space"
 safe_alias gg    "git grep"
+safe_alias ggno  "git grep --name-only"
 safe_alias gh    "git help"
 safe_alias gl    "git log"
 safe_alias gl1   "git log -1"
