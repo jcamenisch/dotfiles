@@ -4,3 +4,9 @@ alias vim="$EDITOR"
 alias vi="$EDITOR"
 
 is_executable nvim && alias nvim="n$EDITOR"
+
+safe_alias vo 'vi -O'
+safe_alias vogdno 'vi -O `git diff --name-only`'
+voggno () {
+  vi -O `git grep --name-only $@`
+}
