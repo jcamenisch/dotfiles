@@ -27,12 +27,14 @@ gbcleanup() {
 
 safe_alias gbd  "git branch -d"
 safe_alias gbD  "git branch -D"
-safe_alias gco   "git checkout"
-safe_alias gc1  "git checkout HEAD~1"
-safe_alias gca  "git commit --amend"
-safe_alias gcac "git commit --amend -CHEAD"
-safe_alias gcb  "git checkout -b"
-safe_alias gcm  "git commit -m"
+safe_alias gbm  "git branch -m"
+gbm!() { git branch -m $1 ¡$1; }
+gbm@() { git branch -m $1 ª$1 }
+safe_alias gco  "git checkout"
+safe_alias gcob "git checkout -b"
+safe_alias gcm  "git commit"
+safe_alias gcma "git commit --amend"
+safe_alias gcmm "git commit -m"
 
 gd() {
   switches=(`get_dashful $@`)
