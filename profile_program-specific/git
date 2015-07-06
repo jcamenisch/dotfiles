@@ -35,8 +35,9 @@ safe_alias gcb  "git checkout -b"
 safe_alias gcm  "git commit -m"
 
 gd() {
+  switches=(`get_dashful $@`)
   args=()
-  for arg in $@; do
+  for arg in `get_dashless $@`; do
     new=$(grp $arg 2>/dev/null)
     if [[ -n "$new" ]]; then
       args+=($new)
@@ -45,7 +46,7 @@ gd() {
     fi
   done
 
-  git diff $args
+  git diff $switches[*] $args
 }
 
 safe_alias gdc  "gd --cached"
@@ -92,7 +93,10 @@ safe_alias grc   "git rebase --continue"
 safe_alias grm   "git rebase master"
 
 grp() { # git rev-parse (plus)
-  case $1 in
+  switches=(`get_dashful $@`)
+  args=(`get_dashless $@`)
+
+  case $args[1] in
   '')
     sha=HEAD
     ;;
@@ -100,13 +104,13 @@ grp() { # git rev-parse (plus)
     sha=origin/$(git rev-parse --abbrev-ref HEAD)
     ;;
   [1-9]*([0-9]))
-    sha=HEAD~$1
+    sha=HEAD~$args[1]
     ;;
   *)
-    sha=$1
+    sha=$args[1]
   esac
 
-  git rev-parse $sha
+  git rev-parse $switches[*] $sha
 }
 
 safe_alias grph  "git rev-parse HEAD"

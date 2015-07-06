@@ -16,6 +16,30 @@ export INPUTRC=$XDG_CONFIG_HOME/inputrc
 is_executable() { type $1>/dev/null 2>&1; }
 safe_alias()    { is_executable $1 || alias $1="$2"; }
 
+get_dashless() {
+  for thing in $@; do
+    case $thing in
+    -*)
+      ;;
+    *)
+      echo "$thing"
+      ;;
+    esac
+  done
+}
+
+get_dashful() {
+  for thing in $@; do
+    case $thing in
+    -*)
+      echo "$thing"
+      ;;
+    *)
+      ;;
+    esac
+  done
+}
+
 # Machine-specific stuff; use dotfiles/.profile_machine-specific/$computername file for safe syncing
 #   with other machines. Use ~/.profile for sensitive settings that should not be synced or published.
 computername=$(uname -n | sed -e 's/\..*$//')
