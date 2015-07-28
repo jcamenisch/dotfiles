@@ -1,4 +1,4 @@
-export EDITOR="vim -u $XDG_CONFIG_HOME/vimrc"
+export EDITOR="vi -u $XDG_CONFIG_HOME/vimrc"
 
 alias vim="$EDITOR"
 alias vi="$EDITOR"
