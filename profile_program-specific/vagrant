@@ -24,7 +24,8 @@ if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
       [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
     fi
   }
+
   safe_alias vu 'v up'
-  safe_alias vss 'v ssh'
+  vss() { v up $1; v ssh $1 }
   safe_alias vs 'v status'
 fi
