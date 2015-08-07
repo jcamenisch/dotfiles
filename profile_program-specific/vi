@@ -1,12 +1,20 @@
-export EDITOR="vi -u $XDG_CONFIG_HOME/vimrc"
+if [[ "$(vi --version | head -1)" =~ ^VIM ]]; then
+  if is_executable vim; then
+    vim_executable=vim
+  else
+    vim_executable=vi
+  fi
+  
+  export EDITOR="$vim_executable -u $XDG_CONFIG_HOME/vimrc"
 
-alias vim="$EDITOR"
-alias vi="$EDITOR"
+  alias vim="$EDITOR"
+  alias vi="$EDITOR"
 
-is_executable nvim && alias nvim="n$EDITOR"
+  is_executable nvim && alias nvim="n$EDITOR"
 
-safe_alias vo 'vi -O'
-safe_alias vogdno 'vi -O `git diff --name-only`'
-voggno () {
-  vi -O `git grep --name-only $@`
-}
+  safe_alias vo 'vi -O'
+  safe_alias vogdno 'vi -O `git diff --name-only`'
+  voggno () {
+    vi -O `git grep --name-only $@`
+  }
+fi
