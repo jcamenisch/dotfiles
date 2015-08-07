@@ -1,0 +1,16 @@
+onfilechange() {
+  path=$(cd $1 >/dev/null 2>&1 && pwd || echo $1); shift
+  mask="$1"; shift
+  command=$@
+  waiting="waiting for file changes in $path"
+
+  echo $waiting
+  while file=`inotifywait --format %w%f -qr $path`; do
+    if [[ "$file" == $mask ]]; then
+      echo 'Running command...'
+      $command
+      echo
+      echo "$waiting"
+    fi
+  done
+}
