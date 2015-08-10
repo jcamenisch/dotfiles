@@ -50,7 +50,7 @@ gd() {
     fi
   done
 
-  git diff $switches[*] $args
+  git diff ${switches[@]} $args
 }
 
 safe_alias gdc  "gd --cached"
@@ -114,7 +114,7 @@ grp() { # git rev-parse (plus)
     sha=$args[1]
   esac
 
-  git rev-parse $switches[*] $sha
+  git rev-parse ${switches[@]} $sha
 }
 
 safe_alias grph  "git rev-parse HEAD"
