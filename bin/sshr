@@ -4,12 +4,12 @@ unless (host = ARGV.find { |arg| arg !~ /^\d+/ } || ENV['DEFAULT_SSH_BASTION_HOS
   puts "You must supply an ssh server hostname"
   exit 1
 end
-port = ARGV.find { |arg| arg =~ /^\d+/ }.to_i
+port,outport = ARGV.find { |arg| arg =~ /^\d+/ }.split(':').map(&:to_i)
 port += 2222 unless port >= 1024
+outport = 22 unless port > 0
 
 puts 'Establishing reverse ssh tunnel. Pair user can connect with:', '',
      "    ssh -p #{port} pair@#{host}", '',
      'Press Ctrl+C to close tunnel', ''
 
-system "ssh -NR #{port}:localhost:22 #{host}"
-
+system "ssh -NR #{port}:localhost:#{outport} #{host}"
