@@ -16,5 +16,6 @@ is_executable rl || rl () {
 
 safe_alias rlc "rl console"
 safe_alias rld "rl dbconsole"
+safe_alias rlg "rl g"
 safe_alias rlr "rl runner"
 safe_alias rls "rl server"
