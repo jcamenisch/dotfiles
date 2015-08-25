@@ -4,28 +4,11 @@ if [[ -d $UV_DIR ]]; then
   export UV_METROID_DIR="$UV_DIR/metroid"
   export UV_SAMUS_DIR="$UV_DIR/samus"
   export UV_SILLYPUTTY_DIR="$UV_DIR/sillyputty"
-fi
 
-if ! is_executable v && [[ -n "$VAGRANT_HOME$DEFAULT_VAGRANT_HOME" ]]; then
-  v () {
-    ORIG_PATH=`pwd`
-    [[ -n "$VAGRANT_HOME" ]] && ORIG_VAGRANT_HOME=$VAGRANT_HOME
+  v() { VAGRANT_CWD=$UV_DIR/deployment vagrant $@ dev }
 
-    [[ -f ./Vagrantfile ]] || (git rev-parse --show-toplevel >/dev/null 2>&1 && cd $(git rev-parse --show-toplevel) >/dev/null)
-    [[ -f ./Vagrantfile ]] || cd "${VAGRANT_HOME:-$DEFAULT_VAGRANT_HOME}"
-
-    if [[ -f ./Vagrantfile ]]; then
-      VAGRANT_HOME=`pwd`
-      vagrant $@
-
-      cd $ORIG_PATH >/dev/null
-      unset ORIG_PATH
-      unset VAGRANT_HOME
-      [[ -n "$ORIG_VAGRANT_HOME" ]] && VAGRANT_HOME=$ORIG_VAGRANT_HOME
-    fi
-  }
-
-  safe_alias vu 'v up'
-  vss() { v up $1; v ssh $1 }
-  safe_alias vs 'v status'
+  safe_alias vs  'v status'
+  safe_alias vss 'v ssh'
+  safe_alias vu  'v up'
+  safe_alias vus 'v up; v ssh'
 fi
