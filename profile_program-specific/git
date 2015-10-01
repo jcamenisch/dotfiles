@@ -107,7 +107,7 @@ grp() { # git rev-parse (plus)
   o)
     sha=origin/$(git rev-parse --abbrev-ref HEAD)
     ;;
-  [1-9]*([0-9]))
+  [1-9]|[1-9][0-9])
     sha=HEAD~$args[1]
     ;;
   *)
