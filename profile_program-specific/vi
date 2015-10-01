@@ -13,8 +13,10 @@ if [[ "$(vi --version | head -1)" =~ ^VIM ]]; then
   is_executable nvim && alias nvim="n$EDITOR"
 
   safe_alias vo 'vi -O'
-  safe_alias vogdno 'vi -O `git diff --name-only`'
+  vogdno () {
+    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O `git diff --name-only $@`
+  }
   voggno () {
-    vi -O `git grep --name-only $@`
+    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O `git grep --name-only $@`
   }
 fi
