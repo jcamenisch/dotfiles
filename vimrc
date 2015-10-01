@@ -30,6 +30,7 @@ if isdirectory(expand(bundle_home."/Vundle.vim/"))
   Bundle 'jcamenisch/vim-rename3'
   Bundle 'airblade/vim-gitgutter'
   Bundle 'tpope/vim-fugitive'
+  Bundle 'Valloric/YouCompleteMe'
 endif
 
 if run_bundle_install
