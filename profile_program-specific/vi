@@ -14,9 +14,9 @@ if [[ "$(vi --version | head -1)" =~ ^VIM ]]; then
 
   safe_alias vo 'vi -O'
   vogdno () {
-    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O `git diff --name-only $@`
+    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O $(git diff --name-only $@ | uniq)
   }
   voggno () {
-    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O `git grep --name-only $@`
+    $vim_executable -u $XDG_CONFIG_HOME/vimrc -O $(git grep --name-only $@ | uniq)
   }
 fi
