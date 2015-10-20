@@ -1,0 +1,1 @@
+alias tmux="tmux -f $(dirname $(dirname ${BASH_SOURCE[0]}))/tmux.conf"
