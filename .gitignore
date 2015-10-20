@@ -3,3 +3,4 @@
 vim/bundle/*
 /configstore
 /keybase
+.bash_history*
