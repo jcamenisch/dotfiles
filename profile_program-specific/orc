@@ -23,7 +23,20 @@ safe_alias or "orc rails"
 safe_alias ors "orc rails staging"
 safe_alias orw "orc rails \$(orc_random_worker)"
 safe_alias os "orc ssh"
+
+osdev() {
+  orc ssh $1 'sudo su - dev'
+}
+
+osmux() {
+  orc ssh $1 "sudo su -lc 'tmux attach || tmux -f /home/j2d2/.jcamenisch/tmux.conf' dev"
+}
+
+osp() {
+  orc ssh $1 ".jcamenisch/shell"
+}
+
 safe_alias oss "orc ssh staging"
 safe_alias osw "orc ssh \$(orc_random_worker)"
-safe_alias ots "orc top staging"
+safe_alias ots 'echo "Local revision: $(grp)" && echo "" && orc top staging'
 safe_alias ou "orc update"
