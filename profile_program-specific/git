@@ -100,7 +100,7 @@ grp() { # git rev-parse (plus)
   switches=(`get_dashful $@`)
   args=(`get_dashless $@`)
 
-  case $args[1] in
+  case ${args[1]} in
   '')
     sha=HEAD
     ;;
