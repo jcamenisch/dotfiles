@@ -94,6 +94,16 @@ safe_alias gpspm "git push production master"
 safe_alias gpssm "git push stage master"
 safe_alias gr    "git rebase"
 safe_alias grc   "git rebase --continue"
+
+grecent() {
+  declare -i default_line_count=10
+  declare -i line_count=$1
+
+  [[ $line_count == 0 ]] && line_count=$default_line_count
+
+  git reflog | grep 'checkout: moving from' | cut -d' ' -f6 | awk '!_[$0]++' | head -$line_count
+}
+
 safe_alias grm   "git rebase master"
 
 grp() { # git rev-parse (plus)
