@@ -1,3 +1,5 @@
+export VAGRANT_DOTFILE_PATH=$HOME/.vagrant.d
+
 UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
 if [[ -d $UV_DIR ]]; then
   export UV_RAILS_DIR="$UV_DIR/uservoice"
