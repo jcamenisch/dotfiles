@@ -13,35 +13,18 @@ export XDG_CONFIG_HOME="$(cd $(dirname ${BASH_SOURCE:-$_}); pwd)"
 
 export INPUTRC=$XDG_CONFIG_HOME/inputrc
 
-is_executable() { type $1>/dev/null 2>&1; }
-safe_alias()    { is_executable $1 || alias $1="$2"; }
+# Shell helper functions. Load these first so they can be reused by everything else.
+for script in $(ls $XDG_CONFIG_HOME/profile_helpers); do
+  . $XDG_CONFIG_HOME/profile_helpers/$script
+done
 
-get_dashless() {
-  for thing in $@; do
-    case $thing in
-    -*)
-      ;;
-    *)
-      echo "$thing"
-      ;;
-    esac
-  done
-}
 
-get_dashful() {
-  for thing in $@; do
-    case $thing in
-    -*)
-      echo "$thing"
-      ;;
-    *)
-      ;;
-    esac
-  done
-}
-
-# Machine-specific stuff; use dotfiles/.profile_machine-specific/$computername file for safe syncing
-#   with other machines. Use ~/.profile for sensitive settings that should not be synced or published.
+# Machine-specific stuff
+#
+# Use dotfiles/.profile_machine-specific/$computername file for safe syncing to repo,
+# as it will only be loaded on the machine that matches the filename.
+#
+# Use ~/.profile for sensitive settings that should not be published.
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_machine-specific/$computername ]] && . $XDG_CONFIG_HOME/profile_machine-specific/$computername
 
@@ -49,7 +32,15 @@ computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
 
 # Program-specific stuff
+#
+# Load any file in the ./profile_program-specific/ directory, only if it's name matches a command
+# that exists on the current system. I.e., the "bundle" script won't be sourced unless we have bundler
+# installed on this machine. This allows the script to assume the presence of said command, and also
+# provides a nice way to keep things organized.
 for file in $(ls $XDG_CONFIG_HOME/profile_program-specific); do
+  # First cut off any prefixes that end in dot (.). This is just a hack to control load order of scripts.
+  # I.e., to make the 'gem' script load before the 'bundle' script, we can rename 'gem' to '0.gem'--
+  # or any prefix that makes it sort alphabetically before 'bundle'
   program=$(echo $file | rev | cut -d'.' -f1 | rev)
   is_executable $program && . $XDG_CONFIG_HOME/profile_program-specific/$file
 done
@@ -59,5 +50,6 @@ for script in $(ls $XDG_CONFIG_HOME/profile_misc); do
   . $XDG_CONFIG_HOME/profile_misc/$script
 done
 
+# RVM is just special. It has to load at the very very end.
 [[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

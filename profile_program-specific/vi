@@ -10,6 +10,7 @@ if [[ "$(vi --version | head -1)" =~ ^VIM ]]; then
   alias vim="$EDITOR"
   alias vi="$EDITOR"
 
+  # If neovim is installed, alias that to use our vimrc file too
   is_executable nvim && alias nvim="n$EDITOR"
 
   safe_alias vo 'vi -O'
