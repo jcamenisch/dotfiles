@@ -55,7 +55,9 @@ gd() {
 
 safe_alias gdc  "gd --cached"
 safe_alias gdm  "gd master"
-safe_alias gdno "gd --name-only | uniq"
+gdno() {
+  gd --name-only $* | uniq
+}
 
 is_executable gdmb || gdmb() { # Diff a branch against its merge-base with another branch
   ref1=master
