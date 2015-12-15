@@ -31,6 +31,7 @@ if isdirectory(expand(bundle_home."/Vundle.vim/"))
   Bundle 'airblade/vim-gitgutter'
   Bundle 'tpope/vim-fugitive'
   Bundle 'Valloric/YouCompleteMe'
+  Bundle 'elixir-lang/vim-elixir'
 endif
 
 if run_bundle_install
