@@ -58,6 +58,9 @@ safe_alias gdm  "gd master"
 gdno() {
   gd --name-only --relative $* | uniq
 }
+is_executable gdmbno || gdmbno() {
+  gdmb --name-only --relative $* | uniq
+}
 
 is_executable gdmb || gdmb() { # Diff a branch against its merge-base with another branch
   ref1=master
@@ -77,6 +80,8 @@ safe_alias ggno  "git grep --name-only"
 safe_alias gh    "git help"
 safe_alias gl    'git log --format="%C(auto)%h %C(green)%aN%Creset %C(blue)<%ae>%n%s %C(auto)%d"'
 safe_alias gl1   "gl -1"
+           gl.h() { git log $(grp $1)..HEAD }
+           glh.() { git log HEAD..$(grp $1) }
 safe_alias glhm  "gl HEAD..master"
 safe_alias glhmo "gl HEAD..origin/master"
 safe_alias glmh  "gl master..HEAD"
@@ -94,7 +99,7 @@ safe_alias gpsu  "git push -u"
 safe_alias gpshm "git push heroku master"
 safe_alias gpspm "git push production master"
 safe_alias gpssm "git push stage master"
-safe_alias gr    "git rebase"
+           gr()  { git rebase $(get_dashful $@) $(grp $(get_dashless $@)) }
 safe_alias grc   "git rebase --continue"
 
 grecent() {
