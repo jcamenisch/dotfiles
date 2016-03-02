@@ -25,3 +25,6 @@ stty start  stop 
 [[ -f $(dirname $_)/bin/tmuxinator.zsh ]] && source $(dirname $_)/bin/tmuxinator.zsh
 
 is_executable rspec && alias rspec='nocorrect rspec'
+
+# Mostly just using the steeef prompt theme, but add this one slight enhancement:
+RPROMPT='%{$reset_color%}%D{%H:%M:%S}'
