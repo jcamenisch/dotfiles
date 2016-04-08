@@ -9,6 +9,11 @@ safe_alias od "orc deploy"
 safe_alias ods "orc deploy staging"
 safe_alias ol "orc logs"
 safe_alias ols "orc logs staging"
+old() {
+  pattern=$1
+  [ -n "$pattern" ] || pattern=staging7
+  orc ssh deployer1 "sudo cat /var/log/staging.log | grep $pattern | less +G"
+}
 
 ods_m() {
   for app in $@; do
@@ -41,4 +46,5 @@ osp() {
 safe_alias oss "orc ssh staging"
 safe_alias osw "orc ssh \$(orc_random_worker)"
 safe_alias ots 'echo "Local revision: $(grp)\n" && orc top staging'
+safe_alias otsw "watch -c \"orc top staging | grep '| 7 |' | sed -e 's/  */ /g'\""
 safe_alias ou "orc update"
