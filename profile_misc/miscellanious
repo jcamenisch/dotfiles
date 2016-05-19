@@ -6,3 +6,5 @@ wait_for_process () {
     sleep 0.5
   done
 }
+
+alias bd='vi ~/braindump/$(date +%G-%m-%d.md)'
