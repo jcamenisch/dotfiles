@@ -13,14 +13,23 @@ safe_alias gbl  "git blame"
 safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 safe_alias gb   "git branch"
 
+gbnuke() {
+  git push origin :$1
+  git branch -d $1
+}
+
+gbnuke!() {
+  git push origin :$1
+  git branch -D $1
+}
+
 gbcleanup() {
   branches=$@
   [[ -z "$branches" ]] && branches=$(git branch | awk '!/\*|master/ { print $1 }')
 
   for b in $(echo $branches); do
     if [[ -z $(git log master..$b 2>/dev/null) ]]; then
-      git push origin :$b
-      git branch -d $b
+      gbnuke $b
     fi
   done
 }
