@@ -72,14 +72,20 @@ is_executable gdmbno || gdmbno() {
 }
 
 is_executable gdmb || gdmb() { # Diff a branch against its merge-base with another branch
-  ref1=master
-  ref2=HEAD
+  if [[ -n "$1" ]] && git rev-parse "$1" 2>&1 >/dev/null; then
+    ref1=$1 && shift
+    if [[ -n "$1" ]] && git rev-parse "$1" 2>&1 >/dev/null; then
+      ref2=$1 && shift
+    fi
+  fi
 
-  [[ -n "$1" ]] && (git rev-parse "$1" 2>&1 >/dev/null || (ref1=$1 && shift))
-  [[ -n "$1" ]] && (git rev-parse "$1" 2>&1 >/dev/null || (ref2=$1 && shift))
+  [[ -z "$ref1" ]] && ref1=master
+  [[ -z "$ref2" ]] && ref2=HEAD
 
+  echo "git merge-base $ref1 $ref2"
   base=`git merge-base $ref1 $ref2`
 
+  echo "git diff $base $ref2 $*"
   git diff $base $ref2 $*
 }
 
