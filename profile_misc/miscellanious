@@ -8,3 +8,4 @@ wait_for_process () {
 }
 
 alias bd='vi ~/braindump/$(date +%G-%m-%d.md)'
+alias tabify="awk '/^\|/ { print \$0 }' | sed -e 's/ *| */	/g' | sed -e 's/^       //' | sed -e 's/       \$//'"
