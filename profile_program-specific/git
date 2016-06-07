@@ -13,6 +13,21 @@ safe_alias gbl  "git blame"
 safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 safe_alias gb   "git branch"
 
+# List bare branch names without asterisk (*)
+gbbare() {
+  git branch | rev | cut -d' ' -f1 | rev
+}
+
+# List branches with date, hash, and author name
+gbdated() {
+  for b in $(gbbare); do
+    echo "$(git log -1 --pretty=format:'%ci %h %an' $b) $b"
+  done
+}
+
+# List branches in reverse chronological order, showing date, hash, and author name
+safe_alias gbs 'gbdated | sort -r'
+
 gbnuke() {
   git push origin :$1
   git branch -d $1
