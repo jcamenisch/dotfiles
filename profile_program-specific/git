@@ -129,7 +129,15 @@ safe_alias gpsu  "git push -u"
 safe_alias gpshm "git push heroku master"
 safe_alias gpspm "git push production master"
 safe_alias gpssm "git push stage master"
-           gr()  { git rebase $(get_dashful $@) $(grp $(get_dashless $@)) }
+
+gr()  {
+  opts=$(get_dashful $@)
+  args=$(get_dashless $@)
+  if [[ -n $args ]] || [[ -z $opts ]]; then
+    args=$(grp $args)
+  fi
+  git rebase $opts $args
+}
 safe_alias grc   "git rebase --continue"
 
 grecent() {
