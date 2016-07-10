@@ -1,0 +1,83 @@
+charcode() {
+  LC_CTYPE=C printf '%d' "'$1"
+}
+
+color_from_string() {
+  colors=(69 75 81 87 111 123 117 153 159 195 194 158 157 121 122 120 86 85 84 83 119 155 227 191 192 228 156 229 193 230 224 217 223 210 222 216 215 221 209 203 204 205 206 207 211 213 212 218 219 225 189 147 183 105 177 141 135 171 99 63)
+
+  local option_space=${#colors[*]}
+  local current_option_space=$option_space
+  local color_i=0
+
+  for (( i=0; i<${#1}; i++ )); do
+    local char=${1:$i:1}
+    local code=$(charcode "$char")
+
+    if [[ $code -ge 97 ]] && [[ $code -le 122 ]]; then
+      local jump=$((code - 96))
+      local jump_space=27
+      if [[ "$char_was" == "letter" ]] && [[ $current_option_space -lt 2 ]]; then
+        current_option_space=2
+      fi
+      local char_was=letter
+    elif [[ $code -ge 48 ]] && [[ $code -le 57 ]]; then
+      local jump=$((code - 47))
+      local jump_space=10
+      if [[ $char_was == "letter" ]] && [[ $current_option_space -lt 10 ]]; then
+        current_option_space=10
+      fi
+      local char_was=number
+    else
+      # Let's expect the alpha space from 26 to 27, and use it for punctuation too
+      local jump=26
+      local jump_space=27
+    fi
+    color_i=$((color_i + current_option_space * jump / jump_space))
+
+    current_option_space=$((current_option_space / 2))
+  done
+
+  echo ${colors[$((color_i % option_space))]}
+}
+
+colorful_print() {
+  color=$(color_from_string $1)
+  echo -en "[0m[38;5;${color}m$@[0m"
+}
+
+colorful_print_test() {
+  colorful_print 'zapple0'
+  colorful_print 'zapple1'
+  colorful_print 'zapple2'
+  colorful_print 'zapple3'
+  colorful_print 'zapple4'
+  colorful_print 'zapple5'
+  colorful_print 'zapple6'
+  colorful_print 'zapple7'
+  colorful_print 'zapple8'
+  colorful_print 'zapple9'
+  echo
+
+  colorful_print 'dapple1'
+  colorful_print 'dapple2'
+  colorful_print 'dapple3'
+  colorful_print 'dapple4'
+  colorful_print 'dapple5'
+  colorful_print 'dapple6'
+  colorful_print 'dapple7'
+  colorful_print 'dapple8'
+  colorful_print 'dapple9'
+  echo
+
+  colorful_print 'apple1'
+  colorful_print 'apple2'
+  colorful_print 'apple3'
+  colorful_print 'apple4'
+  colorful_print 'apple5'
+  colorful_print 'apple6'
+  colorful_print 'apple7'
+  colorful_print 'apple8'
+  colorful_print 'apple9'
+  echo
+}
+
