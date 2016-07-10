@@ -7,7 +7,9 @@ if [[ -d $UV_DIR ]]; then
   export UV_SAMUS_DIR="$UV_DIR/samus"
   export UV_SILLYPUTTY_DIR="$UV_DIR/sillyputty"
 
-  v() { VAGRANT_CWD=$UV_DIR/deployment vagrant $@ dev }
+  v() {
+    VAGRANT_CWD=$UV_DIR/deployment vagrant $@ dev
+  }
 
   safe_alias vs  'v status'
   safe_alias vss 'v ssh'

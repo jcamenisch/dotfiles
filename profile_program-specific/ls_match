@@ -1,1 +1,3 @@
-c() { cd $(ls_match -mask="%1*" -first $1) }
+c() {
+  cd $(ls_match -mask="%1*" -first $1)
+}

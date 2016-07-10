@@ -33,7 +33,7 @@ gbnuke() {
   git branch -d $1
 }
 
-gbnuke!() {
+gbNUKE() {
   git push origin :$1
   git branch -D $1
 }
@@ -110,8 +110,6 @@ safe_alias ggno  "git grep --name-only"
 safe_alias gh    "git help"
 safe_alias gl    'git log --format="%C(auto)%h %C(green)%aN%Creset %C(blue)<%ae>%n%s %C(auto)%d"'
 safe_alias gl1   "gl -1"
-           gl.h() { git log $(grp $1)..HEAD }
-           glh.() { git log HEAD..$(grp $1) }
 safe_alias glhm  "gl HEAD..master"
 safe_alias glhmo "gl HEAD..origin/master"
 safe_alias glmh  "gl master..HEAD"
