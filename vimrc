@@ -24,13 +24,16 @@ if isdirectory(expand(bundle_home."/Vundle.vim/"))
   Bundle 'tpope/vim-git'
   Bundle 'fatih/vim-go'
   Bundle 'tpope/vim-haml'
-  Bundle 'tpope/vim-markdown'
+  " Bundle 'tpope/vim-markdown'
+  Bundle 'plasticboy/vim-markdown'
   Bundle 'tpope/vim-rails'
   Bundle 'tpope/vim-vinegar'
   Bundle 'jcamenisch/vim-rename3'
   Bundle 'airblade/vim-gitgutter'
   Bundle 'tpope/vim-fugitive'
+  Bundle 'Shutnik/jshint2.vim'
   Bundle 'Valloric/YouCompleteMe'
+  " Bundle 'scrooloose/syntastic'
   Bundle 'elixir-lang/vim-elixir'
 endif
 
@@ -40,6 +43,10 @@ if run_bundle_install
   silent !echo "Vim is now ready."
   :cq
 endif
+
+" JSHint settings
+let jshint2_read = 1
+let jshint2_save = 1
 
 " Misc
 set nowrap                                  " I don't always wrap lines...
