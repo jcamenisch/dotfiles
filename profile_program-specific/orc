@@ -36,7 +36,11 @@ osdev() {
 }
 
 osmux() {
-  orc ssh $1 "sudo su -lc 'tmux attach || tmux -f /home/j2d2/.jcamenisch/tmux.conf' dev"
+  orc ssh $1 "tmux attach || [ -f /home/j2d2/.jcamenisch/tmux.conf ] && tmux -f /home/j2d2/.jcamenisch/tmux.conf || tmux"
+}
+
+osmuxd() {
+  orc ssh $1 "sudo su -lc 'tmux attach || [ -f /home/j2d2/.jcamenisch/tmux.conf ] && tmux -f /home/j2d2/.jcamenisch/tmux.conf || tmux' dev"
 }
 
 osp() {
