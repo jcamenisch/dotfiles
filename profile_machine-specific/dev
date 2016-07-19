@@ -1,5 +1,5 @@
 export RAILS_ENV=development
-export DATABASE_URL='mysql2://root:@localhost/uservoice_dev?socket=/var/run/mysqld/mysqld.sock'
+export DATABASE_URL='mysql2://root:@localhost/uservoice_development?socket=/var/run/mysqld/mysqld.sock'
 export RAILS_ENV=development
 export GOPATH=/home/dev/go
 export GOBIN=$GOPATH/bin
