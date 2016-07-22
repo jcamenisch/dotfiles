@@ -5,44 +5,31 @@ let &rtp=vim_home.",".&rtp.",".bundle_home."/Vundle.vim"
 set nocompatible
 filetype off
 
-if !isdirectory(expand(bundle_home."/Vundle.vim/")) && $PROFILEMODE_CLEAN != "1"
-  silent !echo "Installing Vundle..."
-  silent execute "!mkdir -p ".bundle_home
-  silent execute "!git clone https://github.com/gmarik/Vundle.vim ".bundle_home."/Vundle.vim"
-  let run_bundle_install = 1
-else
-  let run_bundle_install = 0
-endif
+call plug#begin(vim_home.'/plugged')
 
-if isdirectory(expand(bundle_home."/Vundle.vim/"))
-  call vundle#rc(bundle_home)
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-git'
+Plug 'fatih/vim-go'
+Plug 'tpope/vim-haml'
+" Plug 'tpope/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-vinegar'
+Plug 'jcamenisch/vim-rename3'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'Shutnik/jshint2.vim'
+Plug 'Valloric/YouCompleteMe'
+" Plug 'scrooloose/syntastic'
+Plug 'elixir-lang/vim-elixir'
 
-  Bundle "gmarik/vundle"
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'bling/vim-airline'
-  Bundle 'tpope/vim-cucumber'
-  Bundle 'tpope/vim-git'
-  Bundle 'fatih/vim-go'
-  Bundle 'tpope/vim-haml'
-  " Bundle 'tpope/vim-markdown'
-  Bundle 'plasticboy/vim-markdown'
-  Bundle 'tpope/vim-rails'
-  Bundle 'tpope/vim-vinegar'
-  Bundle 'jcamenisch/vim-rename3'
-  Bundle 'airblade/vim-gitgutter'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'Shutnik/jshint2.vim'
-  Bundle 'Valloric/YouCompleteMe'
-  " Bundle 'scrooloose/syntastic'
-  Bundle 'elixir-lang/vim-elixir'
-endif
+call plug#end()
 
-if run_bundle_install
-  :PluginInstall
-  silent !echo ""
-  silent !echo "Vim is now ready."
-  :cq
-endif
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_new_list_item_indent = 2
 
 " JSHint settings
 let jshint2_read = 1
