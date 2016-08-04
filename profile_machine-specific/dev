@@ -1,6 +1,5 @@
-export RAILS_ENV=development
+export BUNDLE_PATH=/var/lib/uservoice/bundle
 export DATABASE_URL='mysql2://root:@localhost/uservoice_development?socket=/var/run/mysqld/mysqld.sock'
-export RAILS_ENV=development
 export GOPATH=/home/dev/go
 export GOBIN=$GOPATH/bin
 export METROID_TEST_DB_SPEC='root:@unix(/var/run/mysqld/mysqld.sock)/uservoice_test?charset=utf8&parseTime=true'
