@@ -1,3 +1,4 @@
+export RAILS_ENV=development
 export BUNDLE_PATH=/var/lib/uservoice/bundle
 export DATABASE_URL='mysql2://root:@localhost/uservoice_development?socket=/var/run/mysqld/mysqld.sock'
 export GOPATH=/home/dev/go
