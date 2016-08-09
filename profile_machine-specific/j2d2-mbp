@@ -1,1 +1,9 @@
 export DEFAULT_VAGRANT_HOME=$(cd $HOME/../uservoice && pwd)/deployment
+export RIAK_ADDR=":8087"
+export KOMBUCHA_REDIS_SERVER=":6379"
+export SERVER_PUBLIC_ADDR=":9091"
+export SERVER_PRIVATE_ADDR=":9092"
+export TEST_KOMBUCHA_POSTGRES_DB_SPEC="postgres://postgres@localhost:5432/kombucha?sslmode=disable"
+export TEST_USERVOICE_MYSQL_DB_SPEC="root@unix(/tmp/mysql.sock)/kombucha_test?charset=utf8&parseTime=true"
+export KOMBUCHA_POSTGRES_DB_SPEC="postgres://postgres@localhost:5432/kombucha?sslmode=disable"
+export USERVOICE_MYSQL_DB_SPEC="root@unix(/tmp/mysql.sock)/kombucha_test?charset=utf8&parseTime=true"
