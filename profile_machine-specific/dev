@@ -4,3 +4,37 @@ export DATABASE_URL='mysql2://root:@localhost/uservoice_development?socket=/var/
 export GOPATH=/home/dev/go
 export GOBIN=$GOPATH/bin
 export METROID_TEST_DB_SPEC='root:@unix(/var/run/mysqld/mysqld.sock)/uservoice_test?charset=utf8&parseTime=true'
+
+# Dev aliases automatically installed by dev-box-setup.sh
+
+alias babayaga-connect="ssh -L 9091:babayaga-api:9090 -p 41145 dev@uvstaging08.com"
+alias metroid-restart="sudo service metroid restart"
+metroid-update() {
+  (
+    cd ~/go/src/metroid
+    git pull
+    GOPATH=/home/dev/go /home/dev/go/bin/godep go build -o /home/dev/bin/metroid-api metroid/cmd/metroid-api
+  )
+  metroid-restart
+}
+alias sillyputty-restart="sudo service sillyputty restart"
+sillyputty-update() {
+  (
+    cd ~/go/src/github.com/uservoice/sillyputty
+    git pull
+    GOPATH=/home/dev/go /home/dev/go/bin/godep go build sillyputtyd/*.go
+  )
+  sillyputty-restart
+}
+alias redis-restart="sudo service redis restart"
+alias memcache-restart="sudo service memcached restart"
+alias unicorn-restart="sudo service unicorn restart"
+alias rails-restart="unicorn-restart"
+app-restart() {
+  metroid-restart
+  sillyputty-restart
+  rails-restart
+  redis-restart
+  memcache-restart
+}
+alias app-logs="sudo tail -f /home/dev/uservoice/log/development.log -f /var/log/metroid.log -f /var/log/upstart/sillyputty.log -f /var/log/upstart/unicorn.log"
