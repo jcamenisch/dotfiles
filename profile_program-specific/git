@@ -225,3 +225,11 @@ is_executable gg_replace || gg_replace() {
 is_executable gg_dasherize || gg_dasherize() {
   gg_replace $1 `echo $1 | sed -e 's/_/-/g'` $2
 }
+
+is_executable vogd || vogd() {
+  vi -O $(gdno $1)
+}
+
+is_executable vogg || vogg() {
+  vi -O $(ggno $1)
+}
