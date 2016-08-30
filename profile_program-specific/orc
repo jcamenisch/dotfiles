@@ -31,6 +31,12 @@ safe_alias ors "orc rails staging"
 safe_alias orw "orc rails \$(orc_random_worker)"
 safe_alias os "orc ssh"
 
+osbroadcast() {
+  for s in $(echo $1); do
+    orc ssh $s "$2"
+  done
+}
+
 osdev() {
   orc ssh $1 'sudo su - dev'
 }
