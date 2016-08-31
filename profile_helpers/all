@@ -6,6 +6,15 @@ is_executable() { type $1>/dev/null 2>&1; }
 # Create an alias only if it doesn't overwrite an existing command.
 safe_alias() { is_executable $1 || alias $1="$2"; }
 
+# Dereference an alias. I.e., echo it's bare, literal contents.
+alias_content() {
+  if [[ -n "$(alias $1 2>/dev/null)" ]]; then
+    alias $1 | sed -e "s/^[^=]\+='\|'$//g"
+  else
+    echo $1
+  fi
+}
+
 # Some param parsing helpers--to distinguish between params that start with a hyphen (-) and those that don't
 # These are mainly used in the context of a shell function by passing $@ or $* to them.
 

@@ -226,10 +226,12 @@ is_executable gg_dasherize || gg_dasherize() {
   gg_replace $1 `echo $1 | sed -e 's/_/-/g'` $2
 }
 
+# Use alias_content helper to dereference the `vi` alias on these.
+# Otherwise, the bare `vi` executable ends up getting called, which loads without the right .vimrc
 is_executable vogd || vogd() {
-  vi -O $(gdno $1)
+  $(alias_content vi) -O $(gdno $@)
 }
 
 is_executable vogg || vogg() {
-  vi -O $(ggno $1)
+  $(alias_content vi) -O $(ggno $@)
 }
