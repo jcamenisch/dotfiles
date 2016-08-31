@@ -7,7 +7,9 @@ alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/Syste
 alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
 alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 
-unalias o # I don't need to consume this on the `open` alias
+# I don't need to consume this on the `open` alias
+# This must be defined somewhere in my zsh profile; I should probably remove it from there.
+[[ -n "$(alias o 2>/dev/null)" ]] && unalias o 
 
 if [[ -d ~/projects ]]; then
   cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match

@@ -5,6 +5,7 @@ is_executable() { type $1>/dev/null 2>&1; }
 
 # Create an alias only if it doesn't overwrite an existing command.
 safe_alias() { is_executable $1 || alias $1="$2"; }
+safe_unalias() { [[ -n "$(alias $1)" ]] && unalias $1 }
 
 # Dereference an alias. I.e., echo it's bare, literal contents.
 alias_content() {
