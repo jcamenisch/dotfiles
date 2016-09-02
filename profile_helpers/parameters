@@ -1,0 +1,24 @@
+# Some param parsing helpers--to distinguish between params that start with a hyphen (-) and those that don't
+# These are mainly used in the context of a shell function by passing $@ or $* to them.
+
+# Return the params with dashes. E.g.:
+#
+#   $ get_dashful 1 -2 3 -4
+#   -2
+#   -4
+get_dashful() {
+  for thing in $@; do
+    [[ $thing == -* ]] && echo "$thing"
+  done
+}
+
+# Return the params without dashes. E.g.:
+#
+#   $ get_dashless 1 -2 3 -4
+#   1
+#   3
+get_dashless() {
+  for thing in $@; do
+    [[ $thing == -* ]] || echo "$thing"
+  done
+}
