@@ -1,4 +1,4 @@
 # check if a shell command is valid in the current context
 #
 # will return true for any executable, alias, shell function, or shell built-in
-is_executable() { type $1>/dev/null 2>&1; }
+is_executable() { type $1 &>/dev/null; }

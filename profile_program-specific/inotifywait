@@ -1,5 +1,5 @@
 onfilechange() {
-  path=$(cd $1 >/dev/null 2>&1 && pwd || echo $1); shift
+  path=$(cd $1 &>/dev/null && pwd || echo $1); shift
   mask="$1"; shift
   command=$@
   waiting="waiting for file changes in $path"

@@ -87,9 +87,9 @@ is_executable gdmbno || gdmbno() {
 }
 
 is_executable gdmb || gdmb() { # Diff a branch against its merge-base with another branch
-  if [[ -n "$1" ]] && git rev-parse "$1" 2>&1 >/dev/null; then
+  if [[ -n "$1" ]] && git rev-parse "$1" &>/dev/null; then
     ref1=$1 && shift
-    if [[ -n "$1" ]] && git rev-parse "$1" 2>&1 >/dev/null; then
+    if [[ -n "$1" ]] && git rev-parse "$1" &>/dev/null; then
       ref2=$1 && shift
     fi
   fi
