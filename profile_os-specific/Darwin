@@ -9,7 +9,7 @@ alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres
 
 # I don't need to consume this on the `open` alias
 # This must be defined somewhere in my zsh profile; I should probably remove it from there.
-[[ -n "$(alias o 2>/dev/null)" ]] && unalias o 
+safe_unalias o
 
 if [[ -d ~/projects ]]; then
   cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
