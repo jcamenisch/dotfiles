@@ -1,0 +1,70 @@
+# Note: These functions are not portable to sh. Targets are bash and zsh
+
+unset _parseargs__definitions && declare -A _parseargs__definitions
+unset _parseargs__names       && declare -A _parseargs__names
+unset _parseargs__ords        && declare -a _parseargs__ords
+
+defarg() {
+  case $# in
+    [0-1])
+      _defarg__help_message "Missing arguments"
+      return 1
+      ;;
+    2)
+      local name=$1
+      local desc=$2
+      ;;
+    3)
+      local name=$1
+      local short=$2
+      local desc=$3
+      ;;
+    4)
+      local name=$1
+      local short=$2
+      local ord=$3
+      local desc=$4
+      ;;
+    *)
+  esac
+
+  _parseargs__definitions[$name]="--$name,-$short ($ord)    $desc"
+  _parseargs__names["--$name"]="$name"
+  [[ -n "$short" ]] && _parseargs__names["-$short"]="$name"
+  [[ -n "$ord" ]] && _parseargs__ords[$ord]="$name"
+}
+
+parseargs() {
+  unset ARGS; declare -gA ARGS
+
+  i=1
+  while [ $# -gt 0 ]; do
+    case $1 in
+      -*)
+        name=${_parseargs__names[$1]}
+        shift
+        ;;
+      *)
+        if [[ -n "${_parseargs__ords[$i]}" ]]; then
+          name=${_parseargs__ords[$i]}
+        fi
+        i=$((i+1))
+        ;;
+    esac
+
+    if [[ -n "$name" ]]; then
+      ARGS[$name]=$1
+      unset name
+    fi
+
+    shift
+  done
+}
+
+# Namespaced functions for internal use
+_defarg__help_message() {
+  [[ -n $1 ]] && echo $1
+  echo defarg - Register an argument for parsing
+  echo
+  echo '  USAGE:  defargs <fullname> <shortname> <description>'
+}
