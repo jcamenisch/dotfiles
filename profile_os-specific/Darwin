@@ -37,7 +37,7 @@ reopen () {
 
 # Help gcc out a bit with a target platform
 # See https://developer.apple.com/legacy/library/technotes/tn2064/_index.html
-export MACOSX_DEPLOYMENT_TARGET="10.$(echo 9 $(sw_vers | awk -F. '/ProductVersion/ { print $2 }') | xargs -n1 | sort -n | head -1)"
+export MACOSX_DEPLOYMENT_TARGET="$(sw_vers | awk '/ProductVersion/ { print $2 }')"
 
 # iterm2 shell integration
 # Unfortunately, $SHELL variable doesn't always give us the current shell,
