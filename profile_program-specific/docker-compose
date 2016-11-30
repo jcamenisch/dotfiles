@@ -1,0 +1,19 @@
+UV_DOCKER_DIR=$UV_DIR/dev_environment
+if [[ -d "$UV_DOCKER_DIR" ]]; then
+  dc() (
+    cd $UV_DOCKER_DIR
+    docker-compose $*
+  )
+  safe_alias dce 'dc exec'
+  dcr() {
+    dc exec $1 run
+  }
+  safe_alias dcu 'dc up'
+  safe_alias dcud 'dc up -d'
+
+  dccleanup() (
+    cd $UV_DOCKER_DIR
+    docker ps -a --filter status=exited --format '{{.ID}}' | xargs docker rm
+    docker images --filter dangling=true --format '{{.ID}}' | xargs docker rmi
+  )
+fi
