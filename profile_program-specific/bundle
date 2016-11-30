@@ -9,6 +9,6 @@ safe_alias rkap-c 'bundle exec rake assets:precompile && git add . && git commit
 safe_alias rkdm "bundle exec rake db:migrate"
 safe_alias rkjw "bundle exec rake jobs:work"
 
-[[ -z "$BUNDLE_PATH" ]] && export BUNDLE_PATH=.bundle
+[[ -z "$BUNDLE_PATH" ]] && export BUNDLE_PATH=.bundle_$(uname)
 [[ -z "$BUNDLE_BIN" ]] && export BUNDLE_BIN=$BUNDLE_PATH/bin
 [[ "$PATH" == "*.git/safe/../../$BUNDLE_BIN:*" ]] || export PATH=".git/safe/../../$BUNDLE_BIN:$PATH"
