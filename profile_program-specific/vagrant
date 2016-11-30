@@ -2,11 +2,6 @@ export VAGRANT_DOTFILE_PATH=$HOME/.vagrant.d
 
 UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
 if [[ -d $UV_DIR ]]; then
-  export UV_RAILS_DIR="$UV_DIR/uservoice"
-  export UV_METROID_DIR="$UV_DIR/metroid"
-  export UV_SAMUS_DIR="$UV_DIR/samus"
-  export UV_SILLYPUTTY_DIR="$UV_DIR/sillyputty"
-
   v() {
     VAGRANT_CWD=$UV_DIR/deployment vagrant $@ dev
   }
