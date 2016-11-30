@@ -63,6 +63,10 @@ osmuxd() {
   orc ssh $1 "sudo su -lc 'tmux attach || [ -f /home/j2d2/.jcamenisch/tmux.conf ] && tmux -f /home/j2d2/.jcamenisch/tmux.conf || tmux' dev"
 }
 
+osmuxm() {
+  orc ssh admin "sudo su -lc 'tmux -S /tmp/migration attach || tmux -S /tmp/migration' dev"
+}
+
 osp() {
   orc ssh $1 ".jcamenisch/shell"
 }
