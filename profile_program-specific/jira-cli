@@ -1,0 +1,4 @@
+is_executable j || j() (
+  cd
+  jira-cli $@
+)
