@@ -4,6 +4,7 @@ if [[ -d "$UV_DOCKER_DIR" ]]; then
     cd $UV_DOCKER_DIR
     docker-compose $*
   )
+  safe_alias dcd 'dc down'
   safe_alias dce 'dc exec'
   dcr() {
     dc exec $1 run
