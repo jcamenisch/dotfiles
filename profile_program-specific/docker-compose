@@ -7,7 +7,11 @@ if [[ -d "$UV_DOCKER_DIR" ]]; then
   safe_alias dcd 'dc down'
   safe_alias dce 'dc exec'
   dcr() {
-    dc exec $1 run
+    service=$1; shift
+    dc exec $service run $*
+  }
+  dcrnbni() {
+    dcr $1 --no-nobuild --no-install
   }
   safe_alias dcu 'dc up'
   safe_alias dcud 'dc up -d'
