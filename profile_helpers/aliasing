@@ -5,7 +5,7 @@ safe_unalias() { [[ -n "$(alias $1 2>/dev/null)" ]] && unalias $1; }
 # Dereference an alias. I.e., echo it's bare, literal contents.
 alias_content() {
   if [[ -n "$(alias $1 2>/dev/null)" ]]; then
-    alias $1 | sed -e "s/^[^=]\+='\|'$//g"
+    alias $1 | sed -e "s/^[^=]\+='\?\|'$//g"
   else
     echo $1
   fi
