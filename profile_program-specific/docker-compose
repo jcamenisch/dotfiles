@@ -1,23 +1,31 @@
 UV_DOCKER_DIR=$UV_DIR/dev_environment
 if [[ -d "$UV_DOCKER_DIR" ]]; then
+
   dc() (
     cd $UV_DOCKER_DIR
     docker-compose $*
   )
+
   safe_alias dcd 'dc down'
+
   dce() {
     container=$1; shift
     command=$(alias_content $1); shift
     eval "dc exec $container $command $*"
   }
+
   safe_alias dceu 'dce uservoice'
+  sage_alias dcp 'dc pull'
+
   dcr() {
     service=$1; shift
     dc exec $service run $*
   }
+
   dcrnbni() {
     dcr $1 --no-build --no-install
   }
+
   safe_alias dcu 'dc up'
   safe_alias dcud 'dc up -d'
 
