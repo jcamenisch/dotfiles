@@ -4,7 +4,7 @@
 
 # It turns out getting the directory of this file is tricky if you want it to work
 # on Darwin as well as most Unix variants. The following seems to do the trick.
-export XDG_CONFIG_HOME="$(cd $(dirname ${BASH_SOURCE:-$_}); pwd)"
+export XDG_CONFIG_HOME="${0%/*}"
 
 # Don't prepend these if they're already there--sometimes this file may get
 # re-sourced multiple times.
