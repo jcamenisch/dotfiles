@@ -122,6 +122,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 nnoremap <C-l> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
 inoremap <C-l> <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
 inoremap <C-s> <ESC>:w<CR>a
+map <C-v> "*P
+imap <C-v> <ESC>"*P
 map <C-q><C-q> :q!<CR>
 imap <C-q><C-q> <ESC>:q!<CR>
 map <C-q> :q<CR>
