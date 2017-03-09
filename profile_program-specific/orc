@@ -20,29 +20,12 @@ safe_alias omyw "orc mysql \$(orc_random_worker)"
 safe_alias orw "orc rails \$(orc_random_worker)"
 safe_alias osw "orc ssh \$(orc_random_worker)"
 
-safe_alias o orc
 safe_alias od "orc deploy"
-safe_alias ods "orc deploy staging"
 safe_alias ol "orc logs"
-safe_alias ols "orc logs staging"
-old() {
-  pattern=$1
-  [ -n "$pattern" ] || pattern=staging7
-  orc ssh deployer1 "sudo cat /var/log/staging.log | grep $pattern | less +G"
-}
-
-ods_m() {
-  for app in $@; do
-    orc deploy staging $app master
-  done
-}
 
 safe_alias om "orc migrate"
-safe_alias oms "orc migrate staging"
 safe_alias omy "orc mysql"
-safe_alias omys "orc mysql staging7"
 safe_alias or "orc rails"
-safe_alias ors "orc rails staging"
 safe_alias os "orc ssh"
 
 osbroadcast() {
@@ -71,7 +54,3 @@ osp() {
   orc ssh $1 ".jcamenisch/shell"
 }
 
-safe_alias oss "orc ssh staging"
-safe_alias ots 'echo "Local revision: $(grp)\n" && orc top staging'
-safe_alias otsw "watch -c \"orc top staging | grep '| 7 |' | sed -e 's/  */ /g'\""
-safe_alias ou "orc update"

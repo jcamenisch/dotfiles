@@ -1,0 +1,4 @@
+safe_alias o ogre
+safe_alias oe 'ogre exec'
+
+safe_alias ou "ogre update"
