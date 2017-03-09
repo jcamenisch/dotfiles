@@ -54,3 +54,9 @@ osp() {
   orc ssh $1 ".jcamenisch/shell"
 }
 
+ostatus() {
+  for id in $(orc nomad status $1 | awk '/run +running/ { print $1 }'); do
+    orc nomad alloc-status $id;
+    echo; echo
+  done
+}
