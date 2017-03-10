@@ -1,6 +1,10 @@
 is_executable rl || rl () {
   _GIT_ROOT=$(git rev-parse --show-toplevel)
 
+  if [[ -f $_GIT_ROOT/.env ]]; then
+    source $_GIT_ROOT/.env
+  fi
+
   if [[ -x $_GIT_ROOT/script/rails ]]; then
     # We're in a rails 3+ app
     bundle exec $_GIT_ROOT/script/rails $*
