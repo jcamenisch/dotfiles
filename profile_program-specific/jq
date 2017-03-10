@@ -1,0 +1,52 @@
+uauth() {
+  local subdomain=$(echo $1 | sed -e 's"^https://\|\..*""g')
+  if [[ -z "$subdomain" ]]; then
+    echo "You must supply a subdomain, host, or url parameter."
+    echo "Usage: uauth ( subdomain | hostname | url )"
+    return 1
+  fi
+
+  local user
+  local password
+  local client_id
+  local client_secret
+
+  echo -n 'user: '
+  read user
+  echo -n 'password: '
+  read -s password
+  echo
+
+  echo -n "client_id (see https://$subdomain.uservoice.com/admin/settings/api to create): "
+  read client_id
+  echo -n 'client_secret: '
+  read -s client_secret
+  echo
+
+  local response=$(
+    curl https://$subdomain.uservoice.com/api/v2/oauth/token \
+      -X "POST" \
+      -d grant_type=password \
+      -d username="$user" \
+      -d password="$password" \
+      -d client_id="$client_id" \
+      -d client_secret="$client_secret" \
+      2>/dev/null
+    )
+
+  USERVOICE_ACCESS_TOKEN=$(echo $response | jq -r '.access_token')
+  if [[ "$USERVOICE_ACCESS_TOKEN" == null ]]; then
+    unset USERVOICE_ACCESS_TOKEN
+    echo $response
+    return 1
+  fi
+}
+
+ucurl() {
+  if [[ -z "$USERVOICE_ACCESS_TOKEN" ]]; then
+    uauth $(echo "$@" | sed -e 's".*https://\|\..*""g')
+    [[ -n "$USERVOICE_ACCESS_TOKEN" ]] || return 1
+  fi
+  
+  curl -H "Authorization: Bearer $USERVOICE_ACCESS_TOKEN" $@
+}
