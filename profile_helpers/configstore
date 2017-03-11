@@ -1,0 +1,22 @@
+config_read() {
+  file=$1; key=$2
+
+  awk -F= "/^$key=/ { print \$2 }" 2>/dev/null < $file
+}
+
+config_write() {
+  file=$1; key=$2; value=$3
+
+  if [[ -z $value ]]; then
+    echo 'Usage: write_config file key value'
+    return 1
+  fi
+
+  if [[ ! -f $file ]]; then
+    echo "$key=$value" > $file
+  elif grep -q "^$key=" $file; then
+    sed -e "s/^$key=.*/$key=$value/" -i'' $file
+  else
+    echo "$key=$value" >> $file
+  fi
+}
