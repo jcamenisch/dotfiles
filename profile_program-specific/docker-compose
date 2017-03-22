@@ -27,7 +27,7 @@ if [[ -d "$UV_DOCKER_DIR" ]]; then
 
   dcr() {
     service=$1; shift
-    dc exec $service run $*
+    dc exec $service run --no-build --no-install $*
   }
 
   safe_alias dcru 'dcr uservoice'
