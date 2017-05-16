@@ -1,0 +1,52 @@
+#!/usr/bin/ruby
+
+class Line
+  @space_mask = []
+  def self.space_mask
+    @space_mask
+  end
+
+  def self.update_space_mask(line)
+    (0...@space_mask.length).each do |i|
+      @space_mask[i] &&= (line[i] == ' ')
+    end
+    (@space_mask.length...line.length).each do |i|
+      @space_mask[i] = (line[i] == ' ')
+    end
+  end
+
+  def initialize(source)
+    @source = source
+    self.class.update_space_mask(source)
+  end
+
+  def to_fields
+    fields = []
+
+    next_field = ''
+    (0...@source.length).each do |i|
+      if self.class.space_mask[i] && !self.class.space_mask[i - 1]
+        fields << next_field.strip
+        next_field = ''
+      else
+        next_field << @source[i]
+      end
+    end
+    fields << next_field.strip
+  end
+
+  def to_csv
+    '"' << to_fields.join('","') << '"'
+  end
+
+  def to_tsv
+    to_fields.join("\t")
+  end
+end
+
+lines = []
+while line = gets
+  lines << Line.new(line)
+end
+
+puts lines.map(&:to_tsv)
