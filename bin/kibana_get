@@ -1,0 +1,38 @@
+#!/usr/bin/ruby
+
+stop = false
+%w(KIBANA_URL KIBANA_TOKEN).each do |var|
+  unless ENV.has_key?(var)
+    puts "Missing environment variable #{var}"
+    stop = true
+  end
+end
+exit if stop
+
+opts = {
+  size: 500,
+  query: '*',
+  index: 'beat-rails-nomad*',
+  size: 500,
+  begin: '-15M',
+}
+
+ARGV.each do |arg|
+  case arg
+  when /^\d+$/
+    opts[:size] = arg
+  when /^[+-]\d+[wdHMS]$/
+    opts[:begin] = arg
+  when /^beat-/
+    opts[:index] = arg
+  else
+    opts[:query] = arg
+  end
+end
+
+opts[:begin] = `date -v #{opts[:begin]} +%s000`.chomp
+opts[:end] = `date +%s000`.chomp
+
+command = %(curl '#{ENV['KIBANA_URL']}/elasticsearch/_msearch?timeout=0&ignore_unavailable=true&preference=1496245045187' -H 'kbn-xsrf-token: #{ENV['KIBANA_TOKEN']}' --data-binary $'{"index":"#{opts[:index]}","ignore_unavailable":true}\\n{"size":#{opts[:size]},"sort":[{"@timestamp":{"order":"desc","unmapped_type":"boolean"}}],"query":{"filtered":{"query":{"query_string":{"query":"#{opts[:query]}","analyze_wildcard":true}},"filter":{"bool":{"must":[{"range":{"@timestamp":{"gte":#{opts[:begin]},"lte":#{opts[:end]}}}}],"must_not":[]}}}},"aggs":{"2":{"date_histogram":{"field":"@timestamp","interval":"3h","pre_zone":"-04:00","pre_zone_adjust_large_interval":true,"min_doc_count":0,"extended_bounds":{"min":1495640398608,"max":1496245198608}}}},"fields":["*","_source"],"script_fields":{},"fielddata_fields":["@timestamp","timereported"]}\\n' --compressed)
+puts 'running:', command
+system(command)
