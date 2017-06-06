@@ -36,6 +36,8 @@ let jshint2_read = 1
 let jshint2_save = 1
 
 " Misc
+set mouse=a
+set clipboard=unnamed
 set nowrap                                  " I don't always wrap lines...
 set linebreak                               " ...but when I do, I wrap whole words.
 set t_Co=256                                " Support for xterm with 256 colors (gets overriden in .gvimrc)
