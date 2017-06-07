@@ -13,14 +13,26 @@ opts = {
   size: 500,
   query: '*',
   index: 'beat-rails-nomad*',
+  from: 0,
   size: 500,
   begin: '-15M',
+  order: 'desc',
+  verbose: false,
 }
 
+# TODO: Use a real opts parsing library while we're at it. :p
 ARGV.each do |arg|
   case arg
+  when '-v'
+    opts[:verbose] = true
+  when 'asc', 'desc'
+    opts[:order] = arg
+  when /^\d+,\d+$/
+    opts[:from], opts[:size] = arg.split(',')
   when /^\d+$/
     opts[:size] = arg
+  when /^[+-]\d+[wdHMS]:[+-]\d+[wdHMS]$/
+    opts[:begin], opts[:end] = arg.split(':')
   when /^[+-]\d+[wdHMS]$/
     opts[:begin] = arg
   when /^beat-/
@@ -30,10 +42,16 @@ ARGV.each do |arg|
   end
 end
 
+# TODO: convert this to a ruby implementation for better portability. (This won't even work on Linux)
 opts[:begin] = `date -v #{opts[:begin]} +%s000`.chomp
-opts[:end] = `date +%s000`.chomp
+opts[:end] = if opts[:end]
+               `date -v #{opts[:end]} +%s000`.chomp
+             else
+               `date +%s000`.chomp
+             end
 opts[:query] = opts[:query].gsub('"', '\\\\\"') # It just takes 5 backslashes. Simple.
 
-command = %(curl '#{ENV['KIBANA_URL']}/elasticsearch/_msearch?timeout=0&ignore_unavailable=true&preference=1496245045187' -H 'kbn-xsrf-token: #{ENV['KIBANA_TOKEN']}' --data-binary $'{"index":"#{opts[:index]}","ignore_unavailable":true}\\n{"size":#{opts[:size]},"sort":[{"@timestamp":{"order":"desc","unmapped_type":"boolean"}}],"query":{"filtered":{"query":{"query_string":{"query":"#{opts[:query]}","analyze_wildcard":true}},"filter":{"bool":{"must":[{"range":{"@timestamp":{"gte":#{opts[:begin]},"lte":#{opts[:end]}}}}],"must_not":[]}}}},"aggs":{"2":{"date_histogram":{"field":"@timestamp","interval":"3h","pre_zone":"-04:00","pre_zone_adjust_large_interval":true,"min_doc_count":0,"extended_bounds":{"min":1495640398608,"max":1496245198608}}}},"fields":["*","_source"],"script_fields":{},"fielddata_fields":["@timestamp","timereported"]}\\n' --compressed)
-puts 'running:', command
+command = %(curl '#{ENV['KIBANA_URL']}/elasticsearch/_msearch?timeout=0&ignore_unavailable=true&preference=1496245045187' -H 'kbn-xsrf-token: #{ENV['KIBANA_TOKEN']}' --data-binary $'{"index":"#{opts[:index]}","ignore_unavailable":true}\\n{"from":#{opts[:from]},"size":#{opts[:size]},"sort":[{"@timestamp":{"order":"#{opts[:order]}","unmapped_type":"boolean"}}],"query":{"filtered":{"query":{"query_string":{"query":"#{opts[:query]}","analyze_wildcard":true}},"filter":{"bool":{"must":[{"range":{"@timestamp":{"gte":#{opts[:begin]},"lte":#{opts[:end]}}}}],"must_not":[]}}}},"aggs":{"2":{"date_histogram":{"field":"@timestamp","interval":"3h","pre_zone":"-04:00","pre_zone_adjust_large_interval":true,"min_doc_count":0,"extended_bounds":{"min":1495640398608,"max":1496245198608}}}},"fields":["*","_source"],"script_fields":{},"fielddata_fields":["@timestamp","timereported"]}\\n' --compressed)
+
+puts('running:', command) if opts[:verbose]
 system(command)
