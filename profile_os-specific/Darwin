@@ -18,7 +18,7 @@ if [[ -d ~/projects ]]; then
   }
 fi
 
-UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
+UV_DIR=$(cd $HOME/../uservoice &>/dev/null && pwd)
 if [[ -d $UV_DIR ]]; then
   cdu() { # depends on ls_match from https://github.com/jcamenisch/ls_match
     cd $(ls_match -mask="$UV_DIR/%1:$UV_DIR/%1*" -first $1)
