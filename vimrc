@@ -37,7 +37,11 @@ let jshint2_save = 1
 
 " Misc
 set mouse=a
-set clipboard=unnamed
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 set nowrap                                  " I don't always wrap lines...
 set linebreak                               " ...but when I do, I wrap whole words.
 set t_Co=256                                " Support for xterm with 256 colors (gets overriden in .gvimrc)
