@@ -28,6 +28,13 @@ Plug 'elixir-lang/vim-elixir'
 
 call plug#end()
 
+" Go settings
+let g:go_fmt_options = '-s'
+"This is the typical approach to setting up goimports, but it doesn't support
+"the -s flag:
+"let g:go_fmt_command = 'goimports'
+:autocmd BufWritePre *.go :%!goimports
+
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 2
 
