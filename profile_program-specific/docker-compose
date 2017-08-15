@@ -17,11 +17,17 @@ if [[ -d "$UV_DOCKER_DIR" ]]; then
 
   dce() {
     container=$1; shift
-    command=$(alias_content $1); shift
+    command=$(alias_content $1)
+    [[ "$command" =~ "^nocorrect " ]] && command=$1
+    shift
     eval "dc exec $container $command $*"
   }
 
-  safe_alias dceu 'dce uservoice'
+  safe_alias u 'dce uservoice'
+  safe_alias ube 'dce uservoice bundle exec'
+  safe_alias urk 'dce uservoice bundle exec rake'
+  safe_alias url 'dce uservoice bundle exec rails'
+  safe_alias urs 'dce uservoice bundle exec rspec'
   safe_alias dclt 'dc logs -t'
   safe_alias dcp 'dc pull'
 
