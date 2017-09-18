@@ -1,4 +1,7 @@
 safe_alias o ogre
+safe_alias od 'ogre deploy'
 safe_alias oe 'ogre exec'
 
-safe_alias ou "ogre update"
+safe_alias ou "ogre version -update"
+safe_alias ov "ogre version"
+safe_alias ovu "ogre version -update"
