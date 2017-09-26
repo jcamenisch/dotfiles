@@ -3,8 +3,20 @@
 #   That's not too big a deal--most of the time. ;)
 
 # It turns out getting the directory of this file is tricky if you want it to work
-# on Darwin as well as most Unix variants. The following seems to do the trick.
-export XDG_CONFIG_HOME="${0%/*}"
+# on Darwin as well as most Unix variants. Thanks to "Gilles" for the following solution.
+# (See https://unix.stackexchange.com/questions/96203/find-location-of-sourced-shell-script)
+if [ -n "$BASH_SOURCE" ]; then
+  this_script=$BASH_SOURCE
+elif [ -n "$ZSH_VERSION" ]; then
+  setopt function_argzero
+  this_script=$0
+elif eval '[[ -n ${.sh.file} ]]' 2>/dev/null; then
+  eval 'this_script=${.sh.file}'
+else
+  echo 1>&2 "Unsupported shell. Please use bash, zsh or ksh93."
+  exit 2
+fi
+export XDG_CONFIG_HOME="$(dirname $this_script)"
 
 # Don't prepend these if they're already there--sometimes this file may get
 # re-sourced multiple times.
