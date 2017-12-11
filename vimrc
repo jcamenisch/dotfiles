@@ -42,11 +42,21 @@ let g:vim_markdown_new_list_item_indent = 2
 let jshint2_read = 1
 let jshint2_save = 1
 
+" Syntastic settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Misc
 set mouse=a
 if has("mouse_sgr")
   set ttymouse=sgr
-else
+elseif !has('nvim')
   set ttymouse=xterm2
 end
 set nowrap                                  " I don't always wrap lines...
