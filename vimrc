@@ -6,27 +6,46 @@ set nocompatible
 filetype off
 
 call plug#begin(vim_home.'/plugged')
-
-Plug 'kien/ctrlp.vim'
-Plug 'bling/vim-airline'
-Plug 'tpope/vim-cucumber'
-Plug 'tpope/vim-git'
-Plug 'fatih/vim-go'
-Plug 'tpope/vim-haml'
-" Plug 'tpope/vim-markdown'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-vinegar'
-Plug 'jcamenisch/vim-rename3'
+Plug 'kien/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
-Plug 'Shutnik/jshint2.vim'
-Plug 'Valloric/YouCompleteMe'
-" Plug 'scrooloose/syntastic'
-Plug 'elixir-lang/vim-elixir'
 
+Plug 'godlygeek/tabular'
+Plug 'fatih/vim-go'
+Plug 'elixir-lang/vim-elixir'
+Plug 'plasticboy/vim-markdown'
+" Plug 'tpope/vim-markdown'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'w0rp/ale'
+Plug 'Shutnik/jshint2.vim'
+
+Plug 'ngmy/vim-rubocop'
+Plug 'tpope/vim-rails'
+
+" Plugins for TypeScript
+Plug 'HerringtonDarkholme/yats'            " Syntax highlighting
+"Plug 'Quramy/vim-js-pretty-template'      " Syntax highlighting inside template strings
+Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Required by tsuquyomi
+Plug 'Quramy/tsuquyomi'                    " Autocompletion and IDE features
+
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
+
+" Auto-format all the things
+"au BufWrite * :Autoformat
+" More setup: https://github.com/Chiel92/vim-autoformat
+
+" A.L.E. settings https://vimawesome.com/plugin/ale
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\  'go': [
+\    'goimports'
+\  ],
+\}
+
 
 " Go settings
 let g:go_fmt_options = '-s'
