@@ -1,5 +1,29 @@
 safe_alias o ogre
 safe_alias od 'ogre deploy'
+ok() {
+  ogre k8s -n $(git rev-parse --abbrev-ref HEAD 2>&1) $@
+}
+okpod() {
+  ok get pod | pbcopy
+  # Assume any lines that don't match expected patterns must be error messages,
+  # and send them to stderr:
+  pbpaste | awk '!/NAME|[0-9]\/[0-9]/ { print $0 }' >&2
+  # For expected lines, extract the one matching our requested name:
+  pbpaste | awk '/^'$1'-[0-9a-z]+-[0-9a-z]+ / { print $1 }' | cat
+}
+oke() {
+  name=$1; shift
+  ok exec -it $(okpod $name) $@
+}
+okes() {
+  oke $1 sh
+}
+okl() {
+  name=$1; shift
+  container=$1; shift
+  ok logs $@ $(okpod $name) $container
+}
+
 safe_alias oe 'ogre exec'
 
 safe_alias ou "ogre version -update"
