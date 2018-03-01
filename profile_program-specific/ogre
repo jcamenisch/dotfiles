@@ -7,9 +7,20 @@ okpod() {
   ok get pod | pbcopy
   # Assume any lines that don't match expected patterns must be error messages,
   # and send them to stderr:
-  pbpaste | awk '!/NAME|[0-9]\/[0-9]/ { print $0 }' >&2
-  # For expected lines, extract the one matching our requested name:
-  pbpaste | awk '/^'$1'-[0-9a-z]+-[0-9a-z]+ / { print $1 }' | cat
+  for name in $@; do
+    case $name in
+      metroid)  name='metroid-[a-z-]*'  ;;
+      kombucha) name='kombucha-[a-z-]*' ;;
+    esac
+    pbpaste | awk '!/NAME|[0-9]\/[0-9]/ { print $0 }' >&2
+    # For expected lines, extract the one matching our requested name:
+    pbpaste | awk '/^'$name'-[0-9a-z]+-[0-9a-z]+ / { print $1 }' | cat
+  done
+}
+okdp() {
+  for pod in $(okpod $@); do
+    ok delete pod $pod
+  done
 }
 oke() {
   name=$1; shift
