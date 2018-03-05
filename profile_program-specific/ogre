@@ -31,7 +31,10 @@ okes() {
 }
 okl() {
   name=$1; shift
-  container=$1; shift
+  container=$name
+  if [[ -n "$1" ]]; then
+    container=$1; shift
+  fi
   ok logs $@ $(okpod $name) $container
 }
 
