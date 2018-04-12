@@ -1,12 +1,13 @@
 UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
 if [[ -d $UV_DIR ]]; then
-  export UV_RAILS_DIR="$UV_DIR/uservoice"
   export UV_ADMIN_DIR="$UV_DIR/admin"
-  export UV_SIDEBAR_DIR="$UV_DIR/sidebar"
-  export UV_ZENDESK_DIR="$UV_DIR/zendesk"
   export UV_METROID_DIR="$UV_DIR/metroid"
+  export UV_RAILS_DIR="$UV_DIR/uservoice"
+  export UV_SALESFORCE_DIR="$UV_DIR/salesforce-client"
+  export UV_SIDEBAR_DIR="$UV_DIR/sidebar"
   export UV_SILLYPUTTY_DIR="$UV_DIR/sillyputty"
   export UV_SUPERADMIN_DIR="$UV_DIR/superadmin"
+  export UV_ZENDESK_DIR="$UV_DIR/zendesk"
 fi
 
 orc_random_worker() {
