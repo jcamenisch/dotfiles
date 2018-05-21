@@ -1,6 +1,14 @@
+dasherize() {
+  echo $1 | tr '[:upper:]_' '[:lower:]-'
+}
+
+k8s_branch() {
+  dasherize $(git rev-parse --abbrev-ref HEAD 2>&1)
+}
+
 safe_alias o ogre
 ok() {
-  ogre k8s -n $(git rev-parse --abbrev-ref HEAD 2>&1) $@
+  ogre k8s -n $(k8s_branch) $@
 }
 okpod() {
   ok get pod | pbcopy
