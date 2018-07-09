@@ -2,6 +2,7 @@ UV_DIR=$(cd $HOME/../uservoice 2>/dev/null && pwd)
 if [[ -d $UV_DIR ]]; then
   export UV_ADMIN_DIR="$UV_DIR/admin"
   export UV_METROID_DIR="$UV_DIR/metroid"
+  export UV_OKADIN_DIR="$UV_DIR/okadmin"
   export UV_RAILS_DIR="$UV_DIR/uservoice"
   export UV_SALESFORCE_DIR="$UV_DIR/salesforce-client"
   export UV_SIDEBAR_DIR="$UV_DIR/sidebar"
