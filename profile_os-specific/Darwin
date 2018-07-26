@@ -11,6 +11,11 @@ alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres
 # This must be defined somewhere in my zsh profile; I should probably remove it from there.
 safe_unalias o
 
+cdh() { # depends on ls_match from https://github.com/jcamenisch/ls_match
+  cd $(ls_match -mask="$HOME/%1:$HOME/%1*" -first $1)
+  pwd
+}
+
 if [[ -d ~/projects ]]; then
   cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
     cd $(ls_match -mask="$HOME/projects/%1:$HOME/projects/%1*" -first $1)
