@@ -5,3 +5,4 @@ vim/bundle/*
 /keybase
 .bash_history*
 bin/gh-md-toc
+/hub
