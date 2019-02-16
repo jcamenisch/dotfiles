@@ -1,1 +1,3 @@
+safe_alias ucd 'u-cd'
+safe_alias udc 'u docker-compose'
 safe_alias uk 'u k8s'
