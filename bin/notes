@@ -1,0 +1,12 @@
+#!/usr/bin/ruby
+
+aliases = {
+  nil => '$(date +%G-%m-%d.md)',
+  'r' => 'retro.md',
+  'a' => 'architecture.md',
+}
+
+filename = ARGV.first
+filename = aliases[filename] if aliases.key?(filename)
+
+exec '$EDITOR ~/braindump/' + filename

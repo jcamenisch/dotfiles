@@ -7,7 +7,7 @@ wait_for_process () {
   done
 }
 
-alias bd='vi ~/braindump/$(date +%G-%m-%d.md)'
+safe_alias n notes
 alias tabify="awk '/^\|/ { print \$0 }' | sed -e 's/ *| */	/g' | sed -e 's/^       //' | sed -e 's/       \$//'"
 csvify() {
   awk '/^\| / { print $0 }' | sed -e 's/"/""/g' -e 's/ \+|$/"/' -e 's/^| \+/"/' -e 's/ \+| \+/","/g' -e 's/","| \+/","","/g'
