@@ -14,7 +14,6 @@
 # export CASE_SENSITIVE="true"
 
 # Customize to your needs...
-source ${0%/*}/profile
 setopt glob_subst
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
@@ -28,3 +27,5 @@ is_executable rspec && alias rspec='nocorrect rspec'
 
 # Mostly just using the steeef prompt theme, but add this one slight enhancement:
 RPROMPT='%{$reset_color%}%D{%H:%M:%S}'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
