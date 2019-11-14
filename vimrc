@@ -140,10 +140,17 @@ runtime macros/matchit.vim
 " Set wildcard ignore for ctrlp and ack/ag
 set wildignore+=*/tmp/*,vendor/bundle/*,*.so,*.swp,*.zip,*.png,*.jpg,*.jpeg,*.gif,.gitkeep
 
-let g:ctrlp_custom_ignore = {'dir': '\v[\/]vendor\/bundle$' }
+" Mappings for fzf
+nmap <C-p> :FZF<CR>
+xmap <C-p> :FZF<CR>
+imap <C-p> <ESC>:FZF<CR>
 
-" Use powerline font in airline
-let g:airline_powerline_fonts = 1
+" Insert mode completion
+" Why don't these work?
+imap <C-x><C-k> <plug>(fzf-complete-word)
+imap <C-x><C-f> <plug>(fzf-complete-path)
+imap <C-x><C-j> <plug>(fzf-complete-file-ag)
+imap <C-x><C-l> <plug>(fzf-complete-line)
 
 " More textobj-ruby bindings
 let g:textobj_ruby_more_mappings = 1
