@@ -14,6 +14,7 @@ Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 
 Plug 'fatih/vim-go'
+Plug 'ElmCast/elm-vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'plasticboy/vim-markdown'
 " Plug 'tpope/vim-markdown'
@@ -31,6 +32,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'} " Required by tsuquyomi
 Plug 'Quramy/tsuquyomi'                    " Autocompletion and IDE features
 
 Plug 'Chiel92/vim-autoformat'
+Plug 'amadeus/vim-mjml'
 call plug#end()
 
 " Auto-format all the things
@@ -51,8 +53,12 @@ let g:go_fmt_options = '-s'
 "This is the typical approach to setting up goimports, but it doesn't support
 "the -s flag:
 "let g:go_fmt_command = 'goimports'
-:autocmd BufWritePre *.go :%!goimports
+":autocmd BufWritePre *.go :%!goimports
 
+" RuboCop settings
+let g:vimrubocop_config = './.rubocop.yml'
+
+" Markdown settings
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_new_list_item_indent = 2
 
