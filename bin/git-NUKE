@@ -1,0 +1,2 @@
+git push origin :$1
+git branch -D $1

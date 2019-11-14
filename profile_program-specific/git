@@ -28,16 +28,6 @@ gbdated() {
 # List branches in reverse chronological order, showing date, hash, and author name
 safe_alias gbs 'gbdated | sort -r'
 
-gbnuke() {
-  git push origin :$1
-  git branch -d $1
-}
-
-gbNUKE() {
-  git push origin :$1
-  git branch -D $1
-}
-
 gbcleanup() {
   branches=$@
   [[ -z "$branches" ]] && branches=$(git branch | awk '!/\*|master/ { print $1 }')
