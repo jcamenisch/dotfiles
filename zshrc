@@ -7,9 +7,6 @@
 
 [[ -z "$ZDOTDIR" ]] && export ZDOTDIR="${0%/*}"
 
-# Source Prezto.
-[[ -s "$ZDOTDIR/.zprezto/init.zsh" ]] && source "$ZDOTDIR/.zprezto/init.zsh"
-
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
@@ -25,7 +22,34 @@ stty start  stop 
 
 is_executable rspec && alias rspec='nocorrect rspec'
 
-# Mostly just using the steeef prompt theme, but add this one slight enhancement:
-RPROMPT='%{$reset_color%}%D{%H:%M:%S}'
+# autoload -Uz compinit promptinit
+# compinit
+# promptinit
+# prompt bart
+
+# History and history search
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+
+# Git info
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+precmd() {
+  vcs_info
+}
+
+# precmd() {
+#   LEFT='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f ${vcs_info_msg_0_}'
+#   RIGHT="%{$reset_color%}$(date '+%H:%M:%S') "
+#   RIGHTWIDTH=$(($COLUMNS-${#LEFT}))
+#   print $LEFT${(l:$RIGHTWIDTH::.:)RIGHT}
+# }
+PS1='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f ${vcs_info_msg_0_} • %D{%H:%M:%S}
+$ '
+#RPROMPT='%D{%H:%M:%S}'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
