@@ -1,0 +1,8 @@
+ini_section() {
+  file=$1
+  shift
+
+  for section in $@; do
+    cat $file | ruby -ne "line = \$_.chomp; if line == '[$section]'; go = true; elsif line == ''; go = false; elsif go; puts line; end"
+  done
+}
