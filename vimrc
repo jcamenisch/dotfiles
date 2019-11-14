@@ -13,7 +13,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 
-Plug 'godlygeek/tabular'
 Plug 'fatih/vim-go'
 Plug 'elixir-lang/vim-elixir'
 Plug 'plasticboy/vim-markdown'
