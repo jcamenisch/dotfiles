@@ -71,7 +71,3 @@ done
 for script in $(ls $XDG_CONFIG_HOME/profile_misc); do
   . $XDG_CONFIG_HOME/profile_misc/$script
 done
-
-# RVM is just special. It has to load at the very very end.
-[[ -d $HOME/.rvm/bin ]] && PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
