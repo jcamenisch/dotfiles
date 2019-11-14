@@ -7,7 +7,7 @@ filetype off
 
 call plug#begin(vim_home.'/plugged')
 Plug 'tpope/vim-vinegar'
-Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-git'
