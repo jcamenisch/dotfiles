@@ -66,16 +66,6 @@ let g:vim_markdown_new_list_item_indent = 2
 let jshint2_read = 1
 let jshint2_save = 1
 
-" Syntastic settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " Misc
 set mouse=a
 if has("mouse_sgr")
@@ -173,22 +163,19 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 
 
-nnoremap <C-l> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
-inoremap <C-l> <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
-inoremap <C-s> <ESC>:w<CR>a
-map <C-v> "*P
+let mapleader = " "
+nmap <Leader>g :Ggrep
+
+map <C-l> "=strftime("%a %m/%d/%Y %H:%M  ")<CR>Pa
+imap <C-l> <C-R>=strftime("%a %m/%d/%Y %H:%M  ")<CR>
+map <C-s><C-s> :w<CR>
+imap <C-s> <ESC>:w<CR>a
 imap <C-v> <ESC>"*P
-map <C-q><C-q> :q!<CR>
-imap <C-q><C-q> <ESC>:q!<CR>
-map <C-q> :q<CR>
-imap <C-q> <ESC>:q<CR>
-map <C-x> :x<CR>
-imap <C-x> <ESC>:x<CR>
 
 imap jj <Esc>
 
 if has("gui_macvim")
-    let macvim_hig_shift_movement = 1
+  let macvim_hig_shift_movement = 1
 endif
 
 " This stuff doesn't work. I don't know why.
@@ -202,7 +189,7 @@ else
 endif
 
 if has("gui_macvim")
-    let macvim_hig_shift_movement = 1
+  let macvim_hig_shift_movement = 1
 endif
 
 " Splits
@@ -212,13 +199,13 @@ set winminheight=0
 
 " Make pasting work without indentation in terminal
 "if &term =~ "xterm.*"
-    "let &t_ti = &t_ti . "\e[?2004h"
-    "let &t_te = "\e[?2004l" . &t_te
-    "function XTermPasteBegin(ret)
-        "set pastetoggle=<Esc>[201~
-        "set paste
-        "return a:ret
-    "endfunction
-    "map <expr> <Esc>[200~ XTermPasteBegin("i")
-    "imap <expr> <Esc>[200~ XTermPasteBegin("")
+"let &t_ti = &t_ti . "\e[?2004h"
+"let &t_te = "\e[?2004l" . &t_te
+"function XTermPasteBegin(ret)
+"set pastetoggle=<Esc>[201~
+"set paste
+"return a:ret
+"endfunction
+"map <expr> <Esc>[200~ XTermPasteBegin("i")
+"imap <expr> <Esc>[200~ XTermPasteBegin("")
 "endif
