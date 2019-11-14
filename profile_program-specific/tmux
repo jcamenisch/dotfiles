@@ -1,1 +1,6 @@
 alias tmux="tmux -f $(dirname $(dirname ${BASH_SOURCE:-${0:-$_}}))/tmux.conf"
+do_if_attached() {
+  if [[ -z "$TMUX" ]] || [[ "1" == $(tmux ls -F '#{session_attached} #{session_name}' | awk '$2 == "'$(tmux display -p '#{session_name}')'" { print $1 }') ]]; then
+    $@
+  fi
+}

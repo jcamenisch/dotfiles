@@ -1,0 +1,7 @@
+watch_if_attached() {
+  if [[ -z "$TMUX" ]]; then
+    watch $@
+  else
+    watch 'do_if_attached '$@
+  fi
+}
