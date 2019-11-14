@@ -1,3 +1,8 @@
+# To use a secret directory of profile overrides, set $dotsecrets before calling this script.
+# If it's not set, we populate it with a nonsense value to avoid inadvertent matches when
+# doing file comparisons.
+[[ -n "$dotsecrets" ]] || export dotsecrets=disable-dotsecrets
+
 # Note: this script, along with every script it calls,
 #   should be written to run from bash or zsh
 #   That's not too big a deal--most of the time. ;)
@@ -30,6 +35,9 @@ for script in $(ls $XDG_CONFIG_HOME/profile_helpers); do
   . $XDG_CONFIG_HOME/profile_helpers/$script
 done
 
+# general secret stuff
+[[ -f $dotsecrets/profile ]] && . $dotsecrets/profile
+
 
 # Machine-specific stuff
 #
@@ -39,9 +47,11 @@ done
 # Use ~/.profile for sensitive settings that should not be published.
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_machine-specific/$computername ]] && . $XDG_CONFIG_HOME/profile_machine-specific/$computername
+[[ -f $dotsecrets/profile_machine-specific/$computername ]] && . $dotsecrets/profile_machine-specific/$computername
 
 # OS-specific Stuff
 [[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
+[[ -f $dotsecrets/profile_os-specific/$(uname) ]] && . $dotsecrets/profile_os-specific/$(uname)
 
 # Program-specific stuff
 #
