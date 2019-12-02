@@ -12,16 +12,17 @@ Installation
 1. Copy the repo:
 
    ```sh
-   git clone https://github.com/jcamenisch/dotfiles.git ~/.jcamenisch
+   cd $HOME
+   git clone https://github.com/jcamenisch/dotfiles.git
    ```
 
 2. (Optional) To permanently install, call rc files from local one(s):
 
    ```sh
-   echo '. $HOME/.jcamenisch/profile' >> ~/.profile
-   echo '. $HOME/.jcamenisch/bash_profile' >> ~/.bash_profile
-   echo '. $HOME/.jcamenisch/bashrc' >> ~/.bashrc
-   echo '. $HOME/.jcamenisch/zshrc' >> ~/.zshrc
+   echo '. $HOME/dotfiles/profile' >> ~/.profile
+   echo '. $HOME/dotfiles/bash_profile' >> ~/.bash_profile
+   echo '. $HOME/dotfiles/bashrc' >> ~/.bashrc
+   echo '. $HOME/dotfiles/zshrc' >> ~/.zshrc
    ```
 
 Manual invocation
@@ -30,13 +31,13 @@ Manual invocation
 After the repo is in place, use dotfiles in zsh (or bash as fallback) with
 
 ```sh
-~/.jcamenisch/shell
+~/dotfiles/shell
 ```
 
 To exit immediately after session is closed (avoid need to exit twice), call
 
 ```sh
-~/.jcamenisch/shexit
+~/dotfiles/shexit
 ```
 
 One-off use, with no files left behind
@@ -45,9 +46,9 @@ One-off use, with no files left behind
 To avoid touching someone else's precious profile, but still use these dotfiles while you're there, just run
 
 ```
-git clone https://github.com/jcamenisch/dotfiles.git ~/.jcamenisch && ~/.jcamenisch/shexit --clean
+git clone https://github.com/jcamenisch/dotfiles.git ~/dotfiles && ~/dotfiles/shexit --clean
 ```
 
-This will create the ~/.jcamenisch directory, but remove it completely when you exit the session. It will
+This will create the ~/dotfiles directory, but remove it completely when you exit the session. It will
 also set `PROFILEMODE_CLEAN=1` in the shell session, to inform any apps that may want to skip setup steps
 in this mode. Vim responds to this flag by not taking time to install any plugins.
