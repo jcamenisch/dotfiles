@@ -13,7 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 
-Plug 'fatih/vim-go'
+" Plug 'fatih/vim-go'
 Plug 'ElmCast/elm-vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'plasticboy/vim-markdown'
@@ -41,15 +41,15 @@ call plug#end()
 
 " A.L.E. settings https://vimawesome.com/plugin/ale
 let g:ale_fix_on_save = 1
-let g:ale_fixers = {
-\  'go': [
-\    'goimports'
-\  ],
-\}
+" let g:ale_fixers = {
+" \  'go': [
+" \    'goimports'
+" \  ],
+" \}
 
 
 " Go settings
-let g:go_fmt_options = '-s'
+" let g:go_fmt_options = '-s'
 "This is the typical approach to setting up goimports, but it doesn't support
 "the -s flag:
 "let g:go_fmt_command = 'goimports'
