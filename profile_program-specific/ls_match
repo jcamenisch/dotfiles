@@ -1,14 +1,22 @@
+# To enable these functions, install ls_match from https://github.com/jcamenisch/ls_match
 c() {
   cd $(ls_match -mask="%1*" -first $1)
 }
 
-cdh() { # depends on ls_match from https://github.com/jcamenisch/ls_match
+cdh() {
   cd $(ls_match -mask="$HOME/%1:$HOME/%1*" -first $1)
   pwd
 }
 
+if [[ -d ~/src ]]; then
+  cds() {
+    cd $(ls_match -mask="$HOME/src/%1:$HOME/src/%1*" -first $1)
+    pwd
+  }
+fi
+
 if [[ -d ~/projects ]]; then
-  cdp() { # depends on ls_match from https://github.com/jcamenisch/ls_match
+  cdp() {
     cd $(ls_match -mask="$HOME/projects/%1:$HOME/projects/%1*" -first $1)
     pwd
   }
