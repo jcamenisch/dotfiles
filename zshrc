@@ -35,20 +35,15 @@ zle -N down-line-or-beginning-search
 [[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
 [[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
-# Git info
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-  vcs_info
-}
-
 # precmd() {
 #   LEFT='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f ${vcs_info_msg_0_}'
 #   RIGHT="%{$reset_color%}$(date '+%H:%M:%S') "
 #   RIGHTWIDTH=$(($COLUMNS-${#LEFT}))
 #   print $LEFT${(l:$RIGHTWIDTH::.:)RIGHT}
 # }
-PS1='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f ${vcs_info_msg_0_} • %D{%H:%M:%S}
+autoload -U colors && colors
+setopt prompt_subst
+PS1='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f $(git_summary) · %D{%H:%M:%S}
 $ '
 #RPROMPT='%D{%H:%M:%S}'
 
