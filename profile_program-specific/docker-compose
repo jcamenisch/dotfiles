@@ -6,4 +6,5 @@ dbash() {
 
 safe_alias dbundle 'docker-compose exec rails bundle'
 safe_alias drails 'docker-compose exec rails bundle exec rails'
+safe_alias drake 'docker-compose exec rails bundle exec rake'
 safe_alias drspec 'docker-compose exec rails bundle exec rspec'
