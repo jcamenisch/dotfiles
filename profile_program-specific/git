@@ -68,6 +68,8 @@ gd() {
 }
 
 safe_alias gdc  "gd --cached"
+safe_alias gdcw   "gd --cached --ignore-all-space"
+safe_alias gdw   "gd --ignore-all-space"
 safe_alias gdm  "gd master"
 gdno() {
   gd --name-only --relative $* | uniq
@@ -94,29 +96,22 @@ is_executable gdmb || gdmb() { # Diff a branch against its merge-base with anoth
   git diff $base $ref2 $*
 }
 
-safe_alias gdw   "git diff --ignore-all-space"
 safe_alias gg    "git grep"
 safe_alias ggno  "git grep --name-only"
 safe_alias gh    "git help"
 safe_alias gl    'git log --format="%C(auto)%h %C(green)%aN%Creset %C(blue)<%ae>%n%s %C(auto)%d"'
 safe_alias gl1   "gl -1"
+safe_alias gldh  "gl develop..HEAD"
+safe_alias glhd  "gl HEAD..develop"
 safe_alias glhm  "gl HEAD..master"
-safe_alias glhmo "gl HEAD..origin/master"
 safe_alias glmh  "gl master..HEAD"
-safe_alias glomh "gl origin/master..HEAD"
-safe_alias gloh  "gl origin/master..HEAD"
-safe_alias glho  "gl HEAD..origin/master"
 safe_alias gls   "git ls-files"
 safe_alias glsg  "git ls-files | grep"
 safe_alias gm    "git merge"
 safe_alias gpl   "git pull"
 safe_alias gplr  "git pull --rebase"
 safe_alias gps   "git push"
-safe_alias gpso  "git push origin"
 safe_alias gpsu  "git push -u"
-safe_alias gpshm "git push heroku master"
-safe_alias gpspm "git push production master"
-safe_alias gpssm "git push stage master"
 
 gr()  {
   opts=$(get_dashful $@)
