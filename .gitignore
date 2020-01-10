@@ -4,5 +4,8 @@ vim/bundle/*
 /configstore
 /keybase
 .bash_history*
+.zsh_history*
 bin/gh-md-toc
 /hub
+.gitconfig
+git/config
