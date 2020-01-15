@@ -12,6 +12,10 @@
 
 # Customize to your needs...
 setopt glob_subst
+
+setopt inc_append_history
+setopt share_history
+
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^R' history-incremental-pattern-search-backward
