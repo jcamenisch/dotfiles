@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 
 aliases = {
-  nil => '$(date +%G-%m-%d.md)',
+  nil => '$(date +%G-%m-%d).md',
   'r' => 'retro.md',
   'a' => 'architecture.md',
   't' => 'todo.md',
@@ -9,5 +9,6 @@ aliases = {
 
 filename = ARGV.first
 filename = aliases[filename] if aliases.key?(filename)
+filename << '.md' unless filename.include?('.')
 
-exec '$EDITOR ~/braindump/' + filename.sub(/(\.md)?$/, '.md')
+exec '$EDITOR ~/braindump/' + filename
