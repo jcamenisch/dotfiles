@@ -51,4 +51,9 @@ PS1='%F{magenta}%n%f at %F{yellow}%m%f in %F{green}%~%f $(git_summary) · %D{%H:
 $ '
 #RPROMPT='%D{%H:%M:%S}'
 
+if type brew &>/dev/null; then
+  autoload -Uz compinit
+  compinit
+fi
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
