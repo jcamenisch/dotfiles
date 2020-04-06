@@ -1,0 +1,20 @@
+safe_alias s3 'aws s3'
+
+s3cp() {
+  local file=$1; shift
+
+  aws s3 $* cp s3://$file /tmp/ >2
+  echo /tmp/$(basename $file)
+}
+
+s3cat() {
+  cat $(s3cp $*)
+}
+
+s3less() {
+  less $(s3cp $*)
+}
+
+s3vi() {
+  vi $(s3cp $*)
+}
