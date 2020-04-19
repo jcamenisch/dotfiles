@@ -1,8 +1,7 @@
 #!/usr/bin/ruby
 
-# cp_radiant.rb
-
 require 'fileutils'
+require 'uri'
 
 def process_dir(dir_path)
   Dir.chdir(dir_path) do
@@ -10,7 +9,7 @@ def process_dir(dir_path)
     `git add .`
     `git commit -m 'initial clone'`
 
-    (all=Dir["*"]).each do |file_name|
+    (all = Dir["*"]).each do |file_name|
       if File.directory?(file_name)
         if all.include?(source_index="#{file_name}.html")
           FileUtils.cp("#{source_index}", (dest_index=File.join(file_name, "index.html")))
@@ -30,14 +29,14 @@ if ARGV.empty?
   exit 1
 end
 
-ARGV.each do |url|
-  puts "FETCHING SITE... #{url}"
-  `wget --adjust-extension --mirror --page-requisites --convert-links #{url}`
+url = URI.parse(ARGV.first)
 
-  puts "\n\n"
+puts "FETCHING SITE... #{url}"
+domains_arg = "--domains=#{[url.hostname, *ARGV[1..-1]].join(',')}"
+follow_tags_arg = "--follow-tags=a"
+`wget --adjust-extension --mirror --page-requisites --span-hosts #{domains_arg} --convert-links #{url}`
 
-  result_dir = File.join(Dir.pwd, url.gsub(/http:\/\//,''))
+puts "\n\n"
 
-  puts "POST PROCESSING #{result_dir}"
-  process_dir(result_dir)
-end
+puts "POST PROCESSING #{url.hostname}"
+process_dir(url.hostname)
