@@ -9,6 +9,6 @@ aliases = {
 
 filename = ARGV.first
 filename = aliases[filename] if aliases.key?(filename)
-filename << '.md' unless filename.include?('.')
+filename += '.md' unless filename.include?('.')
 
 exec '$EDITOR ~/braindump/' + filename
