@@ -27,6 +27,7 @@ export XDG_CONFIG_HOME="$(dirname $this_script)"
 # re-sourced multiple times.
 [[ "$PATH" == "*$XDG_CONFIG_HOME/bin:*" ]] || export PATH="$XDG_CONFIG_HOME/bin:$PATH"
 [[ "$PATH" == "*$HOME/bin:*" ]] || export PATH="$HOME/bin:$PATH"
+[[ "$PATH" == "*$dotsecrets/bin:*" ]] || [[ -d "$dotsecrets/bin" ]] && export PATH="$dotsecrets/bin:$PATH"
 
 export INPUTRC=$XDG_CONFIG_HOME/inputrc
 
