@@ -33,6 +33,8 @@ Plug 'Quramy/tsuquyomi'                    " Autocompletion and IDE features
 
 Plug 'Chiel92/vim-autoformat'
 Plug 'amadeus/vim-mjml'
+Plug 'nvie/vim-flake8'
+Plug 'psf/black'
 call plug#end()
 
 " Auto-format all the things
