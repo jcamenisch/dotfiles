@@ -35,6 +35,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'amadeus/vim-mjml'
 Plug 'nvie/vim-flake8'
 Plug 'psf/black'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 " Auto-format all the things
@@ -67,6 +68,10 @@ let g:vim_markdown_new_list_item_indent = 2
 " JSHint settings
 let jshint2_read = 1
 let jshint2_save = 1
+
+" Terraform settings
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " Misc
 set mouse=a
