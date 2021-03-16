@@ -33,8 +33,6 @@ Plug 'Quramy/tsuquyomi'                    " Autocompletion and IDE features
 
 Plug 'Chiel92/vim-autoformat'
 Plug 'amadeus/vim-mjml'
-Plug 'nvie/vim-flake8'
-Plug 'psf/black'
 Plug 'hashivim/vim-terraform'
 call plug#end()
 
@@ -44,6 +42,8 @@ call plug#end()
 
 " A.L.E. settings https://vimawesome.com/plugin/ale
 let g:ale_fix_on_save = 1
+let g:ale_linters = { '*': [], 'python': ['flake8']}
+let g:ale_fixers = { '*': [], 'python': ['black']}
 " let g:ale_fixers = {
 " \  'go': [
 " \    'goimports'
