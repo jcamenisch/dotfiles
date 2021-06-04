@@ -35,10 +35,10 @@ safe_alias gbs 'gbdated | sort -r'
 
 gbcleanup() {
   branches=$@
-  [[ -z "$branches" ]] && branches=$(git branch | awk '!/\*|master/ { print $1 }')
+  [[ -z "$branches" ]] && branches=$(git branch | awk '!/\*|main/ { print $1 }')
 
   for b in $(echo $branches); do
-    if [[ -z $(git log master..$b 2>/dev/null) ]]; then
+    if [[ -z $(git log main..$b 2>/dev/null) ]]; then
       gbnuke $b
     fi
   done
@@ -78,7 +78,7 @@ gd() {
 safe_alias gdc  "gd --cached"
 safe_alias gdcw   "gd --cached --ignore-all-space"
 safe_alias gdw   "gd --ignore-all-space"
-safe_alias gdm  "gd master"
+safe_alias gdm  "gd main"
 gdno() {
   gd --name-only --relative $* | uniq
 }
@@ -94,7 +94,7 @@ is_executable gdmb || gdmb() { # Diff a branch against its merge-base with anoth
     fi
   fi
 
-  [[ -z "$ref1" ]] && ref1=master
+  [[ -z "$ref1" ]] && ref1=main
   [[ -z "$ref2" ]] && ref2=HEAD
 
   echo "git merge-base $ref1 $ref2"
@@ -117,8 +117,8 @@ glhx() {
   gl HEAD..$1
 }
 safe_alias glhd  "gl HEAD..develop"
-safe_alias glhm  "gl HEAD..master"
-safe_alias glmh  "gl master..HEAD"
+safe_alias glhm  "gl HEAD..main"
+safe_alias glmh  "gl main..HEAD"
 safe_alias gls   "git ls-files"
 safe_alias glsg  "git ls-files | grep"
 safe_alias gm    "git merge"
@@ -147,7 +147,7 @@ grecent() {
   git reflog | grep 'checkout: moving from' | cut -d' ' -f6 | awk '!_[$0]++' | head -$line_count
 }
 
-safe_alias grm   "git rebase master"
+safe_alias grm   "git rebase main"
 
 grp() { # git rev-parse (plus)
   switches=(`get_dashful $@`)
