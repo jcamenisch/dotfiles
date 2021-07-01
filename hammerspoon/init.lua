@@ -48,10 +48,26 @@ hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'Left', switchScreen('toWest'))
 hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'Up', switchScreen('toNorth'))
 hs.hotkey.bind({'cmd', 'alt', 'ctrl'}, 'Down', switchScreen('toSouth'))
 
+-- -------------------
+-- Personal automation
+-- -------------------
 
--- -----------
--- Bookkeeping
--- -----------
+-- Close Slack every evening to prep for a quiet morning the next day
+hs.timer.doAt("18:30", "1d", function ()
+  local app = hs.application.get("Slack")
+  if app == nil then return end
+  app:kill()
+end)
+
+-- Open Slack again to catch up on what's happening daily
+hs.timer.doAt("11:00", "1d", function ()
+  hs.application.open("Slack")
+end)
+
+
+-- ----------------
+-- Meta Bookkeeping
+-- ----------------
 
 function reloadConfig(files)
   doReload = false
