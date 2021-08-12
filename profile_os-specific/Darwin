@@ -27,3 +27,7 @@ if [ -n "$BASH_VERSION" ]; then
 elif [ -n "$ZSH_VERSION" ]; then
   source $XDG_CONFIG_HOME/.iterm2_shell_integration.zsh
 fi
+
+gateway() {
+  route get 0.0.0.0 | awk '/gateway:/ { print $2 }'
+}
