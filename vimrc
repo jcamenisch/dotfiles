@@ -21,6 +21,10 @@ Plug 'plasticboy/vim-markdown'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'w0rp/ale'
 Plug 'Shutnik/jshint2.vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/0.x'
+  \ }
 
 Plug 'ngmy/vim-rubocop'
 Plug 'tpope/vim-rails'
