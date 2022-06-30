@@ -1,1 +1,0 @@
-[[ -f ~/mongo/config ]] && alias mongo_start="mongod -f ~/mongo/config"
