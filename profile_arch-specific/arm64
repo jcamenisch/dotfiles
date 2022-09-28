@@ -1,0 +1,7 @@
+# This runs version of brew installed via
+# arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+
+# This runs version of brew installed via
+# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+alias abrew=/opt/homebrew/bin/brew

@@ -54,6 +54,11 @@ computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
 [[ -f "$dotsecrets/profile_os-specific/$(uname)" ]] && . "$dotsecrets/profile_os-specific/$(uname)"
 
+# Architecture-specific Stuff
+arch=$(uname -m)
+[[ -f $XDG_CONFIG_HOME/profile_arch-specific/$arch ]] && . $XDG_CONFIG_HOME/profile_arch-specific/$arch
+[[ -f "$dotsecrets/profile_arch-specific/$arch" ]] && . "$dotsecrets/profile_arch-specific/$arch"
+
 # Program-specific stuff
 #
 # Load any file in the ./profile_program-specific/ directory, only if it's name matches a command
