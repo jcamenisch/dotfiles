@@ -1,0 +1,11 @@
+cod() {
+  [ $# -gt 0 ] && return `code $*`
+
+  git_dir=$(git rev-parse --show-toplevel)
+  workspace_name=$(basename $git_dir)
+
+  [ -f "$git_dir/$workspace_name.code-workspace" ] && return `code "$git_dir/$workspace_name.code-workspace"`
+  [ -f "$git_dir/../$workspace_name.code-workspace" ] && return `code "$git_dir/../$workspace_name.code-workspace"`
+
+  code
+}
