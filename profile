@@ -46,7 +46,7 @@ done
 # as it will only be loaded on the machine that matches the filename.
 #
 # Use ~/.profile for sensitive settings that should not be published.
-computername=$(uname -n | sed -e 's/\..*$//')
+computername=$(uname -n | cut -f1 -d.)
 [[ -f $XDG_CONFIG_HOME/profile_machine-specific/$computername ]] && . $XDG_CONFIG_HOME/profile_machine-specific/$computername
 [[ -f "$dotsecrets/profile_machine-specific/$computername" ]] && . "$dotsecrets/profile_machine-specific/$computername"
 
