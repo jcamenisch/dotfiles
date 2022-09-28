@@ -1,0 +1,11 @@
+safe_alias k kubectl
+kc() {
+  kubectl config use-context $1
+}
+kn() {
+  kubectl config set-context --current --namespace=$1
+}
+kcn() {
+  kc $1
+  kn $2
+}
