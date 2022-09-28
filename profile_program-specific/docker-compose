@@ -4,11 +4,11 @@ d() (
 )
 
 dbash() {
-  docker-compose exec $1 bash
+  docker-compose run --rm $@ bash
 }
 
-safe_alias dbundle 'docker-compose run rails bundle'
-safe_alias dpsql 'docker-compose run postgres psql --username postgres $(basename $PWD)'
-safe_alias drails 'docker-compose run rails bundle exec rails'
-safe_alias drake 'docker-compose run rails bundle exec rake'
-safe_alias drspec 'docker-compose run rails bundle exec rspec'
+safe_alias dbundle 'docker-compose run --rm rails bundle'
+safe_alias dpsql 'docker-compose run --rm postgres psql --username postgres $(basename $PWD)'
+safe_alias drails 'docker-compose run --rm rails bundle exec rails'
+safe_alias drake 'docker-compose run --rm rails bundle exec rake'
+safe_alias drspec 'docker-compose run --rm rails bundle exec rspec'
