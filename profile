@@ -37,7 +37,7 @@ for script in $(ls $XDG_CONFIG_HOME/profile_helpers); do
 done
 
 # general secret stuff
-[[ -f $dotsecrets/profile ]] && . $dotsecrets/profile
+[[ -f "$dotsecrets/profile" ]] && . "$dotsecrets/profile"
 
 
 # Machine-specific stuff
@@ -48,11 +48,11 @@ done
 # Use ~/.profile for sensitive settings that should not be published.
 computername=$(uname -n | sed -e 's/\..*$//')
 [[ -f $XDG_CONFIG_HOME/profile_machine-specific/$computername ]] && . $XDG_CONFIG_HOME/profile_machine-specific/$computername
-[[ -f $dotsecrets/profile_machine-specific/$computername ]] && . $dotsecrets/profile_machine-specific/$computername
+[[ -f "$dotsecrets/profile_machine-specific/$computername" ]] && . "$dotsecrets/profile_machine-specific/$computername"
 
 # OS-specific Stuff
 [[ -f $XDG_CONFIG_HOME/profile_os-specific/$(uname) ]] && . $XDG_CONFIG_HOME/profile_os-specific/$(uname)
-[[ -f $dotsecrets/profile_os-specific/$(uname) ]] && . $dotsecrets/profile_os-specific/$(uname)
+[[ -f "$dotsecrets/profile_os-specific/$(uname)" ]] && . "$dotsecrets/profile_os-specific/$(uname)"
 
 # Program-specific stuff
 #
@@ -64,7 +64,7 @@ for file in $(ls $XDG_CONFIG_HOME/profile_program-specific); do
   # First cut off any prefixes that end in dot (.). This is just a hack to control load order of scripts.
   # I.e., to make the 'gem' script load before the 'bundle' script, we can rename 'gem' to '0.gem'--
   # or any prefix that makes it sort alphabetically before 'bundle'
-  program=$(echo $file | rev | cut -d'.' -f1 | rev)
+  program=$(echo $file | awk -F'.' '{ print $NF }')
   is_executable $program && . $XDG_CONFIG_HOME/profile_program-specific/$file
 done
 
