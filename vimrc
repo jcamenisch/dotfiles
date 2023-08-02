@@ -2,6 +2,7 @@ let vim_home=$XDG_CONFIG_HOME."/vim"
 let bundle_home=vim_home."/bundle"
 let &rtp=vim_home.",".&rtp.",".bundle_home."/Vundle.vim"
 
+colorscheme default
 set nocompatible
 filetype off
 
@@ -137,7 +138,6 @@ set formatoptions-=or
 " Colorscheme
 syntax enable
 highlight SignColumn ctermbg=8
-colorscheme delek
 highlight LineNr term=bold ctermfg=2 ctermbg=0
 
 
