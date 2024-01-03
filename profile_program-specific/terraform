@@ -1,3 +1,16 @@
+# This defines a `tf` shell function that decorates the `terraform` executable
+# with support for a default variables file. The file must be located in $HOME/.tfvars
+#
+# Usage examples                            # -> translations
+#
+#   tf                                      # -> terraform
+#   tf plan                                 # -> terraform plan -var-file=$HOME/.tfvars
+#   tf refresh                              # -> terraform refresh -var-file=$HOME/.tfvars
+#   tf apply -target='aws_instance.app[2]'  # -> terraform apply -var-file=$HOME/.tfvars -target='aws_instance.app[2]'
+#
+# If there is no file in $HOME/.tfvars, the all invocations of `tf` will pass through
+# directly to `terraform`
+
 if [ -f $HOME/.tfvars ]; then
   tf() {
     subcommand=$1; shift
