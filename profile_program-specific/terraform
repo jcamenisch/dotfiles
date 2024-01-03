@@ -1,0 +1,18 @@
+if [ -f $HOME/.tfvars ]; then
+  tf() {
+    subcommand=$1; shift
+
+    case $subcommand in
+      apply | console | destroy | import | plan | refresh)
+        terraform $subcommand -var-file=$HOME/.tfvars $*
+        ;;
+      *)
+        terraform $subcommand $*
+        ;;
+    esac
+  }
+else
+  tf() {
+    terraform $*
+  }
+fi
