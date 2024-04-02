@@ -5,6 +5,7 @@ vim/bundle/*
 /keybase
 .bash_history*
 .zsh_history*
+.zcompdump
 bin/gh-md-toc
 /hub
 .gitconfig
