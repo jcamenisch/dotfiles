@@ -1,0 +1,8 @@
+python 3.8.8 2.7.18
+postgres 13.1
+elixir 1.12.2-otp-24
+erlang 24.0.5
+ruby 2.7.3
+golang 1.22.1
+ripgrep 14.1.0
+fzf 0.49.0
