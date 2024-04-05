@@ -19,6 +19,17 @@ return {
       }
     },
     {
+      "mfussenegger/nvim-dap",
+    },
+    {
+      "leoluz/nvim-dap-go",
+      ft = "go",
+      dependencies = "mfussenegger/nvim-dap",
+      config = function(_, opts)
+        require("dap-go").setup(opts)
+      end,
+    },
+    {
       "neovim/nvim-lspconfig",
       config = function()
         require("nvchad.configs.lspconfig").defaults()
@@ -30,6 +41,20 @@ return {
       ft = "go",
       opts = function()
         return require "configs.null-ls"
+      end,
+    },
+    {
+      "olexsmir/gopher.nvim",
+      ft = "go",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      config = function(_, opts)
+        require("gopher").setup(opts)
+      end,
+      build = function()
+        vim.cmd [[silent! GoInstallDeps]]
       end,
     },
   },
