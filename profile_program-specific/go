@@ -1,4 +1,6 @@
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
+export GOARCH=$(uname -m)
+export GOOS=$(uname -s | tr '[:upper:]' '[:lower:]')
 export PATH=$PATH:$GOBIN
 export ASDF_GOLANG_MOD_VERSION_ENABLED=false
