@@ -170,6 +170,11 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+vim.fn.sign_define('DiagnosticSignError', { text = '󰅙', texthl = '', linehl = 'NotifyERRORIcon', numhl = '' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'NotifyWARNIcon', linehl = '', numhl = '' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'NotifyINFOIcon', linehl = '', numhl = '' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '󰌵', texthl = 'NotifyINFOIcon', linehl = '', numhl = '' })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -236,6 +241,71 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   'github/copilot.vim', -- Github Copilot
+
+  -- DAP interface for golang
+  {
+    'leoluz/nvim-dap-go',
+    opts = {},
+    dependencies = {
+      -- Debug Adapter Protocol for nvim
+      {
+        'mfussenegger/nvim-dap',
+        config = function() -- This is the function that runs, AFTER loading
+          vim.keymap.set('n', '<leader>3', require('dap').continue)
+          vim.keymap.set('n', '<Leader>b', require('dap').toggle_breakpoint)
+          vim.keymap.set('n', '<leader>2', require('dap').step_over)
+          vim.keymap.set('n', '<leader>6', require('dap').step_into)
+          vim.keymap.set('n', '<leader>8', require('dap').step_out)
+          --[[
+          vim.keymap.set('n', '<Leader>lp', function()
+            require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+          end)
+          vim.keymap.set('n', '<Leader>dr', require('dap').repl.open)
+          vim.keymap.set('n', '<Leader>dl', require('dap').run_last)
+          vim.keymap.set({'n', 'v'}, '<Leader>dh', require('require('dap').ui.widgets').hover)
+          vim.keymap.set({'n', 'v'}, '<Leader>dp', require('dap.ui.widgets').preview)
+          vim.keymap.set('n', '<Leader>df', function()
+            local widgets = require('require('dap').ui.widgets')
+            widgets.centered_float(widgets.frames)
+          end)
+          vim.keymap.set('n', '<Leader>ds', function()
+            local widgets = require('require('dap').ui.widgets')
+            widgets.centered_float(widgets.scopes)
+          end)
+          ]]
+        end,
+      },
+      -- Debug UI management
+      {
+        'rcarriga/nvim-dap-ui',
+        dependencies = {
+          'nvim-neotest/nvim-nio',
+        },
+
+        config = function() -- This is the function that runs, AFTER loading
+          local dap = require 'dap'
+          local dapui = require 'dapui'
+
+          vim.fn.sign_define('DapBreakpoint', { text = '󰏃', texthl = 'NotifyWARNIcon', linehl = '', numhl = '' })
+          vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'NotifyWARNIcon', linehl = '', numhl = '' })
+          vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'NotifyINFOIcon', linehl = '', numhl = '' })
+
+          dap.listeners.before.attach.dapui_config = function()
+            dapui.open()
+          end
+          dap.listeners.before.launch.dapui_config = function()
+            dapui.open()
+          end
+          dap.listeners.before.event_terminated.dapui_config = function()
+            dapui.close()
+          end
+          dap.listeners.before.event_exited.dapui_config = function()
+            dapui.close()
+          end
+        end,
+      },
+    },
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
