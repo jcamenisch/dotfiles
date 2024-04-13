@@ -1,8 +1,16 @@
-python 3.8.8 2.7.18
+python 3.12.2
 postgres 13.1
 elixir 1.12.2-otp-24
 erlang 24.0.5
-ruby 2.7.3
-golang 1.22.1
+ruby 3.2.3
+golang 1.22.2
 ripgrep 14.1.0
 fzf 0.49.0
+nodejs 21.7.2
+git 2.44.0
+kubectl 1.29.3
+kubectx 0.9.5
+awscli 2.15.37
+eksctl 0.175.0
+helm 3.14.4
+terraform 1.4.6
