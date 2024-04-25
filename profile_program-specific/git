@@ -106,7 +106,6 @@ is_executable gdmb || gdmb() { # Diff a branch against its merge-base with anoth
 
 safe_alias gg    "git grep"
 safe_alias ggno  "git grep --name-only"
-safe_alias gh    "git help"
 safe_alias gl    'git log --format="%C(auto)%h %C(green)%aN%Creset %C(blue)<%ae>%n%s %C(auto)%d"'
 safe_alias gl1   "gl -1"
 safe_alias gldh  "gl develop..HEAD"
@@ -200,7 +199,7 @@ is_executable gg_replace || gg_replace() {
 
     ORIG_GLOBIGNORE=$GLOBIGNORE
     GLOBIGNORE=*.*
-    
+
     if [[ "$#" = "0" ]]; then
       set -- ' ' $@
     fi
