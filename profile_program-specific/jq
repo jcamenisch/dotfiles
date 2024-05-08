@@ -69,6 +69,10 @@ ucurl() {
 
     token=$(utoken $subdomain)
   fi
-  
+
   curl -H "Authorization: Bearer $token" $@
+}
+
+jwtd() {
+  jq -R 'split(".") |.[0:2] | map(@base64d) | map(fromjson)'
 }
