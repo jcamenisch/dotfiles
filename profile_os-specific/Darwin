@@ -2,10 +2,7 @@
   . `brew --prefix`/etc/bash_completion
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 
-alias lk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend ; exit"
 alias rootprefs="sudo /Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences&"
-alias pg="postgres -D ~/Applications/postgres >~/Applications/postgres.log 2>&1 </dev/null &"
-alias stoppg="kill -TERM \`ps | grep \"[p]ostgres -D $HOME/Applications/postgres\" | cut -f 1 -d ' '\`"
 
 # I don't need to consume this on the `open` alias
 # This must be defined somewhere in my zsh profile; I should probably remove it from there.

@@ -50,10 +50,6 @@ safe_alias gbD  "git branch -D"
 safe_alias gbm  "git branch -m"
 safe_alias gbmd 'git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 
-# if [[ $SHELL =~ zsh ]]; then
-#   gbm!() { git branch -m $1 ¡$1; }
-#   gbm@() { git branch -m $1 ª$1 }
-# fi
 safe_alias gco  "git checkout"
 safe_alias gcob "git checkout -b"
 safe_alias gcm  "git commit"
@@ -108,14 +104,12 @@ safe_alias gg    "git grep"
 safe_alias ggno  "git grep --name-only"
 safe_alias gl    'git log --format="%C(auto)%h %C(green)%aN%Creset %C(blue)<%ae>%n%s %C(auto)%d"'
 safe_alias gl1   "gl -1"
-safe_alias gldh  "gl develop..HEAD"
 glxh() {
   gl $1..HEAD
 }
 glhx() {
   gl HEAD..$1
 }
-safe_alias glhd  "gl HEAD..develop"
 safe_alias glhm  "gl HEAD..main"
 safe_alias glmh  "gl main..HEAD"
 safe_alias gls   "git ls-files"
@@ -146,8 +140,6 @@ grecent() {
   git reflog | grep 'checkout: moving from' | cut -d' ' -f6 | awk '!_[$0]++' | head -$line_count
 }
 
-safe_alias grm   "git rebase main"
-
 grp() { # git rev-parse (plus)
   switches=(`get_dashful $@`)
   args=(`get_dashless $@`)
@@ -170,14 +162,12 @@ grp() { # git rev-parse (plus)
 }
 
 safe_alias grph  "git rev-parse HEAD"
-safe_alias gruo  "git remote update origin"
 safe_alias gst   "git status"
 safe_alias gsh   "git stash"
 safe_alias gsha  "git stash apply"
 safe_alias gshl  "git stash list"
 safe_alias gshp  "git stash pop"
 safe_alias gsl   "git shortlog"
-safe_alias gu    "git update"
 
 if is_executable git-ftp; then
   passwd_arg=p

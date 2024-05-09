@@ -1,13 +1,4 @@
 safe_alias b "bundle"
-safe_alias be "bundle exec"
-safe_alias bi "bundle install"
-safe_alias bu "bundle update"
-safe_alias cuc "bundle exec cucumber"
-safe_alias rk "bundle exec rake"
-safe_alias rkap "bundle exec rake assets:precompile"
-safe_alias rkap-c 'bundle exec rake assets:precompile && git add . && git commit -m "Compile assets"'
-safe_alias rkdm "bundle exec rake db:migrate"
-safe_alias rkjw "bundle exec rake jobs:work"
 
 [[ -z "$BUNDLE_PATH" ]] && export BUNDLE_PATH=.bundle_$(uname)
 [[ -z "$BUNDLE_BIN" ]] && export BUNDLE_BIN=$BUNDLE_PATH/bin
