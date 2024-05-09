@@ -1,5 +1,6 @@
 alias profile=". ~/.profile"
 safe_alias cdd "cd $XDG_CONFIG_HOME"
+safe_alias cdp "cd $HOME/projects"
 
 wait_for_process () {
   while [[ -z $(ps | grep "$1") ]]; do
