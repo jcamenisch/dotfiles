@@ -10,3 +10,4 @@ bin/gh-md-toc
 /hub
 .gitconfig
 git/config
+.dbg_history
