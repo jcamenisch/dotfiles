@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+HISTSIZE=100000
+
 [[ -z "$ZDOTDIR" ]] && export ZDOTDIR="${0%/*}"
 
 # Set to this to use case-sensitive completion
