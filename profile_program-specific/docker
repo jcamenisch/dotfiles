@@ -7,6 +7,13 @@ dbash() {
   docker compose run --rm $@ bash
 }
 
+drmvols() {
+  docker volume ls | awk '/local *'$1'/ { print $2 }' | xargs docker volume rm
+}
+dupl() {
+  docker compose up -d && docker compose logs -f
+}
+
 safe_alias dbundle 'docker compose run --rm rails bundle'
 safe_alias dpsql 'docker compose run --rm postgres psql --username postgres $(basename $PWD)'
 safe_alias drails 'docker compose run --rm rails bundle exec rails'
