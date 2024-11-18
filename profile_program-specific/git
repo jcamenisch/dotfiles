@@ -272,9 +272,9 @@ git_summary() {
 # Use alias_content helper to dereference the `vi` alias on these.
 # Otherwise, the bare `vi` executable ends up getting called, which loads without the right .vimrc
 is_executable vogd || vogd() {
-  $(alias_content vi) -O $(gdno $@)
+  noglob $(alias_content vi) -O $(gdno $@)
 }
 
 is_executable vogg || vogg() {
-  $(alias_content vi) -O $(ggno $@)
+  noglob $(alias_content vi) -O $(ggno $@)
 }
