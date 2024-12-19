@@ -1,4 +1,5 @@
 safe_alias k kubectl
+
 kc() {
   if [ -z "$1" ]; then
     kubectl config get-contexts
@@ -6,6 +7,7 @@ kc() {
     kubectl config use-context $1
   fi
 }
+
 kn() {
   if [ -z "$1" ]; then
     kubectl config get-contexts
@@ -13,6 +15,7 @@ kn() {
     kubectl config set-context --current --namespace=$1
   fi
 }
+
 kcn() {
   kc $1
   kn $2
