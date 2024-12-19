@@ -264,9 +264,41 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   {
-    'supermaven-inc/supermaven-nvim', -- Github Copilot
+    'Exafunction/codeium.vim', -- AI chat assistant (Alternative to Github Copilot chat)
     config = function()
-      require('supermaven-nvim').setup {}
+      vim.g.codeium_disabled_bindings = 1
+      vim.g.codeium_no_map_tab = 1
+      vim.g.codeium_enabled = false
+      vim.g.codeium_manual = true
+
+      local imap = function(lhs, rhs, opts)
+        vim.keymap.set('i', lhs, rhs, opts or { expr = true })
+      end
+
+      imap('<C-a>', function()
+        return vim.fn['codeium#Accept']()
+      end)
+      imap('<C-n>', function()
+        return vim.fn['codeium#CycleCompletions'](1)
+      end)
+      imap('<C-p>', function()
+        return vim.fn['codeium#CycleCompletions'](-1)
+      end)
+      imap('<C-q>', function()
+        return vim.fn['codeium#Clear']()
+      end)
+
+      vim.keymap.set('n', '<C-c>', vim.fn['codeium#Chat'], { expr = true })
+    end,
+  },
+  {
+    'supermaven-inc/supermaven-nvim', -- AI coding autocomplete (Altenative to Github Copilot autocomplete)
+    config = function()
+      require('supermaven-nvim').setup {
+        keymaps = {
+          accept_suggestion = '<tab>',
+        },
+      }
     end,
   },
 
@@ -487,6 +519,10 @@ require('lazy').setup({
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          local vmap = function(keys, func, desc)
+            vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          end
+
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
@@ -497,12 +533,12 @@ require('lazy').setup({
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -519,6 +555,7 @@ require('lazy').setup({
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          vmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -592,7 +629,7 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        -- tsserver = {},
         --
 
         lua_ls = {
@@ -676,6 +713,7 @@ require('lazy').setup({
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
         go = { 'goimports' },
+        typescript = { 'prettier' },
         ['_'] = { 'trim_whitespace' },
       },
     },
