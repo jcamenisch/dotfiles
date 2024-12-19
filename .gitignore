@@ -11,3 +11,5 @@ bin/gh-md-toc
 .gitconfig
 git/config
 .dbg_history
+gh
+github-copilot
