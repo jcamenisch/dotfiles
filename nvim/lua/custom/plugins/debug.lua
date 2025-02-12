@@ -177,6 +177,7 @@ return {
 
           -- which adapters to register in nvim-dap
           adapters = {
+            'node-terminal',
             'pwa-node',
             'pwa-chrome',
             'pwa-msedge',
