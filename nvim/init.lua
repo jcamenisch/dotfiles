@@ -263,46 +263,37 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  {
-    'Exafunction/codeium.vim', -- AI chat assistant (Alternative to Github Copilot chat)
-    config = function()
-      vim.g.codeium_disabled_bindings = 1
-      vim.g.codeium_no_map_tab = 1
-      vim.g.codeium_enabled = false
-      vim.g.codeium_manual = true
+  -- {
+  --   'Exafunction/codeium.vim', -- AI chat assistant (Alternative to Github Copilot chat)
+  --   config = function()
+  --     vim.g.codeium_disabled_bindings = 1
+  --     vim.g.codeium_no_map_tab = 1
+  --     vim.g.codeium_enabled = false
+  --     vim.g.codeium_manual = true
 
-      local imap = function(lhs, rhs, opts)
-        vim.keymap.set('i', lhs, rhs, opts or { expr = true })
-      end
+  --     local imap = function(lhs, rhs, opts)
+  --       vim.keymap.set('i', lhs, rhs, opts or { expr = true })
+  --     end
 
-      imap('<C-a>', function()
-        return vim.fn['codeium#Accept']()
-      end)
-      imap('<C-n>', function()
-        return vim.fn['codeium#CycleCompletions'](1)
-      end)
-      imap('<C-p>', function()
-        return vim.fn['codeium#CycleCompletions'](-1)
-      end)
-      imap('<C-q>', function()
-        return vim.fn['codeium#Clear']()
-      end)
+  --     imap('<C-a>', function()
+  --       return vim.fn['codeium#Accept']()
+  --     end)
+  --     imap('<C-n>', function()
+  --       return vim.fn['codeium#CycleCompletions'](1)
+  --     end)
+  --     imap('<C-p>', function()
+  --       return vim.fn['codeium#CycleCompletions'](-1)
+  --     end)
+  --     imap('<C-q>', function()
+  --       return vim.fn['codeium#Clear']()
+  --     end)
 
-      vim.keymap.set('n', '<C-c>', vim.fn['codeium#Chat'], { expr = true })
-    end,
-  },
-  {
-    'supermaven-inc/supermaven-nvim', -- AI coding autocomplete (Altenative to Github Copilot autocomplete)
-    config = function()
-      require('supermaven-nvim').setup {
-        keymaps = {
-          accept_suggestion = '<tab>',
-        },
-      }
-    end,
-  },
+  --     vim.keymap.set('n', '<C-c>', vim.fn['codeium#Chat'], { expr = true })
+  --   end,
+  -- },
 
-  'https://github.com/andreshazard/vim-freemarker', -- Freemarker template syntax highlighting
+  -- Freemarker template syntax highlighting
+  'https://github.com/andreshazard/vim-freemarker',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -315,24 +306,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
