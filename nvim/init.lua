@@ -614,7 +614,6 @@ require('lazy').setup({
                 unusedwrite = true,
               },
               gofumpt = true,
-              format_on_save = true,
               buildFlags = {
                 '-tags=integration_test',
               },
