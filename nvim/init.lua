@@ -604,6 +604,8 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
+        tailwindcss = {},
+
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
