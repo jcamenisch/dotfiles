@@ -1,3 +1,2 @@
 export ASDF_CONFIG_FILE=${XDG_CONFIG_HOME}/asdfrc
-
-source $(brew --prefix asdf)/libexec/asdf.sh
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"

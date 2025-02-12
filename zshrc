@@ -17,6 +17,7 @@ setopt glob_subst
 
 setopt inc_append_history
 setopt share_history
+setopt chase_links
 
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
@@ -59,3 +60,8 @@ if type brew &>/dev/null; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# append asdf completions to fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
