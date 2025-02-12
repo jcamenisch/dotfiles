@@ -6,6 +6,13 @@
 -- be extended to other languages as well. That's why it's called
 -- kickstart.nvim and not kitchen-sink.nvim ;)
 
+local js_based_languages = {
+  'javascript',
+  'javascriptreact',
+  'typescript',
+  'typescriptreact',
+}
+
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -148,6 +155,36 @@ return {
         }
       end,
     },
+
+    {
+      'microsoft/vscode-js-debug',
+      -- After install, build it and rename the dist director to out
+      build = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out',
+    },
+    {
+      'mxsdev/nvim-dap-vscode-js',
+      config = function()
+        ---@diagnostic disable-next-line: missing-fields
+        require('dap-vscode-js').setup {
+          -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+          -- node_path = "node",
+
+          -- Path to vscode-js-debug installation.
+          debugger_path = vim.fn.resolve(vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug'),
+
+          -- Command to use to launch the debug server. Takes precedence over "node_path" and "debugger_path".
+          -- debugger_cmd = { "js-debug-adapter" },
+
+          -- which adapters to register in nvim-dap
+          adapters = {
+            'pwa-node',
+            'pwa-chrome',
+            'pwa-msedge',
+            'pwa-extensionHost',
+          },
+        }
+      end,
+    },
   },
   config = function()
     local dap = require 'dap'
@@ -165,5 +202,66 @@ return {
     vim.fn.sign_define('DapBreakpoint', { text = '󰏃', texthl = 'NotifyWARNIcon', linehl = '', numhl = '' })
     vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'NotifyWARNIcon', linehl = '', numhl = '' })
     vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'NotifyINFOIcon', linehl = '', numhl = '' })
+
+    for _, lang in ipairs(js_based_languages) do
+      dap.configurations[lang] = {
+        -- Debug single nodejs files
+        {
+          type = 'pwa-node',
+          request = 'launch',
+          name = 'Launch file',
+          program = '${file}',
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+        },
+        -- Debug nodejs processes (make sure to add --inspect when you run the process)
+        {
+          type = 'pwa-node',
+          request = 'attach',
+          name = 'Attach',
+          processId = require('dap.utils').pick_process,
+          cwd = '${workspaceFolder}',
+          sourceMaps = true,
+        },
+        -- Debug web applications
+        {
+          type = 'pwa-chrome',
+          request = 'launch',
+          name = 'Launch & Debug Chrome',
+          url = 'http://localhost:3000',
+          webRoot = '${workspaceFolder}',
+          skipFiles = {
+            '<node_internals>/**/*.js',
+          },
+          protocol = 'inspector',
+          sourceMaps = true,
+          userDataDir = false,
+        },
+        -- Divider for the launch.json derived configurations
+        {
+          name = '———————— launch.json configs ————————',
+          type = '',
+          request = 'launch',
+        },
+      }
+    end
   end,
+  keys = {
+    {
+      '<leader>da',
+      function()
+        if vim.fn.filereadable '.vscode/launch.json' then
+          local dap_vscode = require 'dap.ext.vscode'
+          dap_vscode.load_launchjs(nil, {
+            ['pwa-node'] = js_based_languages,
+            ['node'] = js_based_languages,
+            ['pwa-chrome'] = js_based_languages,
+            ['chrome'] = js_based_languages,
+          })
+        end
+        require('dap').continue()
+      end,
+      desc = 'Run with Args',
+    },
+  },
 }
