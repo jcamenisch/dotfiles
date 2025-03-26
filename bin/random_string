@@ -1,4 +1,0 @@
-length=${1:-50}
-let longer=$length+20
-exclude_chars=${2:-'&:@/" '}
-cat /dev/urandom | LC_CTYPE=C LANG=C tr -dc '[:print:]' | head -c $longer | tr -d $exclude_chars | head -c $length
